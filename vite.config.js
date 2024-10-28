@@ -36,10 +36,7 @@ function generateApp() {
             }, []);
 
             const routesmap = routes.map(x => {
-                if (x == "index")
-                    return `       "/": ${x}_route,`
-                else
-                    return `       "/${x}": ${x}_route,`
+                return `       "/${x === "index" ? "" : x}": ${x}_route,`
             });
 
             const APP_TEMPLATE =
