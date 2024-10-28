@@ -110,18 +110,10 @@
         import initFontAwesome from "./fontawesome.js";
         import "./components/tabcontainer.js";
         import "./components/ghstats.js";
-        import App from "./app.js";
-        import HomePage from "./pages/home.js";
-        import PluginsPage from "./pages/plugins.js";
-        import DownloadPage from "./pages/download.js";
-
-        new App({
-            "/": HomePage,
-            "/plugins": PluginsPage,
-            "/download": DownloadPage,
-        }, {name: "REDasm"});
+        import initApp from "$app/init.js";
 
         initFontAwesome();
+        initApp({name: "REDasm"});
     </script>
 </body>
 

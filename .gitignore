@@ -1,3 +1,4 @@
 .automaton/
+.app/
 node_modules/
 dist/
