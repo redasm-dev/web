@@ -89,6 +89,9 @@ function generateSiteMap() {
             const SITEMAP_TEMPLATE =
                 `<?xml version="1.0" encoding="UTF-8"?>\n` +
                 `<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">\n` +
+                `    <url>\n` +
+                `        <loc>${homepage}</loc>\n` +
+                `    </url>\n` +
                 urlset.join("\n") + "\n" +
                 `</urlset>`;
 
