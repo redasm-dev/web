@@ -48,7 +48,7 @@ function generateApp() {
                 `    }, options);\n` +
                 `}\n`;
 
-            await fs.writeFile(path.join(APP_TMPDIR, "init.js"), APP_TEMPLATE);
+            await fs.writeFile(path.join(APP_TMPDIR, "index.js"), APP_TEMPLATE);
         },
     }
 }
@@ -104,7 +104,8 @@ export default defineConfig({
 
     resolve: {
         alias: {
-            "$app": path.resolve(__dirname, APP_TMPDIR)
+            "$app": path.resolve(__dirname, APP_TMPDIR),
+            "$lib": path.resolve(__dirname, "lib"),
         }
     },
 
