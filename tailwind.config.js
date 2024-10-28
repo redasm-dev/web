@@ -1,10 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-    content: [
-        "./index.html",
-        "./routes/**/*.js",
-        "./components/**/*.js",
-    ],
+    content: ["./src/**/*.{html,js}"],
     theme: {
         colors: {
             "error": "#ff7575",

@@ -1,3 +1,5 @@
+import "$lib/tabcontainer.js";
+
 const LOADERS = [
     { name: "Portable Executable (PE)", language: "C++", status: "Stable" },
     { name: "ELF Executable", language: "C++", status: "Stable" },

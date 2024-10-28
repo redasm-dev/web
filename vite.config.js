@@ -4,9 +4,10 @@ import path from "path";
 import pkg from "./package.json";
 
 const APP_TMPDIR = ".app";
+const srcdir = path.resolve(__dirname, "src");
 
 async function getRoutes() {
-    const routes = (await fs.readdir("routes", { withFileTypes: true }))
+    const routes = (await fs.readdir(path.resolve(srcdir, "routes"), { withFileTypes: true }))
         .filter(x => x.isFile() && path.extname(x.name).toLowerCase() === ".js")
         .map(x => path.basename(x.name, ".js"));
 
@@ -31,7 +32,7 @@ function generateApp() {
 
             const routesimports = routes.reduce((acc, x) => {
                 config.logger.info(`Found route /${x}`);
-                acc.push(`import ${x}_route from "../routes/${x}.js";`);
+                acc.push(`import ${x}_route from "$src/routes/${x}.js";`);
                 return acc;
             }, []);
 
@@ -40,7 +41,7 @@ function generateApp() {
             });
 
             const APP_TEMPLATE =
-                `import App from "../app.js"\n` +
+                `import App from "$src/app.js"\n` +
                 `${routesimports.join("\n")}\n\n` +
                 `export default function initApp(options) {\n` +
                 `   new App({\n` +
@@ -101,21 +102,27 @@ function generateSiteMap() {
 
 export default defineConfig({
     plugins: [generateApp(), generateSiteMap()],
+    root: "src",
+    publicDir: path.resolve(__dirname, "public"),
 
     resolve: {
         alias: {
+            "$src": srcdir,
+            "$lib": path.resolve(srcdir, "lib"),
             "$app": path.resolve(__dirname, APP_TMPDIR),
-            "$lib": path.resolve(__dirname, "lib"),
         }
     },
 
     build: {
         minify: "esbuild", // Use esbuild for faster builds
+        outDir: path.resolve(__dirname, "dist"),
+        emptyOutDir: true,
+
         rollupOptions: {
             output: {
-                manualChunks(id) { // Split components, routes and vendor code
-                    if (id.includes("components/"))
-                        return "components";
+                manualChunks(id) { // Split libs, routes and vendor code
+                    if (id.includes("lib/"))
+                        return "lib";
                     else if (id.includes("routes/"))
                         return "routes";
                     else if (id.includes("node_modules/"))
