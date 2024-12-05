@@ -65,7 +65,7 @@
         "content_type": "application/vnd.appimage",
         "state": "uploaded",
         "size": 32163008,
-        "download_count": 1469,
+        "download_count": 1473,
         "created_at": "2021-05-16T17:25:59Z",
         "updated_at": "2021-05-16T17:27:41Z",
         "browser_download_url": "https://github.com/REDasmOrg/REDasm/releases/download/v3.0.0-beta5/REDasm_3.0_BETA5_Linux_AMD64.AppImage"
@@ -100,7 +100,7 @@
         "content_type": "application/zip",
         "state": "uploaded",
         "size": 25850935,
-        "download_count": 6174,
+        "download_count": 6180,
         "created_at": "2021-05-16T17:25:56Z",
         "updated_at": "2021-05-16T17:27:32Z",
         "browser_download_url": "https://github.com/REDasmOrg/REDasm/releases/download/v3.0.0-beta5/REDasm_3.0_BETA5_Windows_x86_64.zip"
@@ -536,7 +536,7 @@
         "content_type": "application/zip",
         "state": "uploaded",
         "size": 7059884,
-        "download_count": 357,
+        "download_count": 359,
         "created_at": "2021-05-16T16:06:11Z",
         "updated_at": "2021-05-16T16:06:16Z",
         "browser_download_url": "https://github.com/REDasmOrg/REDasm/releases/download/v2.1.1/REDasm_2.1.1_Linux_x86_64.zip"
@@ -717,7 +717,7 @@
         "content_type": "application/zip",
         "state": "uploaded",
         "size": 49457334,
-        "download_count": 121,
+        "download_count": 122,
         "created_at": "2021-05-16T16:04:31Z",
         "updated_at": "2021-05-16T16:05:01Z",
         "browser_download_url": "https://github.com/REDasmOrg/REDasm/releases/download/v2.1/REDasm_2.1_Windows_x86_64.zip"
@@ -863,7 +863,7 @@
         "content_type": "application/zip",
         "state": "uploaded",
         "size": 95386629,
-        "download_count": 168,
+        "download_count": 169,
         "created_at": "2021-05-16T16:02:22Z",
         "updated_at": "2021-05-16T16:03:14Z",
         "browser_download_url": "https://github.com/REDasmOrg/REDasm/releases/download/v2.0/REDasm_2.0_Windows_x86_64.zip"
