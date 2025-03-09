@@ -65,7 +65,7 @@
         "content_type": "application/vnd.appimage",
         "state": "uploaded",
         "size": 32163008,
-        "download_count": 1571,
+        "download_count": 1573,
         "created_at": "2021-05-16T17:25:59Z",
         "updated_at": "2021-05-16T17:27:41Z",
         "browser_download_url": "https://github.com/REDasmOrg/REDasm/releases/download/v3.0.0-beta5/REDasm_3.0_BETA5_Linux_AMD64.AppImage"
@@ -100,7 +100,7 @@
         "content_type": "application/zip",
         "state": "uploaded",
         "size": 25850935,
-        "download_count": 6567,
+        "download_count": 6576,
         "created_at": "2021-05-16T17:25:56Z",
         "updated_at": "2021-05-16T17:27:32Z",
         "browser_download_url": "https://github.com/REDasmOrg/REDasm/releases/download/v3.0.0-beta5/REDasm_3.0_BETA5_Windows_x86_64.zip"
@@ -188,7 +188,7 @@
         "content_type": "application/vnd.appimage",
         "state": "uploaded",
         "size": 32048320,
-        "download_count": 127,
+        "download_count": 128,
         "created_at": "2021-02-14T18:19:02Z",
         "updated_at": "2021-02-14T18:19:22Z",
         "browser_download_url": "https://github.com/REDasmOrg/REDasm/releases/download/v3.0.0-beta4/REDasm_3.0_BETA4_Linux_AMD64.AppImage"
@@ -223,7 +223,7 @@
         "content_type": "application/zip",
         "state": "uploaded",
         "size": 25792647,
-        "download_count": 465,
+        "download_count": 467,
         "created_at": "2021-02-14T18:19:25Z",
         "updated_at": "2021-02-14T18:19:40Z",
         "browser_download_url": "https://github.com/REDasmOrg/REDasm/releases/download/v3.0.0-beta4/REDasm_3.0_BETA4_Windows_x86_64.zip"
@@ -299,7 +299,7 @@
         "content_type": "application/vnd.appimage",
         "state": "uploaded",
         "size": 31585472,
-        "download_count": 47,
+        "download_count": 48,
         "created_at": "2021-01-31T20:45:32Z",
         "updated_at": "2021-01-31T20:46:19Z",
         "browser_download_url": "https://github.com/REDasmOrg/REDasm/releases/download/v3.0.0-beta3/REDasm_3.0_BETA3_Linux_AMD64.AppImage"
@@ -334,7 +334,7 @@
         "content_type": "application/zip",
         "state": "uploaded",
         "size": 40299336,
-        "download_count": 229,
+        "download_count": 230,
         "created_at": "2021-01-31T20:45:34Z",
         "updated_at": "2021-01-31T20:46:20Z",
         "browser_download_url": "https://github.com/REDasmOrg/REDasm/releases/download/v3.0.0-beta3/REDasm_3.0_BETA3_Windows_x86_64.zip"
@@ -863,7 +863,7 @@
         "content_type": "application/zip",
         "state": "uploaded",
         "size": 95386629,
-        "download_count": 178,
+        "download_count": 179,
         "created_at": "2021-05-16T16:02:22Z",
         "updated_at": "2021-05-16T16:03:14Z",
         "browser_download_url": "https://github.com/REDasmOrg/REDasm/releases/download/v2.0/REDasm_2.0_Windows_x86_64.zip"
