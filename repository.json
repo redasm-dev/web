@@ -83,7 +83,7 @@
   "has_wiki": true,
   "has_pages": false,
   "has_discussions": true,
-  "forks_count": 149,
+  "forks_count": 150,
   "mirror_url": null,
   "archived": false,
   "disabled": false,
@@ -120,7 +120,7 @@
     "xtensa"
   ],
   "visibility": "public",
-  "forks": 149,
+  "forks": 150,
   "open_issues": 17,
   "watchers": 1684,
   "default_branch": "master",
@@ -149,6 +149,6 @@
     "user_view_type": "public",
     "site_admin": false
   },
-  "network_count": 149,
+  "network_count": 150,
   "subscribers_count": 47
 }
