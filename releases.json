@@ -557,7 +557,7 @@
         "state": "uploaded",
         "size": 7059884,
         "digest": null,
-        "download_count": 460,
+        "download_count": 461,
         "created_at": "2021-05-16T16:06:11Z",
         "updated_at": "2021-05-16T16:06:16Z",
         "browser_download_url": "https://github.com/REDasmOrg/REDasm/releases/download/v2.1.1/REDasm_2.1.1_Linux_x86_64.zip"
