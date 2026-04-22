@@ -66,7 +66,7 @@
   "releases_url": "https://api.github.com/repos/REDasmOrg/REDasm/releases{/id}",
   "deployments_url": "https://api.github.com/repos/REDasmOrg/REDasm/deployments",
   "created_at": "2017-11-25T13:35:37Z",
-  "updated_at": "2026-04-18T11:01:02Z",
+  "updated_at": "2026-04-21T14:40:31Z",
   "pushed_at": "2024-10-27T16:37:55Z",
   "git_url": "git://github.com/REDasmOrg/REDasm.git",
   "ssh_url": "git@github.com:REDasmOrg/REDasm.git",
@@ -83,7 +83,7 @@
   "has_wiki": true,
   "has_pages": false,
   "has_discussions": true,
-  "forks_count": 153,
+  "forks_count": 152,
   "mirror_url": null,
   "archived": false,
   "disabled": false,
@@ -122,7 +122,7 @@
     "xtensa"
   ],
   "visibility": "public",
-  "forks": 153,
+  "forks": 152,
   "open_issues": 17,
   "watchers": 1708,
   "default_branch": "master",
@@ -151,6 +151,6 @@
     "user_view_type": "public",
     "site_admin": false
   },
-  "network_count": 153,
+  "network_count": 152,
   "subscribers_count": 47
 }
