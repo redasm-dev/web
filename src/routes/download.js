@@ -18,7 +18,7 @@ function getFileSize(bytes, si = false, dp = 1) {
 }
 
 async function fetchReleases() {
-    const URL = "https://raw.githubusercontent.com/REDasmOrg/redasm.dev/refs/heads/data/releases.json";
+    const URL = "https://raw.githubusercontent.com/redasm-dev/redasm.dev/refs/heads/data/releases.json";
 
     try {
         const response = await fetch(URL);
@@ -145,7 +145,7 @@ export default {
                 </tab-panel>
                 <tab-panel title="Nightly Builds">
                     Nightly builds are provided by 
-                    <a href="https://github.com/REDasmOrg/REDasm/actions/workflows/build.yml">GitHub Actions</a>.<br>
+                    <a href="https://github.com/redasm-dev/redasm/actions/workflows/build.yml">GitHub Actions</a>.<br>
                     They provides the latest features and bugfixes, but they can be unstable.
                 </tab-panel>
                 <tab-panel id="download__packages" title="Packages">

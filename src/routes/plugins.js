@@ -78,7 +78,7 @@ export default {
         </p>
         <p>
             Have a suggestion or an idea? Feel free to request a feature or join the discussion
-            <a href="https://github.com/REDasmOrg/REDasm/issues">by opening an issue on GitHub</a>!
+            <a href="https://github.com/redasm-dev/redasm/issues">by opening an issue on GitHub</a>!
         </p>
     `
 };

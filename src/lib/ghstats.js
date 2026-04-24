@@ -1,6 +1,6 @@
 class GitHubStats extends HTMLElement {
-    REPO = "https://github.com/REDasmOrg/REDasm"
-    URL = "https://raw.githubusercontent.com/REDasmOrg/redasm.github.io/refs/heads/data/repository.json";
+    REPO = "https://github.com/redasm-dev/redasm"
+    URL = "https://raw.githubusercontent.com/redasm-dev/web/refs/heads/data/repository.json";
 
     connectedCallback() {
         this.innerHTML = /*html*/`

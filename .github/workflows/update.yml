@@ -16,11 +16,11 @@ jobs:
 
       - name: Fetch repository details
         run: |
-          curl -s https://api.github.com/repos/REDasmOrg/REDasm > repository.json
+          curl -s https://api.github.com/repos/redasm-dev/redasm > repository.json
 
       - name: Fetch releases
         run: |
-          curl -s https://api.github.com/repos/REDasmOrg/REDasm/releases > releases.json
+          curl -s https://api.github.com/repos/redasm-dev/redasm/releases > releases.json
 
       - name: Push updates to data branch
         run: |
