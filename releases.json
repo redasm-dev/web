@@ -557,7 +557,7 @@
         "state": "uploaded",
         "size": 7059884,
         "digest": null,
-        "download_count": 467,
+        "download_count": 468,
         "created_at": "2021-05-16T16:06:11Z",
         "updated_at": "2021-05-16T16:06:16Z",
         "browser_download_url": "https://github.com/redasm-dev/redasm/releases/download/v2.1.1/REDasm_2.1.1_Linux_x86_64.zip"
@@ -593,7 +593,7 @@
         "state": "uploaded",
         "size": 49462548,
         "digest": null,
-        "download_count": 2112,
+        "download_count": 2113,
         "created_at": "2021-05-16T16:06:16Z",
         "updated_at": "2021-05-16T16:06:46Z",
         "browser_download_url": "https://github.com/redasm-dev/redasm/releases/download/v2.1.1/REDasm_2.1.1_Windows_x86_64.zip"
@@ -708,7 +708,7 @@
         "state": "uploaded",
         "size": 7049611,
         "digest": null,
-        "download_count": 56,
+        "download_count": 57,
         "created_at": "2021-05-16T16:04:25Z",
         "updated_at": "2021-05-16T16:04:31Z",
         "browser_download_url": "https://github.com/redasm-dev/redasm/releases/download/v2.1/REDasm_2.1_Linux_x86_64.zip"
@@ -744,7 +744,7 @@
         "state": "uploaded",
         "size": 49457334,
         "digest": null,
-        "download_count": 159,
+        "download_count": 160,
         "created_at": "2021-05-16T16:04:31Z",
         "updated_at": "2021-05-16T16:05:01Z",
         "browser_download_url": "https://github.com/redasm-dev/redasm/releases/download/v2.1/REDasm_2.1_Windows_x86_64.zip"
