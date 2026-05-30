@@ -2,41 +2,35 @@ import { library, dom } from "@fortawesome/fontawesome-svg-core";
 
 import {
     faStar,
-    faList,
     faSitemap,
-    faWindowRestore,
-    faCubesStacked,
-    faDumbbell,
     faHeart,
-    faCircle,
-    faChevronLeft,
-    faChevronRight,
+    faCaretRight,
+    faTriangleExclamation,
+    faDownload,
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
-    faTelegram,
     faXTwitter,
-    faRedditAlien,
     faYoutube,
+    faGithub,
+    faWindows,
+    faLinux,
 } from "@fortawesome/free-brands-svg-icons";
 
 export default function initFontAwesome() {
     library.add(
         faStar,
-        faList,
         faSitemap,
-        faWindowRestore,
-        faCubesStacked,
-        faDumbbell,
         faHeart,
-        faCircle,
-        faChevronLeft,
-        faChevronRight,
+        faCaretRight,
+        faTriangleExclamation,
+        faDownload,
 
-        faTelegram,
         faXTwitter,
-        faRedditAlien,
         faYoutube,
+        faGithub,
+        faWindows,
+        faLinux,
     );
 
     dom.watch();

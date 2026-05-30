@@ -1,104 +1,111 @@
-const FEATURES_LIST = [
-    {
-        image: "/showcase/redasm_1.png",
+import "$lib/components/badge.js";
+import "$lib/components/snippet.js";
+import "$lib/components/section.js";
+import "$lib/components/featuregrid.js";
+import "$lib/components/notice.js";
+import { createReleasesTable } from "$lib/downloads.js";
+import { AppPage } from "$app";
 
-        features: [
-            {
-                icon: "fas fa-list",
-                title: "INTERACTIVE LISTING",
-                text: "A fully custom component that behaves like a classic text editor, allowing seamless navigation through disassembled code"
-            },
-            {
-                icon: "fas fa-sitemap",
-                title: "GRAPHING SUPPORT",
-                text: "Automatically generated graphs during analysis provide valuable insights for identifying code paths and control flow"
-            },
-            {
-                icon: "fas fa-dumbbell",
-                title: "BINARY LIFTING",
-                text: "An internal virtual instruction set (RDIL) converts machine code into a higher-level representation for easier understanding"
-            },
-        ]
-    },
-    {
-        image: "/showcase/redasm_2.png",
+export default class HomePage extends AppPage {
+    static get tag() { return "home-page"; }
 
-        features: [
-            {
-                icon: "fas fa-window-restore",
-                title: "NATIVE GUI",
-                text: "A cross-platform graphical interface, written in modern C++ using the Qt6 framework, ensures a smooth user experience"
-            },
-            {
-                icon: "fas fa-cubes-stacked",
-                title: "C/C++ AND PYTHON API",
-                text: "First-class support for C/C++ and Python, enabling developers to extend and integrate REDasm into their workflows"
-            },
-            {
-                icon: "fas fa-heart",
-                title: "OPEN SOURCE",
-                text: "Licensed under the GNU GPL3, REDasm is free and open-source, encouraging community collaboration and contributions"
-            }
-        ]
-    }
-];
-
-export default {
-    delegate: function(app, template) {
-        const c = template.querySelector("#home__features");
-
-        FEATURES_LIST.forEach((f, i) => {
-            const H = /*html*/ `
-                <div class="flex ${i % 2 ? "flex-row-reverse" : ""} items-center gap-x-3 mt-6">
-                    <div class="flex-1">
-                        <ul class="space-y-5">
-                            ${f.features.map(x => {
-                return /*html*/ `
-                                    <li class="flex gap-x-3 items-center ">
-                                        <div>
-                                            <i class="${x.icon} fa-fw fa-2xl"></i>
-                                        </div>
-                                        <div class="flex-1">
-                                            <h3 class="font-bold text-lg">${x.title}</h3>
-                                            <p>${x.text}</p>
-                                        </div>
-                                    </li>
-                                `;
-            }).join("")}
-                        </ul>
-                    </div>
-                    <div>
-                        <img class="object-fit w-[500px]" src="${f.image}">
-                    </div>
+    static get template() {
+        return /*html*/`
+<article class="py-6 gap-y-3">
+    <div class="border-b border-muted">
+        <div class="flex px-7 md:px-14 gap-y-3 pb-10">
+            <div class="flex-1 flex flex-col gap-y-8">
+                <div class="leading-[1.15]">
+                    <h1 class="text-[1.9rem] mb-1 font-bold tracking-[-0.02em]"><span class="text-primary">RE</span>Dasm</h1>
+                    <h5 class="text-muted tracking-[0.08em]">The OpenSource Disassembler</h5>
                 </div>
-                `;
-
-            c.appendChild(app.parseHTML(H));
-        });
-    },
-
-    template: /*html*/`
-        <article>
-            <div class="flex gap-x-4">
+                <p class="leading-[1.75]">
+                    For hobbyists and professional reverse engineers.<br>
+                    Free forever<span class="cursor"></span>
+                </p>
                 <div>
-                    <img alt="logo" src="/logo.png">
-                </div>
-                <div>
-                    <p>
-                        REDasm is a user-friendly, modern and cross-platform disassembler 
-                        designed for both hobbyists and professional reverse engineers. 
-                    </p>
-                    <p>
-                        Featuring an intuitive interface and a flexible plugin system, REDasm makes it easy to analyze 
-                        binary files and transform machine code into readable assembly language.
-                    </p>
-                    <p class="text-right italic mt-3">
-                       Check the list of supported plugins
-                       <a data-navigation href="/plugins">here</a> and the features list below!
-                    </p>
+                    <x-badge class="my-1" color="foreground" label="language" value="C/C++"></x-badge>
+                    <x-badge class="my-1" color="success" label="license" value="GPL3"></x-badge>
                 </div>
             </div>
-        </article>
-        <div id="home__features"></div>
-    `
-};
+            <div class="flex flex-col gap-y-3 text-right">
+                <div>
+                    <a data-default class="tracking-[0.08em] inline-flex items-center gap-x-2 bg-primary hover:bg-highlight hover:text-background text-foreground uppercase text-sm px-4 py-2" href="#download">
+                        <i class="fas fa-download"></i>
+                        <span>download</span>
+                    </a>
+                </div>
+                <div>
+                    <div class="inline-flex items-end gap-x-2 text-muted">
+                        <i class="fab fa-windows fa-lg"></i>
+                        <i class="fab fa-linux fa-lg"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <x-snippet></x-snippet>
+    </div>
+    <div class="px-14">
+        <section>
+            <section-title>Overview</section-title>
+            <feature-grid class="grid-cols-1 md:grid-cols-2">
+                <feature-item heading="Interactive listing">
+                    Navigate code and data with cross-references, 
+                    symbol renaming, comments and control flow graph.
+                </feature-item>
+                <feature-item heading="Plugin architecture">
+                    Core written in C++, API in C for broad language compatibility. 
+                    Loaders and Processors can be written in C or C++.<br>
+                    C API allows integration from other programming languages.
+                </feature-item>
+                <feature-item heading="Architecture support">
+                    x86, MIPS, ARM, AARCH64 and Dalvik.
+                </feature-item>
+                <feature-item heading="Format support">
+                    PE, ELF, DEX, PS1, N64, DEX and XBE. 
+                </feature-item>
+            </feature-grid>
+        </section>
+        <section id="download" class="flex flex-col gap-y-3">
+            <section-title>Download</section-title>
+            <x-notice color="primary" icon="fa-triangle-exclamation" class="p-3 text-xs">
+                <h5 class="uppercase font-bold pb-3">these are legacy builds</h5>
+                <p>
+                    3.0 BETA5 is the most recent release but never officially announced, it carries 
+                    limitations inherited from previous versions and a full rewrite was necessary.
+                </p>
+                <p>
+                    Version 4.0 is under active development. Follow progress on <a href="https://github.com/redasm-dev">GitHub</a>.
+                </p>
+            </x-notice>
+            <div id="home__downloads" class="overflow-auto text-sm"></div>
+        </section>
+    </div>
+</article>
+`;
+    }
+
+    get styles() {
+        return `
+            @keyframes blink {
+                0%, 100% { opacity: 1; }
+                50%      { opacity: 0; }
+            }
+            .cursor {
+                display: inline-block;
+                width: 0.55em;
+                height: 3px;
+                background: var(--color-foreground);
+                animation: blink 1.1s step-end infinite;
+                vertical-align: text-bottom;
+                margin-bottom: 0;
+                margin-left: 3px;
+                border-radius: 1px;
+            }
+        `;
+    }
+
+    onCreated() {
+        createReleasesTable(this.querySelector("#home__downloads"));
+    }
+}

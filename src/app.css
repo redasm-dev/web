@@ -1,14 +1,39 @@
-@import "@fontsource/inter/latin-400.css"; /* Regular weight, Latin */
-@import "@fontsource/inter/latin-700.css"; /* Bold weight, Latin */
+@import "@fontsource/jetbrains-mono/400.css"; 
+@import "@fontsource/jetbrains-mono/400-italic.css"; 
+@import "tailwindcss";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-body {
-    font-family: "Inter", sans-serif;
+@theme {
+    --color-background: #2f2f2f;
+    --color-foreground: #f4f1d6;
+    --color-muted: #757575;
+    --color-error: #ff7575;
+    --color-warning: #ffb22e;
+    --color-success: #67bd61;
+    --color-highlight: #ffb22e;
+    --color-primary: #c03131;
+    --color-dark: #444444;
+    --color-light: #f4f1d6;
+    --color-background-alt: #202020;
 }
 
-a:not([data-default]), a:visited:not([data-default]), a[data-default]:hover {
+::selection {
+  background-color: var(--color-primary);
+  color: var(--color-foreground);
+}
+
+::-moz-selection {
+  background-color: var(--color-primary);
+  color: var(--color-foreground);
+}
+
+body {
+    font-family: "JetBrains Mono", monospace;
+}
+
+a:not([data-default]), a:visited:not([data-default]) {
     @apply text-primary
+}
+
+a:not([data-default]):hover {
+    @apply text-highlight
 }

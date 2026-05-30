@@ -1,4 +1,5 @@
 import { defineConfig } from "vite";
+import tailwindcss from "@tailwindcss/vite";
 import fs from "fs/promises";
 import path from "path";
 import pkg from "./package.json";
@@ -12,6 +13,10 @@ async function getRoutes() {
         .map(x => path.basename(x.name, ".js"));
 
     return routes;
+}
+
+function escapeParam(r) {
+    return r.replace(/[\[\]]/g, '_');
 }
 
 function generateApp() {
@@ -32,18 +37,22 @@ function generateApp() {
 
             const routesimports = routes.reduce((acc, x) => {
                 config.logger.info(`Found route /${x}`);
-                acc.push(`import ${x}_route from "$src/routes/${x}.js";`);
+                acc.push(`import ${escapeParam(x)}_page from "$src/routes/${x}.js";`);
                 return acc;
             }, []);
 
             const routesmap = routes.map(x => {
-                return `       "/${x === "index" ? "" : x}": ${x}_route,`
+                return `       "/${x === "index" ? "" : x}": ${escapeParam(x)}_page,`
+
             });
 
             const APP_TEMPLATE =
-                `import App from "$src/app.js"\n` +
-                `${routesimports.join("\n")}\n\n` +
-                `export default function initApp(options) {\n` +
+                `import { App } from "$src/app.js"\n` +
+                `${routesimports.join("\n")}\n` +
+                `\n` +
+                `export * from "$src/app.js";\n` +
+                `\n` +
+                `export function initApp(options) {\n` +
                 `   new App({\n` +
                 `${routesmap.join("\n")}\n` +
                 `    }, options);\n` +
@@ -104,7 +113,7 @@ function generateSiteMap() {
 }
 
 export default defineConfig({
-    plugins: [generateApp(), generateSiteMap()],
+    plugins: [tailwindcss(), generateApp(), generateSiteMap()],
     root: "src",
     publicDir: path.resolve(__dirname, "public"),
 
@@ -117,20 +126,18 @@ export default defineConfig({
     },
 
     build: {
-        minify: "esbuild", // Use esbuild for faster builds
         outDir: path.resolve(__dirname, "dist"),
         emptyOutDir: true,
 
-        rollupOptions: {
+        rolldownOptions: {
             output: {
-                manualChunks(id) { // Split libs, routes and vendor code
-                    if (id.includes("lib/"))
-                        return "lib";
-                    else if (id.includes("routes/"))
-                        return "routes";
-                    else if (id.includes("node_modules/"))
-                        return "vendor";
-                },
+                codeSplitting: {
+                    groups: [
+                        { name: "routes", test: /\/src\/routes\// },
+                        { name: "lib", test: /\/src\/lib\// },
+                        { name: "vendor", test: /\/node_modules\// },
+                    ]
+                }
             },
         },
     },
