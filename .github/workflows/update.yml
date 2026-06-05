@@ -2,7 +2,7 @@ name: Update model data
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # Runs every 24 hours
+    - cron: '0 3 * * *'  # Runs every 24 hours
   workflow_dispatch:  # Allow manual trigger
 
 jobs:
