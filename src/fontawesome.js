@@ -5,8 +5,9 @@ import {
     faSitemap,
     faHeart,
     faCaretRight,
-    faTriangleExclamation,
     faDownload,
+    faHand,
+    faHandPointRight
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
@@ -23,8 +24,9 @@ export default function initFontAwesome() {
         faSitemap,
         faHeart,
         faCaretRight,
-        faTriangleExclamation,
         faDownload,
+        faHand,
+        faHandPointRight,
 
         faXTwitter,
         faYoutube,
