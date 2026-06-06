@@ -32,6 +32,7 @@ async function fetchReleases() {
                 for (let a of r.assets) {
                     acc.push({
                         version: r.tag_name,
+                        nightly: r.tag_name === "nightly",
                         prerelease: r.prerelease,
                         name: a.name,
                         url: a.browser_download_url,
@@ -48,7 +49,7 @@ async function fetchReleases() {
             console.error(response.statusText);
     }
     catch (error) {
-        console.error(error.messasge)
+        console.error(error.message)
     }
 
     return [];
@@ -64,12 +65,17 @@ export async function createReleasesTable(container) {
         delegate: row => {
             return /*html*/`
                 <td>
-                    <div class="flex mr-2 gap-x-2">
+                    <div class="flex mr-2 gap-x-1">
                         <a href="${row.url}">${row.name}</a>
                         <div class="flex-1"></div>
 
+                        ${row.nightly ? /*html*/
+                    `<span class="border-t border-b border-background px-1 
+                                  bg-error text-background uppercase
+                                  font-bold">nightly</span>` : ""}
+
                         ${row.prerelease ? /*html*/
-                    `<span class="mx-1 border-t border-b border-background px-1 
+                    `<span class="border-t border-b border-background px-1 
                                   bg-warning text-background uppercase
                                   font-bold">prerelease</span>` : ""}
                     </div>
