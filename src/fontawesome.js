@@ -12,6 +12,7 @@ import {
 
 import {
     faXTwitter,
+    faDiscord,
     faYoutube,
     faGithub,
     faWindows,
@@ -29,6 +30,7 @@ export default function initFontAwesome() {
         faHandPointRight,
 
         faXTwitter,
+        faDiscord,
         faYoutube,
         faGithub,
         faWindows,
