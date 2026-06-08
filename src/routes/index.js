@@ -76,14 +76,14 @@ export default class HomePage extends AppPage {
                 </p>
             </x-notice>
             <x-notice color="warning" icon="fa-hand-point-right" class="p-3 text-sm">
-                <h5 class="uppercase font-bold pb-3">nightly builds and version 4.0</h5>
+                <h5 class="uppercase font-bold pb-3">version 4.0</h5>
                 <p>
-                    Nightly builds are generated automatically from the latest code. 
+                    Nightly builds are generated automatically from the latest code.<br>
                     Development is still ongoing, tagged releases will follow.
                     Track progress on <a href="https://github.com/redasm-dev">GitHub</a>.
                 </p>
                 <br>
-                <p>Nightly versions are GPG signed, import the public key to verify:</p>
+                <p>Nightlies are GPG signed, import the public key to verify:</p>
                 <pre class="whitespace-pre-line text-code">
                     gpg --keyserver keys.openpgp.org --recv-keys A2391AFACAE2EE52B35541DD65F948A2F6BB294A
                     gpg --verify REDasm-linux-x86_64.AppImage.asc REDasm-linux-x86_64.AppImage
