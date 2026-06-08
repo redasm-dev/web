@@ -1,6 +1,7 @@
 // let tailwind detect these classes
 
 const BORDER_COLORS = {
+    "background-alt": "border-background-alt",
     foreground: "border-foreground",
     background: "border-background",
     muted: "border-muted",
@@ -11,6 +12,7 @@ const BORDER_COLORS = {
 };
 
 const BACKGROUND_COLORS = {
+    "background-alt": "bg-background-alt",
     foreground: "bg-foreground",
     background: "bg-background",
     muted: "bg-muted",
@@ -21,6 +23,7 @@ const BACKGROUND_COLORS = {
 };
 
 const TEXT_COLORS = {
+    "foreground-alt": "bg-foreground-alt",
     foreground: "text-foreground",
     background: "text-background",
     muted: "text-muted",

@@ -56,17 +56,37 @@ export function createTable(params) {
         });
     }
 
-    if (Array.isArray(params.rows) && params.rows.length > 0 && typeof (params.delegate) === "function") {
+    if (Array.isArray(params.rows) && params.rows.length > 0 && typeof (params.rowDelegate) === "function") {
         const fragment = document.createDocumentFragment();
-        const tbody = fragment.appendChild(document.createElement("tbody"))
+        let tbody = fragment.appendChild(document.createElement("tbody"))
         if (params.bodyclass) tbody.className = params.bodyclass;
 
+        let currcategory = "";
+
         params.rows.forEach((x, i) => {
+            if (typeof (params.categoryDelegate) === "function") {
+                const newcategory = params.categoryDelegate(x, i);
+
+                if (newcategory !== currcategory) {
+                    if (i > 0) { // reuse first body for the first category
+                        tbody = fragment.appendChild(document.createElement("tbody"))
+                        if (params.bodyclass) tbody.className = params.bodyclass;
+                    }
+
+                    const row = tbody.insertRow();
+                    const cell = row.insertCell();
+                    cell.colSpan = params.header.length;
+                    cell.innerHTML = newcategory;
+
+                    currcategory = newcategory;
+                }
+            }
+
             const row = tbody.insertRow();
-            row.innerHTML = params.delegate(x, row, i);
+            row.innerHTML = params.rowDelegate(x, row, i);
         });
 
-        table.appendChild(tbody);
+        table.appendChild(fragment);
     }
 
     return table;

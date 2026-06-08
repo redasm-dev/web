@@ -7,7 +7,8 @@ import {
     faCaretRight,
     faDownload,
     faHand,
-    faHandPointRight
+    faHandPointRight,
+    faKey,
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
@@ -28,6 +29,7 @@ export default function initFontAwesome() {
         faDownload,
         faHand,
         faHandPointRight,
+        faKey,
 
         faXTwitter,
         faDiscord,

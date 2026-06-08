@@ -68,18 +68,27 @@ export default class HomePage extends AppPage {
         </section>
         <section id="download" class="flex flex-col gap-y-3">
             <section-title>Download</section-title>
-            <x-notice color="primary" icon="fa-hand" class="p-3 text-xs">
+            <x-notice color="primary" icon="fa-hand" class="p-3 text-sm">
                 <h5 class="uppercase font-bold pb-3">3.x and below are now legacy</h5>
                 <p>
                     3.0 BETA5 is the most recent release but never officially announced, it carries 
                     limitations inherited from previous versions and a full rewrite was necessary.
                 </p>
             </x-notice>
-            <x-notice color="warning" icon="fa-hand-point-right" class="p-3 text-xs">
+            <x-notice color="warning" icon="fa-hand-point-right" class="p-3 text-sm">
                 <h5 class="uppercase font-bold pb-3">nightly builds and version 4.0</h5>
-                Nightly builds are generated automatically from the latest code. 
-                Development is still ongoing, tagged releases will follow.<br>
-                Track progress on <a href="https://github.com/redasm-dev">GitHub</a>.
+                <p>
+                    Nightly builds are generated automatically from the latest code. 
+                    Development is still ongoing, tagged releases will follow.
+                    Track progress on <a href="https://github.com/redasm-dev">GitHub</a>.
+                </p>
+                <br>
+                <p>Nightly versions are GPG signed, import the public key to verify:</p>
+                <pre class="whitespace-pre-line text-code">
+                    gpg --keyserver keys.openpgp.org --recv-keys A2391AFACAE2EE52B35541DD65F948A2F6BB294A
+                    gpg --verify REDasm-linux-x86_64.AppImage.asc REDasm-linux-x86_64.AppImage
+                    gpg --verify REDasm-windows-x86_64.zip.asc REDasm-windows-x86_64.zip
+                </pre>
             </x-notice>
             <div id="home__downloads" class="overflow-auto text-sm"></div>
         </section>
