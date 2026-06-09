@@ -34,13 +34,13 @@
     "immutable": false,
     "prerelease": true,
     "created_at": "2026-06-05T16:14:38Z",
-    "updated_at": "2026-06-08T06:47:39Z",
+    "updated_at": "2026-06-09T06:13:16Z",
     "published_at": "2026-06-06T05:57:51Z",
     "assets": [
       {
-        "url": "https://api.github.com/repos/redasm-dev/redasm/releases/assets/441496126",
-        "id": 441496126,
-        "node_id": "RA_kwDOBq0T3c4aULI-",
+        "url": "https://api.github.com/repos/redasm-dev/redasm/releases/assets/442448151",
+        "id": 442448151,
+        "node_id": "RA_kwDOBq0T3c4aXzkX",
         "name": "REDasm-linux-x86_64.AppImage",
         "label": "",
         "uploader": {
@@ -66,17 +66,17 @@
         },
         "content_type": "application/octet-stream",
         "state": "uploaded",
-        "size": 32430584,
-        "digest": "sha256:3f262a80c905352cb192b8cf66081e045c03d2988ddaa67e660deea9673714e3",
+        "size": 32569848,
+        "digest": "sha256:8f52d739a919d0b5f587879ed43a580f5980ed559b4bf0c11f276f666499d3a0",
         "download_count": 0,
-        "created_at": "2026-06-08T06:47:37Z",
-        "updated_at": "2026-06-08T06:47:39Z",
+        "created_at": "2026-06-09T06:13:14Z",
+        "updated_at": "2026-06-09T06:13:16Z",
         "browser_download_url": "https://github.com/redasm-dev/redasm/releases/download/nightly/REDasm-linux-x86_64.AppImage"
       },
       {
-        "url": "https://api.github.com/repos/redasm-dev/redasm/releases/assets/441496127",
-        "id": 441496127,
-        "node_id": "RA_kwDOBq0T3c4aULI_",
+        "url": "https://api.github.com/repos/redasm-dev/redasm/releases/assets/442448150",
+        "id": 442448150,
+        "node_id": "RA_kwDOBq0T3c4aXzkW",
         "name": "REDasm-linux-x86_64.AppImage.asc",
         "label": "",
         "uploader": {
@@ -103,16 +103,16 @@
         "content_type": "application/pgp-keys",
         "state": "uploaded",
         "size": 833,
-        "digest": "sha256:82b2eea1952ee116658124fc14a0ab879c98d93460938cecb4208de08c3e6d57",
+        "digest": "sha256:66ecca29daf06d9c8c34539525b8967975055a56adf51e458b0ae04682b25188",
         "download_count": 0,
-        "created_at": "2026-06-08T06:47:37Z",
-        "updated_at": "2026-06-08T06:47:38Z",
+        "created_at": "2026-06-09T06:13:14Z",
+        "updated_at": "2026-06-09T06:13:15Z",
         "browser_download_url": "https://github.com/redasm-dev/redasm/releases/download/nightly/REDasm-linux-x86_64.AppImage.asc"
       },
       {
-        "url": "https://api.github.com/repos/redasm-dev/redasm/releases/assets/441496128",
-        "id": 441496128,
-        "node_id": "RA_kwDOBq0T3c4aULJA",
+        "url": "https://api.github.com/repos/redasm-dev/redasm/releases/assets/442448155",
+        "id": 442448155,
+        "node_id": "RA_kwDOBq0T3c4aXzkb",
         "name": "REDasm-windows-x86_64.zip",
         "label": "",
         "uploader": {
@@ -138,17 +138,17 @@
         },
         "content_type": "application/zip",
         "state": "uploaded",
-        "size": 23498664,
-        "digest": "sha256:8b5cbf6a368efaeb9fc9892c1a1975a633b85a35f7bb59ae2e11790bea11d5ef",
+        "size": 23498545,
+        "digest": "sha256:94e8fef724a9b2ef6eef5b34df7ac3c14dd775e2e3cc3042cf128a7de03fc004",
         "download_count": 0,
-        "created_at": "2026-06-08T06:47:37Z",
-        "updated_at": "2026-06-08T06:47:39Z",
+        "created_at": "2026-06-09T06:13:15Z",
+        "updated_at": "2026-06-09T06:13:16Z",
         "browser_download_url": "https://github.com/redasm-dev/redasm/releases/download/nightly/REDasm-windows-x86_64.zip"
       },
       {
-        "url": "https://api.github.com/repos/redasm-dev/redasm/releases/assets/441496125",
-        "id": 441496125,
-        "node_id": "RA_kwDOBq0T3c4aULI9",
+        "url": "https://api.github.com/repos/redasm-dev/redasm/releases/assets/442448152",
+        "id": 442448152,
+        "node_id": "RA_kwDOBq0T3c4aXzkY",
         "name": "REDasm-windows-x86_64.zip.asc",
         "label": "",
         "uploader": {
@@ -175,16 +175,16 @@
         "content_type": "application/pgp-keys",
         "state": "uploaded",
         "size": 833,
-        "digest": "sha256:3f37c0039f8394e35cfe91af2b8d2d3388b22d9af0105ed8bf12f03deb15c73b",
+        "digest": "sha256:ff257b9580abc78d573206e4b5e780967615e97d80d94522aeb1da11b5ddc692",
         "download_count": 0,
-        "created_at": "2026-06-08T06:47:37Z",
-        "updated_at": "2026-06-08T06:47:38Z",
+        "created_at": "2026-06-09T06:13:14Z",
+        "updated_at": "2026-06-09T06:13:15Z",
         "browser_download_url": "https://github.com/redasm-dev/redasm/releases/download/nightly/REDasm-windows-x86_64.zip.asc"
       }
     ],
     "tarball_url": "https://api.github.com/repos/redasm-dev/redasm/tarball/nightly",
     "zipball_url": "https://api.github.com/repos/redasm-dev/redasm/zipball/nightly",
-    "body": "\n**core:**\n- `b999f4c` feat!: reverse analyzer is_enabled behavior\n- `fbbae77` feat: implemented plugin module versioning\n- `9485771` feat: implemented rd_command_valuekind_str, refactoring\n- `9bb364b` fix: added missing redasmTargets.cmake #14\n- `9f97fe2` chore: prefer system SQLite if available\n- `e360dc2` feat: simplified module version string handling\n- `5085249` chore: adjusted version naming scheme\n- `666547f` cmake: include GNUInstallDirs to populate install path variables\n- `2564bf1` Merge pull request #15 from blshkv/fix-gnuinstalldirs\n\n**redasm:**\n- `6750627` chore: moved notify to workflows folder\n- `52c2509` feat(AboutDialog): redesign\n- `6edf3e7` feat(AboutDialog): added analyzers and commands\n- `e75e7db` chore: updated QHexView dependency configuration\n- `c8bb6c8` cmake: fix setup_compiler by wrapping Compiler.cmake in a function\n- `b5d10e5` hexview: drop 'override' on comment() for QHexView <v5.1.0 compat\n- `b1e1b65` Revert \"hexview: drop 'override' on comment() for QHexView <v5.1.0 compat\"\n- `fcff014` chore: pinned QHexView at 5.1.1\n- `983ec56` Merge pull request #69 from blshkv/fix-setup-compiler\n- `d40ff6a` fix(LoaderDialog): wrong slice initialization\n- `b744503` chore: refactoring\n- `a7c663d` chore: removed duplicate return\n\n**loaders:**\n- `e044459` feat(PE): sync to core changes\n- `38c644a` feat: explicit module version\n- `fbecb3a` chore: moved install step from workspace\n\n**processors:**\n- `afa979d` feat: explicit module version\n- `4cfdfa6` chore: moved install step from workspace\n\n**commands:**\n- `1674f4f` feat: explicit module version\n- `ca93d41` chore: moved install step from workspace\n\n**kb:**\n- `6794839` chore: moved install step from workspace\n"
+    "body": "\n**core:**\n- `b999f4c` feat!: reverse analyzer is_enabled behavior\n- `fbbae77` feat: implemented plugin module versioning\n- `9485771` feat: implemented rd_command_valuekind_str, refactoring\n- `9bb364b` fix: added missing redasmTargets.cmake #14\n- `9f97fe2` chore: prefer system SQLite if available\n- `e360dc2` feat: simplified module version string handling\n- `5085249` chore: adjusted version naming scheme\n- `666547f` cmake: include GNUInstallDirs to populate install path variables\n- `2564bf1` Merge pull request #15 from blshkv/fix-gnuinstalldirs\n- `fd5185a` fix: autogenerated names heuristic\n- `3e62320` chore: replaced `puts` with assert for search paths\n\n**redasm:**\n- `6750627` chore: moved notify to workflows folder\n- `52c2509` feat(AboutDialog): redesign\n- `6edf3e7` feat(AboutDialog): added analyzers and commands\n- `e75e7db` chore: updated QHexView dependency configuration\n- `c8bb6c8` cmake: fix setup_compiler by wrapping Compiler.cmake in a function\n- `b5d10e5` hexview: drop 'override' on comment() for QHexView <v5.1.0 compat\n- `b1e1b65` Revert \"hexview: drop 'override' on comment() for QHexView <v5.1.0 compat\"\n- `fcff014` chore: pinned QHexView at 5.1.1\n- `983ec56` Merge pull request #69 from blshkv/fix-setup-compiler\n- `d40ff6a` fix(LoaderDialog): wrong slice initialization\n- `b744503` chore: refactoring\n- `a7c663d` chore: removed duplicate return\n- `4c29117` cmake/main: detect system plugin dir via GNUInstallDirs\n- `d9e0e6a` cmake: use generator expression to skip REDASM_PLUGIN_DIR on Windows\n- `27c14e0` Merge pull request #70 from blshkv/fix-plugin-dir\n- `805b9fa` fix: don't hardcode /usr/lib and use REDASM_PLUGIN_DIR for appimage\n- `81cbb1e` fix: missing preprocessor if statement\n- `65e2c12` fix: appimage search path\n- `004f3d8` feat: updated social links\n- `f1a214f` feat(MemoryMapDialog): use selected font\n\n**loaders:**\n- `e044459` feat(PE): sync to core changes\n- `38c644a` feat: explicit module version\n- `fbecb3a` chore: moved install step from workspace\n\n**processors:**\n- `afa979d` feat: explicit module version\n- `4cfdfa6` chore: moved install step from workspace\n- `fcd8495` cmake: prefer system capstone and zydis over CPM downloads\n- `41c92df` cmake: require capstone >= 6.0 in find_package\n- `78014b8` Merge pull request #6 from blshkv/fix-use-system-libs\n\n**commands:**\n- `1674f4f` feat: explicit module version\n- `ca93d41` chore: moved install step from workspace\n\n**kb:**\n- `6794839` chore: moved install step from workspace\n"
   },
   {
     "url": "https://api.github.com/repos/redasm-dev/redasm/releases/43017587",
@@ -780,7 +780,7 @@
         "state": "uploaded",
         "size": 49462548,
         "digest": null,
-        "download_count": 2127,
+        "download_count": 2128,
         "created_at": "2021-05-16T16:06:16Z",
         "updated_at": "2021-05-16T16:06:46Z",
         "browser_download_url": "https://github.com/redasm-dev/redasm/releases/download/v2.1.1/REDasm_2.1.1_Windows_x86_64.zip"
