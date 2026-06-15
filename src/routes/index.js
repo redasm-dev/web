@@ -26,7 +26,7 @@ export default class HomePage extends AppPage {
                 </p>
                 <div class="flex gap-x-3">
                     <x-badge class="my-1" color="foreground" label="language" value="C/C++"></x-badge>
-                    <x-badge class="my-1" color="success" label="license" value="GPL3"></x-badge>
+                    <x-badge class="my-1" color="foreground" label="license" value="GPL3"></x-badge>
                 </div>
             </div>
             <div class="flex flex-col gap-y-3 text-right">

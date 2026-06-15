@@ -91,16 +91,13 @@ function generateSiteMap() {
             const urlset = routes.map(x => {
                 return "" +
                     `    <url>\n` +
-                    `        <loc>${homepage}${x}</loc>\n` +
+                    `        <loc>${homepage}${x === "index" ? "" : x}</loc>\n` +
                     `    </url>`;
             });
 
             const SITEMAP_TEMPLATE =
                 `<?xml version="1.0" encoding="UTF-8"?>\n` +
-                `<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">\n` +
-                `    <url>\n` +
-                `        <loc>${homepage}</loc>\n` +
-                `    </url>\n` +
+                `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
                 urlset.join("\n") + "\n" +
                 `</urlset>`;
 
