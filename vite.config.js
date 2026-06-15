@@ -19,6 +19,11 @@ function escapeParam(r) {
     return r.replace(/[\[\]]/g, '_');
 }
 
+async function ensureDir(dir) {
+    try { await fs.access(dir); }
+    catch { await fs.mkdir(dir, { recursive: true }); }
+}
+
 function generateApp() {
     let config;
 
@@ -58,6 +63,7 @@ function generateApp() {
                 `    }, options);\n` +
                 `}\n`;
 
+            await ensureDir(APP_TMPDIR);
             await fs.writeFile(path.join(APP_TMPDIR, "index.js"), APP_TEMPLATE);
         },
     }
@@ -102,8 +108,7 @@ function generateSiteMap() {
                 `</urlset>`;
 
             config.logger.info("Generating sitemap.xml");
-            try { await fs.access(config.build.outDir); }
-            catch { await fs.mkdir(config.build.outDir, { recursive: true }); }
+            await ensureDir(config.build.outDir);
             await fs.writeFile(path.join(config.build.outDir, "sitemap.xml"), SITEMAP_TEMPLATE);
         }
     }
@@ -135,8 +140,7 @@ function generateRobotsTxt() {
                 `Sitemap: ${homepage}sitemap.xml\n`;
 
             config.logger.info("Generating robots.txt");
-            try { await fs.access(config.build.outDir); }
-            catch { await fs.mkdir(config.build.outDir, { recursive: true }); }
+            await ensureDir(config.build.outDir);
             await fs.writeFile(path.join(config.build.outDir, "robots.txt"), ROBOTS_TEMPLATE);
         }
     }
