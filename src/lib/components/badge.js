@@ -10,7 +10,7 @@ class Badge extends AppComponent {
 
     static get template() {
         return /*html*/`
-<div class="x-badge-label text-background font-bold py-1 px-2 tracking-wider"></div>
+<div class="x-badge-label whitespace-pre text-background font-bold py-1 px-2 tracking-wider"></div>
 <div class="x-badge-value py-1 px-2"></div>
 `;
     }

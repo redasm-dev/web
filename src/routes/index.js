@@ -4,6 +4,7 @@ import "$lib/components/section.js";
 import "$lib/components/featuregrid.js";
 import "$lib/components/notice.js";
 import { createReleasesTable } from "$lib/downloads.js";
+import { updateCIStatus } from "$lib/ci.js";
 import { AppPage } from "$app";
 
 export default class HomePage extends AppPage {
@@ -23,7 +24,7 @@ export default class HomePage extends AppPage {
                     For hobbyists and professional reverse engineers.<br>
                     Free forever<span class="cursor"></span>
                 </p>
-                <div>
+                <div class="flex gap-x-3">
                     <x-badge class="my-1" color="foreground" label="language" value="C/C++"></x-badge>
                     <x-badge class="my-1" color="success" label="license" value="GPL3"></x-badge>
                 </div>
@@ -40,6 +41,10 @@ export default class HomePage extends AppPage {
                         <i class="fab fa-windows fa-lg"></i>
                         <i class="fab fa-linux fa-lg"></i>
                     </div>
+                </div>
+                <div class="flex flex-col gap-y-1">
+                    <x-badge id="x-badge-ci" class="uppercase" color="muted" label="CI     " value="C/C++"></x-badge>
+                    <x-badge id="x-badge-nightly" class="uppercase" color="muted" label="Nightly" value="GPL3"></x-badge>
                 </div>
             </div>
         </div>
@@ -119,5 +124,6 @@ export default class HomePage extends AppPage {
 
     onCreated() {
         createReleasesTable(this.querySelector("#home__downloads"));
+        updateCIStatus();
     }
 }
