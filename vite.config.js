@@ -109,8 +109,41 @@ function generateSiteMap() {
     }
 }
 
+function generateRobotsTxt() {
+    let config;
+
+    return {
+        name: "generate-robotstxt",
+        apply: "build",
+
+        configResolved(resolvedconfig) {
+            config = resolvedconfig;
+        },
+
+        async closeBundle() {
+            if (!pkg.homepage) {
+                config.logger.warn("Homepage not set, skipping robots.txt generation");
+                return;
+            }
+
+            const homepage = pkg.homepage.replace(/\/+$/, "") + "/";
+
+            const ROBOTS_TEMPLATE =
+                `User-agent: *\n` +
+                `Allow: /\n` +
+                `\n` +
+                `Sitemap: ${homepage}sitemap.xml\n`;
+
+            config.logger.info("Generating robots.txt");
+            try { await fs.access(config.build.outDir); }
+            catch { await fs.mkdir(config.build.outDir, { recursive: true }); }
+            await fs.writeFile(path.join(config.build.outDir, "robots.txt"), ROBOTS_TEMPLATE);
+        }
+    }
+}
+
 export default defineConfig({
-    plugins: [tailwindcss(), generateApp(), generateSiteMap()],
+    plugins: [tailwindcss(), generateApp(), generateSiteMap(), generateRobotsTxt()],
     root: "src",
     publicDir: path.resolve(__dirname, "public"),
 
