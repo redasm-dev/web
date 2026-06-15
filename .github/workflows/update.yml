@@ -2,7 +2,7 @@ name: Update model data
 
 on:
   schedule:
-    - cron: '0 3 * * *'  # Runs every 24 hours
+    - cron: '0 4 * * *'  # Runs every 24 hours
   workflow_dispatch:  # Allow manual trigger
 
 jobs:
@@ -24,8 +24,8 @@ jobs:
 
       - name: Fetch CI status
         run: |
-          curl -s "https://api.github.com/repos/redasm-dev/workspace/actions/workflows/ci.yml/runs?per_page=1" > ci.json
-          curl -s "https://api.github.com/repos/redasm-dev/workspace/actions/workflows/nightly.yml/runs?per_page=1" > nightly.json
+          curl -s "https://api.github.com/repos/redasm-dev/workspace/actions/workflows/ci.yml/runs?per_page=10" > ci.json
+          curl -s "https://api.github.com/repos/redasm-dev/workspace/actions/workflows/nightly.yml/runs?per_page=10" > nightly.json
 
       - name: Push updates to data branch
         run: |
