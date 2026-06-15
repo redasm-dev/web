@@ -1,28 +1,28 @@
 {
-  "total_count": 48,
+  "total_count": 50,
   "workflow_runs": [
     {
-      "id": 27533537113,
+      "id": 27536084113,
       "name": "CI",
-      "node_id": "WFR_kwLOSvFxCM8AAAAGaSBvWQ",
+      "node_id": "WFR_kwLOSvFxCM8AAAAGaUdMkQ",
       "head_branch": "master",
-      "head_sha": "33b6d29812d4ee91ee3f6ca2cfaeb4c63b36f9fc",
+      "head_sha": "f6bca506e26049fb0756feff9adf5246412b8112",
       "path": ".github/workflows/ci.yml",
-      "display_title": "repo_updated",
-      "run_number": 98,
-      "event": "repository_dispatch",
+      "display_title": "chore: adjusted cleanup-ci cron",
+      "run_number": 100,
+      "event": "push",
       "status": "completed",
       "conclusion": "success",
       "workflow_id": 289368748,
-      "check_suite_id": 74088247356,
-      "check_suite_node_id": "CS_kwDOSvFxCM8AAAARQADwPA",
-      "url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/27533537113",
-      "html_url": "https://github.com/redasm-dev/workspace/actions/runs/27533537113",
+      "check_suite_id": 74096180908,
+      "check_suite_node_id": "CS_kwDOSvFxCM8AAAARQHn-rA",
+      "url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/27536084113",
+      "html_url": "https://github.com/redasm-dev/workspace/actions/runs/27536084113",
       "pull_requests": [
 
       ],
-      "created_at": "2026-06-15T08:23:43Z",
-      "updated_at": "2026-06-15T08:28:52Z",
+      "created_at": "2026-06-15T09:13:12Z",
+      "updated_at": "2026-06-15T09:18:26Z",
       "actor": {
         "login": "Dax89",
         "id": 1503603,
@@ -47,17 +47,17 @@
       "run_attempt": 1,
       "referenced_workflows": [
         {
-          "path": "redasm-dev/workspace/.github/workflows/build-windows.yml@33b6d29812d4ee91ee3f6ca2cfaeb4c63b36f9fc",
-          "sha": "33b6d29812d4ee91ee3f6ca2cfaeb4c63b36f9fc",
+          "path": "redasm-dev/workspace/.github/workflows/build-windows.yml@f6bca506e26049fb0756feff9adf5246412b8112",
+          "sha": "f6bca506e26049fb0756feff9adf5246412b8112",
           "ref": "refs/heads/master"
         },
         {
-          "path": "redasm-dev/workspace/.github/workflows/build-linux.yml@33b6d29812d4ee91ee3f6ca2cfaeb4c63b36f9fc",
-          "sha": "33b6d29812d4ee91ee3f6ca2cfaeb4c63b36f9fc",
+          "path": "redasm-dev/workspace/.github/workflows/build-linux.yml@f6bca506e26049fb0756feff9adf5246412b8112",
+          "sha": "f6bca506e26049fb0756feff9adf5246412b8112",
           "ref": "refs/heads/master"
         }
       ],
-      "run_started_at": "2026-06-15T08:23:43Z",
+      "run_started_at": "2026-06-15T09:13:12Z",
       "triggering_actor": {
         "login": "Dax89",
         "id": 1503603,
@@ -79,19 +79,19 @@
         "user_view_type": "public",
         "site_admin": false
       },
-      "jobs_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/27533537113/jobs",
-      "logs_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/27533537113/logs",
-      "check_suite_url": "https://api.github.com/repos/redasm-dev/workspace/check-suites/74088247356",
-      "artifacts_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/27533537113/artifacts",
-      "cancel_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/27533537113/cancel",
-      "rerun_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/27533537113/rerun",
+      "jobs_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/27536084113/jobs",
+      "logs_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/27536084113/logs",
+      "check_suite_url": "https://api.github.com/repos/redasm-dev/workspace/check-suites/74096180908",
+      "artifacts_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/27536084113/artifacts",
+      "cancel_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/27536084113/cancel",
+      "rerun_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/27536084113/rerun",
       "previous_attempt_url": null,
       "workflow_url": "https://api.github.com/repos/redasm-dev/workspace/actions/workflows/289368748",
       "head_commit": {
-        "id": "33b6d29812d4ee91ee3f6ca2cfaeb4c63b36f9fc",
-        "tree_id": "62c538a7b312d2d6f7ac120b6e17f49ecd79813a",
-        "message": "fix(nightly): fixed changelog generation",
-        "timestamp": "2026-06-15T07:55:29Z",
+        "id": "f6bca506e26049fb0756feff9adf5246412b8112",
+        "tree_id": "9a33d1b16a5735cdd7ea90566f12e79661b3c2e9",
+        "message": "chore: adjusted cleanup-ci cron",
+        "timestamp": "2026-06-15T09:13:02Z",
         "author": {
           "name": "Dax",
           "email": "contact@antoniodavide.dev"
