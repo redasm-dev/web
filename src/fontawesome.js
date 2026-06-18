@@ -6,6 +6,7 @@ import {
     faHeart,
     faCaretRight,
     faDownload,
+    faChevronRight,
     faHand,
     faHandPointRight,
     faKey,
@@ -13,6 +14,7 @@ import {
 
 import {
     faXTwitter,
+    faReddit,
     faDiscord,
     faYoutube,
     faGithub,
@@ -26,12 +28,14 @@ export default function initFontAwesome() {
         faSitemap,
         faHeart,
         faCaretRight,
+        faChevronRight,
         faDownload,
         faHand,
         faHandPointRight,
         faKey,
 
         faXTwitter,
+        faReddit,
         faDiscord,
         faYoutube,
         faGithub,

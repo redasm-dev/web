@@ -72,48 +72,68 @@ async function fetchReleases() {
     return [];
 }
 
-export async function createReleasesTable(container) {
+export async function createReleasesAccordion(container) {
     const ICONS = {
         "signature": "fas fa-key",
         "windows": "fab fa-windows",
         "linux": "fab fa-linux",
     };
 
-    container.appendChild(createTable({
-        class: "w-full leading-8",
-        header: ["Name", "Size", "Date", "Downloads"],
-        headerclass: "text-left",
-        rows: await fetchReleases(),
+    const fetchedreleases = await fetchReleases();
+    const versions = [...new Set(fetchedreleases.map(item => item.version))];
 
-        categoryDelegate: (row) => {
-            return /*html*/`
-                <div class="flex items-center text-right my-2">
-                    <span class="border px-1 border-success 
-                                  text-success">${row.version}</span>
+    const byversion = fetchedreleases.reduce((acc, item) => {
+        if (!acc[item.version]) acc[item.version] = [];
 
-                    <div class="bg-success h-px flex-1"></div>
-                </div>
-            `;
-        },
+        acc[item.version].push(item);
+        return acc;
+    }, {});
 
-        rowDelegate: row => {
-            return /*html*/`
-                <td>
-                    <div class="flex items-center mr-2 gap-x-1">
-                        <i class="${ICONS[row.type]} fa-fw mr-1 fa-lg"></i>
-                        <a href="${row.url}">${row.name}</a>
-                        <div class="flex-1"></div>
+    const fragment = document.createDocumentFragment();
 
-                        ${row.prerelease && !row.nightly ? /*html*/
-                    `<span class="border-t border-b border-background 
-                                  bg-warning text-background uppercase
-                                  font-bold leading-none p-1 mr-1">prerelease</span>` : ""}
-                    </div>
-                </td>
-                <td>${row.size}</td>
-                <td>${row.created}</td>
-                <td>${row.nightly ? "" : row.downloads}</td>
-            `;
+    for (const [idx, ver] of versions.entries()) {
+        const detail = fragment.appendChild(document.createElement("details"));
+        detail.classList.add("group", "border", "border-muted", "bg-background-alt", "my-3", "cursor-pointer")
+        detail.open = idx === 0;
+
+        const releases = byversion[ver];
+
+        const summary = detail.appendChild(document.createElement("summary"))
+        summary.classList.add("text-xs", "flex", "items-center", "gap-x-3", "p-3", "font-bold", "hover:bg-muted/10");
+
+        summary.innerHTML = /*html*/`
+<i class="fa-solid fa-chevron-right text-primary text-xs transition-transform group-open:rotate-90"></i>
+<span class="${ver === 'nightly' ? 'bg-warning text-background' : 'bg-primary text-foreground'} p-1">${ver}</span>
+<div class="flex-1"></div>
+<span class="text-muted">${releases.length} files</span>
+`;
+
+        const ul = detail.appendChild(document.createElement("ul"));
+        ul.classList.add("flex", "flex-col");
+
+        for (const rel of byversion[ver]) {
+            const li = ul.appendChild(document.createElement("li"));
+            li.classList.add("border-t", "border-muted");
+
+            li.innerHTML = /*html*/`
+<a href="${rel.url}" class="flex text-sm items-center gap-x-3 p-3 hover:bg-warning/5">
+    <i class="${ICONS[rel.type]} fa-fw fa-xl text-foreground"></i>
+    <div class="flex-1">
+        <div class="text-success mb-2 text-base">${rel.name}</div>
+        <div class="flex items-center gap-x-3">
+            <div class="text-muted ${rel.nightly ? 'hidden' : ''}"><span class="text-foreground">Date: </span>${rel.created}</div>
+            <div class="text-muted"><span class="text-foreground">Size: </span>${rel.size}</div>
+            <div class="border border-warning text-warning px-1 ${rel.nightly || !rel.prerelease ? 'hidden' : ''}">prerelease</div>
+        </div>
+    </div>
+    <div>
+        <div class="text-success text-right">${rel.nightly ? "built" : rel.downloads}</div>
+        <div class="text-muted">${rel.nightly ? rel.created : "downloads"}</div>
+    </div>
+</a >
+        `;
         }
-    }));
+    }
+
+    container.appendChild(fragment);
 }

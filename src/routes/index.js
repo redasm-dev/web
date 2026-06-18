@@ -3,7 +3,7 @@ import "$lib/components/snippet.js";
 import "$lib/components/section.js";
 import "$lib/components/featuregrid.js";
 import "$lib/components/notice.js";
-import { createReleasesTable } from "$lib/downloads.js";
+import { createReleasesAccordion } from "$lib/downloads.js";
 import { updateCIStatus } from "$lib/ci.js";
 import { AppPage } from "$app";
 
@@ -89,10 +89,10 @@ export default class HomePage extends AppPage {
                 </p>
                 <br>
                 <p>Nightlies are GPG signed, import the public key to verify:</p>
-                <pre class="whitespace-pre-line text-code">
-                    gpg --keyserver keys.openpgp.org --recv-keys A2391AFACAE2EE52B35541DD65F948A2F6BB294A
-                    gpg --verify REDasm-linux-x86_64.AppImage.asc REDasm-linux-x86_64.AppImage
-                    gpg --verify REDasm-windows-x86_64.zip.asc REDasm-windows-x86_64.zip
+                <pre class="text-code overflow-x-auto whitespace-pre-wrap break-all">
+gpg --keyserver keys.openpgp.org --recv-keys A2391AFACAE2EE52B35541DD65F948A2F6BB294A
+gpg --verify REDasm-linux-x86_64.AppImage.asc REDasm-linux-x86_64.AppImage
+gpg --verify REDasm-windows-x86_64.zip.asc REDasm-windows-x86_64.zip
                 </pre>
             </x-notice>
             <div id="home__downloads" class="overflow-auto text-sm"></div>
@@ -123,7 +123,7 @@ export default class HomePage extends AppPage {
     }
 
     onCreated() {
-        createReleasesTable(this.querySelector("#home__downloads"));
+        createReleasesAccordion(this.querySelector("#home__downloads"));
         updateCIStatus();
     }
 }
