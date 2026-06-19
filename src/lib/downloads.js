@@ -1,5 +1,3 @@
-import { createTable } from "$app";
-
 function getFileSize(bytes, si = false, dp = 1) {
     const thresh = si ? 1000 : 1024;
     if (Math.abs(bytes) < thresh) return bytes + " B";
