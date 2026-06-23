@@ -6,10 +6,12 @@ import {
     faHeart,
     faCaretRight,
     faDownload,
+    faHashtag,
+    faSignature,
     faChevronRight,
     faHand,
     faHandPointRight,
-    faKey,
+    faPenNib
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
@@ -30,9 +32,11 @@ export default function initFontAwesome() {
         faCaretRight,
         faChevronRight,
         faDownload,
+        faHashtag,
+        faSignature,
         faHand,
         faHandPointRight,
-        faKey,
+        faPenNib,
 
         faXTwitter,
         faReddit,

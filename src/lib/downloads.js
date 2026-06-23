@@ -23,6 +23,7 @@ function parseVersion(tag) {
 }
 
 function getReleaseType(name) {
+    if (name.endsWith(".sha256")) return "hash";
     if (name.endsWith(".asc")) return "signature";
 
     const n = name.toLowerCase()
@@ -79,7 +80,8 @@ async function fetchReleases() {
 
 export async function createReleasesAccordion(container) {
     const ICONS = {
-        "signature": "fas fa-key",
+        "signature": "fas fa-signature",
+        "hash": "fas fa-hashtag",
         "windows": "fab fa-windows",
         "linux": "fab fa-linux",
     };

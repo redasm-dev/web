@@ -73,35 +73,49 @@ export default class HomePage extends AppPage {
         </section>
         <section id="download" class="flex flex-col gap-y-3">
             <section-title>Download</section-title>
-            <x-notice color="primary" icon="fa-hand" class="p-3 text-sm">
-                <h5 class="uppercase font-bold pb-3">Version 3.x and below are now retired</h5>
-                <p>
-                    REDasm was fully rewritten for v4 to address long-standing technical debt.
-                </p>
-                <p>
-                    Older releases remain available in <a href="https://github.com/redasm-dev/redasm/releases">GitHub Releases</a>
-                </p>
-            </x-notice>
-            <x-notice color="warning" icon="fa-hand-point-right" class="p-3 text-sm">
-                <h5 class="uppercase font-bold pb-3">version 4.0</h5>
-                <p>
-                    Nightly builds are generated automatically from the latest code.<br>
-                    v4.0.0-beta1 is now available, see <a href="https://github.com/redasm-dev/redasm/releases/tag/v4.0.0-beta1">GitHub</a>
-                    for changelog.
-                </p>
-                <br>
-                <p>Nightlies and Releases are GPG signed, import the public key to verify:</p>
-                <pre class="text-code overflow-x-auto whitespace-pre-wrap break-all">
-# Release
+            <div class="grid grid-cols-2 gap-3">
+                <x-notice color="primary" icon="fa-hand" class="p-3 text-sm">
+                    <h5 class="uppercase font-bold pb-3">Version 3.x and below are now retired</h5>
+                    <p>
+                        REDasm was fully rewritten for v4 to address long-standing technical debt.
+                    </p>
+                    <p>
+                        Older releases remain available in <a href="https://github.com/redasm-dev/redasm/releases">GitHub Releases</a>
+                    </p>
+                </x-notice>
+                <x-notice color="warning" icon="fa-hand-point-right" class="p-3 text-sm">
+                    <h5 class="uppercase font-bold pb-3">version 4.0</h5>
+                    <p>
+                        Nightly builds are generated automatically from the latest code.<br>
+                        v4.0.0-beta1 is now available, see <a href="https://github.com/redasm-dev/redasm/releases/tag/v4.0.0-beta1">GitHub</a>
+                        for changelog.
+                    </p>
+                </x-notice>
+                <x-notice color="muted" icon="fa-pen-nib" class="col-span-2 p-3 text-sm">
+                    <h5 class="uppercase font-bold pb-3">Signature verification</h5>
+
+                    <p>Import the public key to verify:</p>
+                    <pre class="pt-3 text-code overflow-x-auto whitespace-pre-wrap break-all">
+# for release builds
 gpg --keyserver keys.openpgp.org --recv-keys B0C728D7021EEEE9D9B859043AF46EB2201FFB56
- 
-# Nightly 
+
+# for nightly builds
 gpg --keyserver keys.openpgp.org --recv-keys A2391AFACAE2EE52B35541DD65F948A2F6BB294A
 
-gpg --verify REDasm-linux-x86_64.AppImage.asc REDasm-linux-x86_64.AppImage
-gpg --verify REDasm-windows-x86_64.zip.asc REDasm-windows-x86_64.zip
-                </pre>
-            </x-notice>
+# verify linux
+gpg --verify REDasm-VERSION-linux-x86_64.AppImage.sha256.asc REDasm-VERSION-linux-x86_64.AppImage.sha256
+sha256sum -c REDasm-VERSION-linux-x86_64.AppImage.sha256
+
+# verify windows
+gpg --verify REDasm-VERSION-windows-x86_64.zip.sha256.asc REDasm-VERSION-windows-x86_64.zip.sha256
+sha256sum -c REDasm-VERSION-windows-x86_64.zip.sha256
+
+# for nightly builds (replace VERSION with "nightly")
+gpg --verify REDasm-nightly-linux-x86_64.AppImage.sha256.asc REDasm-nightly-linux-x86_64.AppImage.sha256
+sha256sum -c REDasm-nightly-linux-x86_64.AppImage.sha256
+                    </pre>
+                </x-notice>
+            </div>
             <div id="home__downloads" class="overflow-auto text-sm"></div>
         </section>
     </div>
