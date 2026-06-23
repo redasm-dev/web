@@ -56,18 +56,21 @@ export default class HomePage extends AppPage {
             <feature-grid class="grid-cols-1 md:grid-cols-2">
                 <feature-item heading="Interactive listing">
                     Navigate code and data with cross-references, 
-                    symbol renaming, comments and control flow graph.
+                    rename symbols renaming, add comments and display control flow graph.
                 </feature-item>
                 <feature-item heading="Plugin architecture">
-                    Core written in C++, API in C for broad language compatibility. 
-                    Loaders and Processors can be written in C or C++.<br>
-                    C API allows integration from other programming languages.
+                    Core and API are written in C broad language compatibility,
+                    APIs are carefully designed to be simple to use for a seamless developer experience.<br>
+                    C API makes easy to integrate other programming languages and core library is
+                    designed to be used headless for automated analysis.
                 </feature-item>
                 <feature-item heading="Architecture support">
-                    x86, MIPS, ARM, AARCH64 and Dalvik.
+                    x86 family (16/32/64-bit), MIPS32 (BE/lE) with delay slot handling and register tracking, 
+                    ARM, Thumb and AARCH64.
                 </feature-item>
                 <feature-item heading="Format support">
-                    PE, ELF, DEX, PS1, N64, DEX and XBE. 
+                    DOS COM executables, MZ family (MZ, NE, LE/LX with dedicated VxD device driver analysis), Portable Executable (PE),
+                    ELF, Playstation 1 executables (PSX-EXE) and BIOS, XBE (original XBox executables)
                 </feature-item>
             </feature-grid>
         </section>
