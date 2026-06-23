@@ -16,9 +16,10 @@ function getFileSize(bytes, si = false, dp = 1) {
 }
 
 function parseVersion(tag) {
-    let v = tag.split("-")[0];
+    let parts = tag.split("-");
+    let v = parts[0];
     if (v.startsWith("v")) v = v.slice(1);
-    return v;
+    return { version: v, suffix: parts[1] };
 }
 
 function getReleaseType(name) {
@@ -43,9 +44,15 @@ async function fetchReleases() {
             return releases.reduce((acc, r) => {
                 if (r.draft || !r.assets.length) return acc;
 
+                const v = parseVersion(r.tag_name);
+
+                // filter out legacy releases
+                if (v.version[0] === '2' || v.version[0] === '3') return acc;
+
                 for (let a of r.assets) {
                     acc.push({
-                        version: parseVersion(r.tag_name),
+                        version: v.version,
+                        suffix: v.suffix,
                         type: getReleaseType(a.name),
                         nightly: r.tag_name === "nightly",
                         prerelease: r.prerelease,
@@ -122,6 +129,7 @@ export async function createReleasesAccordion(container) {
             <div class="text-muted ${rel.nightly ? 'hidden' : ''}"><span class="text-foreground">Date: </span>${rel.created}</div>
             <div class="text-muted"><span class="text-foreground">Size: </span>${rel.size}</div>
             <div class="border border-warning text-warning px-1 ${rel.nightly || !rel.prerelease ? 'hidden' : ''}">prerelease</div>
+            <div class="border border-foreground text-foreground px-1 ${!rel.suffix ? 'hidden' : ''}">${rel.suffix}</div>
         </div>
     </div>
     <div>
