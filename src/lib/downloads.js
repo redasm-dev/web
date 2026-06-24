@@ -37,7 +37,7 @@ async function fetchReleases() {
     const URL = "https://raw.githubusercontent.com/redasm-dev/redasm.dev/refs/heads/data/releases.json";
 
     try {
-        const response = await fetch(URL);
+        const response = await fetch(URL, { cache: "no-store" });
 
         if (response.ok) {
             const releases = await response.json();
