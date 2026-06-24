@@ -16,6 +16,7 @@ import {
 
 import {
     faXTwitter,
+    faMastodon,
     faReddit,
     faDiscord,
     faYoutube,
@@ -39,6 +40,7 @@ export default function initFontAwesome() {
         faPenNib,
 
         faXTwitter,
+        faMastodon,
         faReddit,
         faDiscord,
         faYoutube,

@@ -59,13 +59,12 @@ export default class HomePage extends AppPage {
                     rename symbols renaming, add comments and display control flow graph.
                 </feature-item>
                 <feature-item heading="Plugin architecture">
-                    Core and API are written in C broad language compatibility,
-                    APIs are carefully designed to be simple to use for a seamless developer experience.<br>
+                    REDasm provides a C API, they are carefully designed to be simple and intuitive to use.<br>
                     C API makes easy to integrate other programming languages and core library is
                     designed to be used headless for automated analysis.
                 </feature-item>
                 <feature-item heading="Architecture support">
-                    x86 family (16/32/64-bit), MIPS32 (BE/lE) with delay slot handling and register tracking, 
+                    x86 family (16/32/64-bit), MIPS32 (BE/LE) with delay slot handling and register tracking, 
                     ARM, Thumb and AARCH64.
                 </feature-item>
                 <feature-item heading="Format support">
