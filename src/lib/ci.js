@@ -8,7 +8,7 @@ export async function updateCIStatus() {
         const badge = document.querySelector(`#x-badge-${ci.name}`);
         badge.value = "fetching...";
 
-        const response = await fetch(ci.url);
+        const response = await fetch(ci.url, { cache: "no-store" });
 
         try {
             if (response.ok) {
