@@ -2,27 +2,27 @@
   "total_count": 69,
   "workflow_runs": [
     {
-      "id": 28321236809,
+      "id": 28475799917,
       "name": "CI",
-      "node_id": "WFR_kwLOSvFxCM8AAAAGmBPHSQ",
+      "node_id": "WFR_kwLOSvFxCM8AAAAGoUo5bQ",
       "head_branch": "master",
       "head_sha": "44e73de7e68da938c84d6abb53ff483aebfa0948",
       "path": ".github/workflows/ci.yml",
-      "display_title": "feat: add analyzers to workspace tree",
-      "run_number": 145,
-      "event": "push",
+      "display_title": "repo_updated",
+      "run_number": 150,
+      "event": "repository_dispatch",
       "status": "completed",
       "conclusion": "success",
       "workflow_id": 289368748,
-      "check_suite_id": 76455891499,
-      "check_suite_node_id": "CS_kwDOSvFxCM8AAAARzSBSKw",
-      "url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/28321236809",
-      "html_url": "https://github.com/redasm-dev/workspace/actions/runs/28321236809",
+      "check_suite_id": 76908088589,
+      "check_suite_node_id": "CS_kwDOSvFxCM8AAAAR6BRNDQ",
+      "url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/28475799917",
+      "html_url": "https://github.com/redasm-dev/workspace/actions/runs/28475799917",
       "pull_requests": [
 
       ],
-      "created_at": "2026-06-28T11:48:36Z",
-      "updated_at": "2026-06-28T11:53:47Z",
+      "created_at": "2026-06-30T21:04:59Z",
+      "updated_at": "2026-06-30T21:11:03Z",
       "actor": {
         "login": "Dax89",
         "id": 1503603,
@@ -57,7 +57,7 @@
           "ref": "refs/heads/master"
         }
       ],
-      "run_started_at": "2026-06-28T11:48:36Z",
+      "run_started_at": "2026-06-30T21:04:59Z",
       "triggering_actor": {
         "login": "Dax89",
         "id": 1503603,
@@ -79,12 +79,12 @@
         "user_view_type": "public",
         "site_admin": false
       },
-      "jobs_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/28321236809/jobs",
-      "logs_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/28321236809/logs",
-      "check_suite_url": "https://api.github.com/repos/redasm-dev/workspace/check-suites/76455891499",
-      "artifacts_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/28321236809/artifacts",
-      "cancel_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/28321236809/cancel",
-      "rerun_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/28321236809/rerun",
+      "jobs_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/28475799917/jobs",
+      "logs_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/28475799917/logs",
+      "check_suite_url": "https://api.github.com/repos/redasm-dev/workspace/check-suites/76908088589",
+      "artifacts_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/28475799917/artifacts",
+      "cancel_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/28475799917/cancel",
+      "rerun_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/28475799917/rerun",
       "previous_attempt_url": null,
       "workflow_url": "https://api.github.com/repos/redasm-dev/workspace/actions/workflows/289368748",
       "head_commit": {
@@ -239,27 +239,27 @@
       }
     },
     {
-      "id": 28320165407,
+      "id": 28474267961,
       "name": "CI",
-      "node_id": "WFR_kwLOSvFxCM8AAAAGmANuHw",
+      "node_id": "WFR_kwLOSvFxCM8AAAAGoTLZOQ",
       "head_branch": "master",
-      "head_sha": "a88c6add22a249907f93b339b1529635de69dd57",
+      "head_sha": "44e73de7e68da938c84d6abb53ff483aebfa0948",
       "path": ".github/workflows/ci.yml",
       "display_title": "repo_updated",
-      "run_number": 144,
+      "run_number": 147,
       "event": "repository_dispatch",
       "status": "completed",
-      "conclusion": "failure",
+      "conclusion": "success",
       "workflow_id": 289368748,
-      "check_suite_id": 76453127458,
-      "check_suite_node_id": "CS_kwDOSvFxCM8AAAARzPYlIg",
-      "url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/28320165407",
-      "html_url": "https://github.com/redasm-dev/workspace/actions/runs/28320165407",
+      "check_suite_id": 76903362504,
+      "check_suite_node_id": "CS_kwDOSvFxCM8AAAAR58wvyA",
+      "url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/28474267961",
+      "html_url": "https://github.com/redasm-dev/workspace/actions/runs/28474267961",
       "pull_requests": [
 
       ],
-      "created_at": "2026-06-28T11:05:29Z",
-      "updated_at": "2026-06-28T11:07:04Z",
+      "created_at": "2026-06-30T20:37:48Z",
+      "updated_at": "2026-06-30T20:42:59Z",
       "actor": {
         "login": "Dax89",
         "id": 1503603,
@@ -284,17 +284,17 @@
       "run_attempt": 1,
       "referenced_workflows": [
         {
-          "path": "redasm-dev/workspace/.github/workflows/build-linux.yml@a88c6add22a249907f93b339b1529635de69dd57",
-          "sha": "a88c6add22a249907f93b339b1529635de69dd57",
+          "path": "redasm-dev/workspace/.github/workflows/build-linux.yml@44e73de7e68da938c84d6abb53ff483aebfa0948",
+          "sha": "44e73de7e68da938c84d6abb53ff483aebfa0948",
           "ref": "refs/heads/master"
         },
         {
-          "path": "redasm-dev/workspace/.github/workflows/build-windows.yml@a88c6add22a249907f93b339b1529635de69dd57",
-          "sha": "a88c6add22a249907f93b339b1529635de69dd57",
+          "path": "redasm-dev/workspace/.github/workflows/build-windows.yml@44e73de7e68da938c84d6abb53ff483aebfa0948",
+          "sha": "44e73de7e68da938c84d6abb53ff483aebfa0948",
           "ref": "refs/heads/master"
         }
       ],
-      "run_started_at": "2026-06-28T11:05:29Z",
+      "run_started_at": "2026-06-30T20:37:48Z",
       "triggering_actor": {
         "login": "Dax89",
         "id": 1503603,
@@ -316,19 +316,19 @@
         "user_view_type": "public",
         "site_admin": false
       },
-      "jobs_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/28320165407/jobs",
-      "logs_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/28320165407/logs",
-      "check_suite_url": "https://api.github.com/repos/redasm-dev/workspace/check-suites/76453127458",
-      "artifacts_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/28320165407/artifacts",
-      "cancel_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/28320165407/cancel",
-      "rerun_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/28320165407/rerun",
+      "jobs_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/28474267961/jobs",
+      "logs_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/28474267961/logs",
+      "check_suite_url": "https://api.github.com/repos/redasm-dev/workspace/check-suites/76903362504",
+      "artifacts_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/28474267961/artifacts",
+      "cancel_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/28474267961/cancel",
+      "rerun_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/28474267961/rerun",
       "previous_attempt_url": null,
       "workflow_url": "https://api.github.com/repos/redasm-dev/workspace/actions/workflows/289368748",
       "head_commit": {
-        "id": "a88c6add22a249907f93b339b1529635de69dd57",
-        "tree_id": "df1368e4e4c06b787947067858f766022fc36ae5",
-        "message": "feat: version naming scheme, unit test releases, signatures",
-        "timestamp": "2026-06-23T12:54:57Z",
+        "id": "44e73de7e68da938c84d6abb53ff483aebfa0948",
+        "tree_id": "68fecbe27ad4c4b5788cf7c985aa2cc856edad3b",
+        "message": "feat: add analyzers to workspace tree",
+        "timestamp": "2026-06-28T11:48:20Z",
         "author": {
           "name": "Dax",
           "email": "contact@antoniodavide.dev"
@@ -476,27 +476,27 @@
       }
     },
     {
-      "id": 28319928691,
+      "id": 28321236809,
       "name": "CI",
-      "node_id": "WFR_kwLOSvFxCM8AAAAGl__Rcw",
+      "node_id": "WFR_kwLOSvFxCM8AAAAGmBPHSQ",
       "head_branch": "master",
-      "head_sha": "a88c6add22a249907f93b339b1529635de69dd57",
+      "head_sha": "44e73de7e68da938c84d6abb53ff483aebfa0948",
       "path": ".github/workflows/ci.yml",
-      "display_title": "repo_updated",
-      "run_number": 143,
-      "event": "repository_dispatch",
+      "display_title": "feat: add analyzers to workspace tree",
+      "run_number": 145,
+      "event": "push",
       "status": "completed",
-      "conclusion": "failure",
+      "conclusion": "success",
       "workflow_id": 289368748,
-      "check_suite_id": 76452496560,
-      "check_suite_node_id": "CS_kwDOSvFxCM8AAAARzOyEsA",
-      "url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/28319928691",
-      "html_url": "https://github.com/redasm-dev/workspace/actions/runs/28319928691",
+      "check_suite_id": 76455891499,
+      "check_suite_node_id": "CS_kwDOSvFxCM8AAAARzSBSKw",
+      "url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/28321236809",
+      "html_url": "https://github.com/redasm-dev/workspace/actions/runs/28321236809",
       "pull_requests": [
 
       ],
-      "created_at": "2026-06-28T10:55:50Z",
-      "updated_at": "2026-06-28T11:00:59Z",
+      "created_at": "2026-06-28T11:48:36Z",
+      "updated_at": "2026-06-28T11:53:47Z",
       "actor": {
         "login": "Dax89",
         "id": 1503603,
@@ -521,17 +521,17 @@
       "run_attempt": 1,
       "referenced_workflows": [
         {
-          "path": "redasm-dev/workspace/.github/workflows/build-windows.yml@a88c6add22a249907f93b339b1529635de69dd57",
-          "sha": "a88c6add22a249907f93b339b1529635de69dd57",
+          "path": "redasm-dev/workspace/.github/workflows/build-windows.yml@44e73de7e68da938c84d6abb53ff483aebfa0948",
+          "sha": "44e73de7e68da938c84d6abb53ff483aebfa0948",
           "ref": "refs/heads/master"
         },
         {
-          "path": "redasm-dev/workspace/.github/workflows/build-linux.yml@a88c6add22a249907f93b339b1529635de69dd57",
-          "sha": "a88c6add22a249907f93b339b1529635de69dd57",
+          "path": "redasm-dev/workspace/.github/workflows/build-linux.yml@44e73de7e68da938c84d6abb53ff483aebfa0948",
+          "sha": "44e73de7e68da938c84d6abb53ff483aebfa0948",
           "ref": "refs/heads/master"
         }
       ],
-      "run_started_at": "2026-06-28T10:55:50Z",
+      "run_started_at": "2026-06-28T11:48:36Z",
       "triggering_actor": {
         "login": "Dax89",
         "id": 1503603,
@@ -553,19 +553,19 @@
         "user_view_type": "public",
         "site_admin": false
       },
-      "jobs_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/28319928691/jobs",
-      "logs_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/28319928691/logs",
-      "check_suite_url": "https://api.github.com/repos/redasm-dev/workspace/check-suites/76452496560",
-      "artifacts_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/28319928691/artifacts",
-      "cancel_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/28319928691/cancel",
-      "rerun_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/28319928691/rerun",
+      "jobs_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/28321236809/jobs",
+      "logs_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/28321236809/logs",
+      "check_suite_url": "https://api.github.com/repos/redasm-dev/workspace/check-suites/76455891499",
+      "artifacts_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/28321236809/artifacts",
+      "cancel_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/28321236809/cancel",
+      "rerun_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/28321236809/rerun",
       "previous_attempt_url": null,
       "workflow_url": "https://api.github.com/repos/redasm-dev/workspace/actions/workflows/289368748",
       "head_commit": {
-        "id": "a88c6add22a249907f93b339b1529635de69dd57",
-        "tree_id": "df1368e4e4c06b787947067858f766022fc36ae5",
-        "message": "feat: version naming scheme, unit test releases, signatures",
-        "timestamp": "2026-06-23T12:54:57Z",
+        "id": "44e73de7e68da938c84d6abb53ff483aebfa0948",
+        "tree_id": "68fecbe27ad4c4b5788cf7c985aa2cc856edad3b",
+        "message": "feat: add analyzers to workspace tree",
+        "timestamp": "2026-06-28T11:48:20Z",
         "author": {
           "name": "Dax",
           "email": "contact@antoniodavide.dev"

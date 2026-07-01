@@ -66,8 +66,8 @@
   "releases_url": "https://api.github.com/repos/redasm-dev/redasm/releases{/id}",
   "deployments_url": "https://api.github.com/repos/redasm-dev/redasm/deployments",
   "created_at": "2017-11-25T13:35:37Z",
-  "updated_at": "2026-06-29T05:20:10Z",
-  "pushed_at": "2026-06-28T10:55:40Z",
+  "updated_at": "2026-06-30T21:04:52Z",
+  "pushed_at": "2026-06-30T21:04:48Z",
   "git_url": "git://github.com/redasm-dev/redasm.git",
   "ssh_url": "git@github.com:redasm-dev/redasm.git",
   "clone_url": "https://github.com/redasm-dev/redasm.git",
@@ -83,7 +83,7 @@
   "has_wiki": false,
   "has_pages": false,
   "has_discussions": true,
-  "forks_count": 159,
+  "forks_count": 158,
   "mirror_url": null,
   "archived": false,
   "disabled": false,
@@ -111,7 +111,7 @@
     "reverse-engineering"
   ],
   "visibility": "public",
-  "forks": 159,
+  "forks": 158,
   "open_issues": 3,
   "watchers": 1759,
   "default_branch": "master",
@@ -147,6 +147,6 @@
     "user_view_type": "public",
     "site_admin": false
   },
-  "network_count": 159,
+  "network_count": 158,
   "subscribers_count": 47
 }
