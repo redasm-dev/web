@@ -68,7 +68,7 @@
         "state": "uploaded",
         "size": 32721400,
         "digest": "sha256:342f31e3fb58ff0f7698b3850e9186a77b4a19a83c2c629993c8c9470e8bb58b",
-        "download_count": 53,
+        "download_count": 54,
         "created_at": "2026-06-23T13:00:55Z",
         "updated_at": "2026-06-23T13:00:56Z",
         "browser_download_url": "https://github.com/redasm-dev/redasm/releases/download/v4.0.0-beta1/REDasm-4.0.0-beta1-linux-x86_64.AppImage"
@@ -176,7 +176,7 @@
         "state": "uploaded",
         "size": 23569159,
         "digest": "sha256:cf51bb0163c2fffd1d48183e9155d45365155febd8a387bcc628cdbbc4a0d301",
-        "download_count": 111,
+        "download_count": 113,
         "created_at": "2026-06-23T13:00:55Z",
         "updated_at": "2026-06-23T13:00:56Z",
         "browser_download_url": "https://github.com/redasm-dev/redasm/releases/download/v4.0.0-beta1/REDasm-4.0.0-beta1-windows-x86_64.zip"
@@ -288,18 +288,18 @@
     "node_id": "RE_kwDOBq0T3c4T_G90",
     "tag_name": "nightly",
     "target_commitish": "master",
-    "name": "Nightly Build (2026-07-14)",
+    "name": "Nightly Build (2026-07-15)",
     "draft": false,
     "immutable": false,
     "prerelease": true,
     "created_at": "2026-06-05T16:14:38Z",
-    "updated_at": "2026-07-14T04:55:08Z",
+    "updated_at": "2026-07-15T04:55:54Z",
     "published_at": "2026-06-06T05:57:51Z",
     "assets": [
       {
-        "url": "https://api.github.com/repos/redasm-dev/redasm/releases/assets/476287106",
-        "id": 476287106,
-        "node_id": "RA_kwDOBq0T3c4cY5CC",
+        "url": "https://api.github.com/repos/redasm-dev/redasm/releases/assets/477535787",
+        "id": 477535787,
+        "node_id": "RA_kwDOBq0T3c4cdp4r",
         "name": "REDasm-nightly-linux-x86_64.AppImage",
         "label": "",
         "uploader": {
@@ -326,10 +326,10 @@
         "content_type": "application/octet-stream",
         "state": "uploaded",
         "size": 34183672,
-        "digest": "sha256:d0a9f38942aec2fa9b5d3957948e594a58263fe1df455bc53f1c4a946e74924c",
+        "digest": "sha256:f32a971d9a2f44117ae77ea523e67b3481b969edad95b9119b0952fe553eb120",
         "download_count": 0,
-        "created_at": "2026-07-14T04:55:06Z",
-        "updated_at": "2026-07-14T04:55:07Z",
+        "created_at": "2026-07-15T04:55:49Z",
+        "updated_at": "2026-07-15T04:55:50Z",
         "browser_download_url": "https://github.com/redasm-dev/redasm/releases/download/nightly/REDasm-nightly-linux-x86_64.AppImage"
       },
       {
@@ -369,9 +369,9 @@
         "browser_download_url": "https://github.com/redasm-dev/redasm/releases/download/nightly/REDasm-nightly-linux-x86_64.AppImage.sha256"
       },
       {
-        "url": "https://api.github.com/repos/redasm-dev/redasm/releases/assets/476287103",
-        "id": 476287103,
-        "node_id": "RA_kwDOBq0T3c4cY5B_",
+        "url": "https://api.github.com/repos/redasm-dev/redasm/releases/assets/477535786",
+        "id": 477535786,
+        "node_id": "RA_kwDOBq0T3c4cdp4q",
         "name": "REDasm-nightly-linux-x86_64.AppImage.sha256.asc",
         "label": "",
         "uploader": {
@@ -398,16 +398,16 @@
         "content_type": "application/pgp-keys",
         "state": "uploaded",
         "size": 833,
-        "digest": "sha256:296e02daa6b3d13a476a0deb1f24022111891eecad9875e46382b1ce27dc8f41",
+        "digest": "sha256:12df25d4671a3b95ad72adaf2f7fe9b9b8cc0fbe3d3ebfeb4d1b7c20578458a3",
         "download_count": 0,
-        "created_at": "2026-07-14T04:55:06Z",
-        "updated_at": "2026-07-14T04:55:06Z",
+        "created_at": "2026-07-15T04:55:49Z",
+        "updated_at": "2026-07-15T04:55:49Z",
         "browser_download_url": "https://github.com/redasm-dev/redasm/releases/download/nightly/REDasm-nightly-linux-x86_64.AppImage.sha256.asc"
       },
       {
-        "url": "https://api.github.com/repos/redasm-dev/redasm/releases/assets/476287108",
-        "id": 476287108,
-        "node_id": "RA_kwDOBq0T3c4cY5CE",
+        "url": "https://api.github.com/repos/redasm-dev/redasm/releases/assets/477535788",
+        "id": 477535788,
+        "node_id": "RA_kwDOBq0T3c4cdp4s",
         "name": "REDasm-nightly-windows-x86_64.zip",
         "label": "",
         "uploader": {
@@ -433,17 +433,17 @@
         },
         "content_type": "application/zip",
         "state": "uploaded",
-        "size": 25197930,
-        "digest": "sha256:d549e860b9ecd781a0a32eb335a46bad5024d9aefba226a5eec6c4782b28f705",
+        "size": 25197933,
+        "digest": "sha256:1ecc9f845e5ab4d42c3411ba63cfacc6e67cdc9f52b1394d9cf3243c918487da",
         "download_count": 0,
-        "created_at": "2026-07-14T04:55:06Z",
-        "updated_at": "2026-07-14T04:55:08Z",
+        "created_at": "2026-07-15T04:55:49Z",
+        "updated_at": "2026-07-15T04:55:50Z",
         "browser_download_url": "https://github.com/redasm-dev/redasm/releases/download/nightly/REDasm-nightly-windows-x86_64.zip"
       },
       {
-        "url": "https://api.github.com/repos/redasm-dev/redasm/releases/assets/476287105",
-        "id": 476287105,
-        "node_id": "RA_kwDOBq0T3c4cY5CB",
+        "url": "https://api.github.com/repos/redasm-dev/redasm/releases/assets/477535845",
+        "id": 477535845,
+        "node_id": "RA_kwDOBq0T3c4cdp5l",
         "name": "REDasm-nightly-windows-x86_64.zip.sha256",
         "label": "",
         "uploader": {
@@ -470,16 +470,16 @@
         "content_type": "application/octet-stream",
         "state": "uploaded",
         "size": 100,
-        "digest": "sha256:cd811ceccb0ff395aa9ec78917f8e186a2b5a862913a972f49c78d613a2162a5",
+        "digest": "sha256:b4a832c4c18955ec4a64e2397ba5581ff0b79e4dd11de4e7230e3e32313c70bb",
         "download_count": 0,
-        "created_at": "2026-07-14T04:55:06Z",
-        "updated_at": "2026-07-14T04:55:06Z",
+        "created_at": "2026-07-15T04:55:54Z",
+        "updated_at": "2026-07-15T04:55:54Z",
         "browser_download_url": "https://github.com/redasm-dev/redasm/releases/download/nightly/REDasm-nightly-windows-x86_64.zip.sha256"
       },
       {
-        "url": "https://api.github.com/repos/redasm-dev/redasm/releases/assets/476287107",
-        "id": 476287107,
-        "node_id": "RA_kwDOBq0T3c4cY5CD",
+        "url": "https://api.github.com/repos/redasm-dev/redasm/releases/assets/477535785",
+        "id": 477535785,
+        "node_id": "RA_kwDOBq0T3c4cdp4p",
         "name": "REDasm-nightly-windows-x86_64.zip.sha256.asc",
         "label": "",
         "uploader": {
@@ -506,10 +506,10 @@
         "content_type": "application/pgp-keys",
         "state": "uploaded",
         "size": 833,
-        "digest": "sha256:8195e7aba7c566c8ce3624bee890437d3c1cb490046962e21cd6c85288a25125",
+        "digest": "sha256:b34ca1430752750d00f6048b718be3242959efc15db34eb23aa2a092652a0f2b",
         "download_count": 0,
-        "created_at": "2026-07-14T04:55:06Z",
-        "updated_at": "2026-07-14T04:55:06Z",
+        "created_at": "2026-07-15T04:55:49Z",
+        "updated_at": "2026-07-15T04:55:49Z",
         "browser_download_url": "https://github.com/redasm-dev/redasm/releases/download/nightly/REDasm-nightly-windows-x86_64.zip.sha256.asc"
       }
     ],
@@ -864,7 +864,7 @@
         "state": "uploaded",
         "size": 40299336,
         "digest": null,
-        "download_count": 258,
+        "download_count": 259,
         "created_at": "2021-01-31T20:45:34Z",
         "updated_at": "2021-01-31T20:46:20Z",
         "browser_download_url": "https://github.com/redasm-dev/redasm/releases/download/v3.0.0-beta3/REDasm_3.0_BETA3_Windows_x86_64.zip"
