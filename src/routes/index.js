@@ -2,6 +2,8 @@ import "$lib/components/badge.js";
 import "$lib/components/snippet.js";
 import "$lib/components/section.js";
 import "$lib/components/featuregrid.js";
+import "$lib/components/tabcontainer.js";
+import "$lib/components/supported.js";
 import "$lib/components/notice.js";
 import { createReleasesAccordion } from "$lib/downloads.js";
 import { updateCIStatus } from "$lib/ci.js";
@@ -63,23 +65,21 @@ export default class HomePage extends AppPage {
                     C API makes easy to integrate other programming languages and core library is
                     designed to be used headless for automated analysis.
                 </feature-item>
-                <feature-item heading="Architecture support">
-                    x86 family (16/32/64-bit), MIPS32 (BE/LE) with delay slot handling and register tracking, 
-                    ARM, Thumb and AARCH64.
-                </feature-item>
-                <feature-item heading="Format support">
-                    DOS COM executables, MZ family (MZ, NE, LE/LX with dedicated VxD device driver analysis), Portable Executable (PE),
-                    ELF, Playstation 1 executables (PSX-EXE) and BIOS, XBE (original XBox executables)
-                </feature-item>
             </feature-grid>
         </section>
+
+        <section class="flex flex-col gap-y-3">
+            <section-title>Features</section-title>
+            <x-supported></x-supported>
+        </section>
+
         <section id="download" class="flex flex-col gap-y-3">
             <section-title>Download</section-title>
             <div class="grid grid-cols-2 gap-3">
                 <x-notice color="primary" icon="fa-hand" class="p-3 text-sm">
                     <h5 class="uppercase font-bold pb-3">Version 3.x and below are now retired</h5>
                     <p>
-                        REDasm was fully rewritten for v4 to address long-standing technical debt.
+                        REDasm is currently under total rewrite in order to address long-standing technical debt.
                     </p>
                     <p>
                         Older releases remain available in <a href="https://github.com/redasm-dev/redasm/releases">GitHub Releases</a>

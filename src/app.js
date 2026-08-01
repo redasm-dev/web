@@ -153,10 +153,10 @@ export class AppComponent extends HTMLElement {
         const children = [...this.childNodes];
 
         // prepare getter and setters
-        for (const [name] of Object.entries(this.constructor.properties)) {
+        for (const [name, value] of Object.entries(this.constructor.properties)) {
             Object.defineProperty(this, name, {
-                get: () => this.getAttribute(name) || "",
-                set: v => v ? this.setAttribute(name, v) : this.removeAttribute(name),
+                get: () => this.getAttribute(name) || value,
+                set: v => v != null ? this.setAttribute(name, v) : this.removeAttribute(name),
                 configurable: true,
             })
         }
@@ -192,8 +192,12 @@ export class AppComponent extends HTMLElement {
     disconnectedCallback() { this.onDestroyed(); }
 
     attributeChangedCallback(name, oldvalue, newvalue) {
-        if (this._domready)
-            this.onAttributeChanged(name, { previous: oldvalue, current: newvalue });
+        if (this._domready) {
+            this.onAttributeChanged(name, {
+                previous: oldvalue != null ? oldvalue : this.constructor.properties[name],
+                current: newvalue,
+            });
+        }
         else
             this._pendingattributes[name] = newvalue;
     }

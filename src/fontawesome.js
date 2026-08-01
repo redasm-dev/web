@@ -11,7 +11,10 @@ import {
     faChevronRight,
     faHand,
     faHandPointRight,
-    faPenNib
+    faPenNib,
+    faMicrochip,
+    faMagnifyingGlass,
+    faFolderOpen,
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
@@ -38,6 +41,9 @@ export default function initFontAwesome() {
         faHand,
         faHandPointRight,
         faPenNib,
+        faMicrochip,
+        faMagnifyingGlass,
+        faFolderOpen,
 
         faXTwitter,
         faMastodon,
