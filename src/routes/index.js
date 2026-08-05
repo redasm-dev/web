@@ -89,7 +89,7 @@ export default class HomePage extends AppPage {
                     <h5 class="uppercase font-bold pb-3">version 4.0</h5>
                     <p>
                         Nightly builds are generated automatically from the latest code.<br>
-                        v4.0.0-beta1 is now available, see <a href="https://github.com/redasm-dev/redasm/releases/tag/v4.0.0-beta1">GitHub</a>
+                        v4.0.0-beta2 is now available, see <a href="https://github.com/redasm-dev/redasm/releases/tag/v4.0.0-beta2">GitHub</a>
                         for changelog.
                     </p>
                 </x-notice>
