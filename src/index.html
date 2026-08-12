@@ -7,14 +7,14 @@
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="title" content="REDasm: The OpenSource Disassembler">
+    <meta name="title" content="REDasm: The Open Source Disassembler">
     <meta name="description"
         content="A cross platform, free and open source disassembler that supports multiple architectures, legacy formats and plugins. No license restrictions">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://redasm.dev/">
-    <meta property="og:title" content="REDasm: The OpenSource Disassembler">
+    <meta property="og:title" content="REDasm: The Open Source Disassembler">
     <meta property="og:description"
         content="A cross platform, free and open source disassembler that supports multiple architectures, legacy formats and plugins. No license restrictions">
     <meta property="og:image" content="https://redasm.dev/web_preview.png">
@@ -22,7 +22,7 @@
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://redasm.dev/">
-    <meta property="twitter:title" content="REDasm: The OpenSource Disassembler">
+    <meta property="twitter:title" content="REDasm: The Open Source Disassembler">
     <meta property="twitter:description"
         content="A cross platform, free and open source disassembler that supports multiple architectures, legacy formats and plugins. No license restrictions">
     <meta property="twitter:image" content="https://redasm.dev/web_preview.png">
@@ -31,7 +31,27 @@
     <link rel="me" href="https://infosec.exchange/@redasm">
 
     <link rel="stylesheet" href="/app.css">
-    <title>REDasm: The OpenSource Disassembler</title>
+    <title>REDasm: The Open Source Disassembler</title>
+
+    <script type="application/ld+json">
+        {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "REDasm",
+        "alternateName": "REDasm Disassembler",
+        "description": "A free and open source disassembler and binary analysis tool for hobbyists and professional reverse engineers.",
+        "url": "https://redasm.dev/",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Windows, Linux",
+        "softwareVersion": "4.0.0-beta2",
+        "license": "https://www.gnu.org/licenses/gpl-3.0.html",
+        "isAccessibleForFree": true,
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Dax", "url": "https://github.com/Dax89" },
+        "downloadUrl": "https://github.com/redasm-dev/redasm/releases",
+        "codeRepository": "https://github.com/redasm-dev"
+        }
+</script>
 </head>
 
 <body class="min-h-screen flex flex-col text-foreground bg-background">
@@ -85,7 +105,7 @@
             <section>
                 <h2 class="font-bold text-foreground uppercase py-2">License</h2>
                 <p class="text-sm">
-                    REDasm is OpenSource Software and
+                    REDasm is Open Source Software and
                     it's released under GNU GPL3 License.
                 </p>
             </section>
@@ -125,7 +145,7 @@
         initFontAwesome();
         initApp({
             name: "REDasm",
-            description: "The OpenSource Disassembler",
+            description: "The Open Source Disassembler",
         });
     </script>
 </body>

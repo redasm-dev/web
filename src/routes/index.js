@@ -20,7 +20,7 @@ export default class HomePage extends AppPage {
             <div class="flex-1 flex flex-col gap-y-8">
                 <div class="leading-[1.15]">
                     <h1 class="text-[1.9rem] mb-1 font-bold tracking-[-0.02em]"><span class="text-primary">RE</span>Dasm</h1>
-                    <h5 class="text-muted tracking-[0.08em]">The OpenSource Disassembler</h5>
+                    <h5 class="text-muted tracking-[0.08em]">The Open Source Disassembler</h5>
                 </div>
                 <p class="leading-[1.75]">
                     For hobbyists and professional reverse engineers.<br>
