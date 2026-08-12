@@ -23,6 +23,8 @@ const SUPPORTED_MATRIX = {
                 { text: "NE (Win16)", tier: "B" },
                 { text: "LE / LX (OS/2)", tier: "B" },
                 { text: "PSX EXE (PS1)", tier: "B" },
+                { text: "PSX BIOS (PS1)", tier: "B" },
+                { text: "XBE (Xbox)", tier: "B" },
             ],
         },
         {
