@@ -9,8 +9,12 @@ function updateAppTitle(newtitle) {
     if (App.instance.options.name) {
         if (newtitle)
             newtitle = `${newtitle} - ${App.instance.options.name}`;
-        else
+        else {
             newtitle = App.instance.options.name;
+
+            if (App.instance.options.description)
+                newtitle += ` - ${App.instance.options.description}`;
+        }
     }
 
     title.textContent = newtitle;
