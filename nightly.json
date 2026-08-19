@@ -2,27 +2,27 @@
   "total_count": 75,
   "workflow_runs": [
     {
-      "id": 32093410691,
+      "id": 32210217628,
       "name": "Nightly",
-      "node_id": "WFR_kwLOSvFxCM8AAAAHeOqVgw",
+      "node_id": "WFR_kwLOSvFxCM8AAAAHf-DqnA",
       "head_branch": "master",
       "head_sha": "7ee60fe5c6d5fe9a6ab98f057de3e09a225ba4b6",
       "path": ".github/workflows/nightly.yml",
       "display_title": "Nightly",
-      "run_number": 79,
+      "run_number": 80,
       "event": "schedule",
-      "status": "in_progress",
-      "conclusion": null,
+      "status": "completed",
+      "conclusion": "success",
       "workflow_id": 289981595,
-      "check_suite_id": 86998373078,
-      "check_suite_node_id": "CS_kwDOSvFxCM8AAAAUQYHS1g",
-      "url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/32093410691",
-      "html_url": "https://github.com/redasm-dev/workspace/actions/runs/32093410691",
+      "check_suite_id": 87317157940,
+      "check_suite_node_id": "CS_kwDOSvFxCM8AAAAUVIIYNA",
+      "url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/32210217628",
+      "html_url": "https://github.com/redasm-dev/workspace/actions/runs/32210217628",
       "pull_requests": [
 
       ],
-      "created_at": "2026-08-18T02:52:30Z",
-      "updated_at": "2026-08-18T02:52:42Z",
+      "created_at": "2026-08-19T02:54:17Z",
+      "updated_at": "2026-08-19T03:24:53Z",
       "actor": {
         "login": "Dax89",
         "id": 1503603,
@@ -57,7 +57,7 @@
           "ref": "refs/heads/master"
         }
       ],
-      "run_started_at": "2026-08-18T02:52:30Z",
+      "run_started_at": "2026-08-19T02:54:17Z",
       "triggering_actor": {
         "login": "Dax89",
         "id": 1503603,
@@ -79,12 +79,12 @@
         "user_view_type": "public",
         "site_admin": false
       },
-      "jobs_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/32093410691/jobs",
-      "logs_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/32093410691/logs",
-      "check_suite_url": "https://api.github.com/repos/redasm-dev/workspace/check-suites/86998373078",
-      "artifacts_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/32093410691/artifacts",
-      "cancel_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/32093410691/cancel",
-      "rerun_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/32093410691/rerun",
+      "jobs_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/32210217628/jobs",
+      "logs_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/32210217628/logs",
+      "check_suite_url": "https://api.github.com/repos/redasm-dev/workspace/check-suites/87317157940",
+      "artifacts_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/32210217628/artifacts",
+      "cancel_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/32210217628/cancel",
+      "rerun_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/32210217628/rerun",
       "previous_attempt_url": null,
       "workflow_url": "https://api.github.com/repos/redasm-dev/workspace/actions/workflows/289981595",
       "head_commit": {
