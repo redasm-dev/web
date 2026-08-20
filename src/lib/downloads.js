@@ -22,15 +22,15 @@ function parseVersion(tag) {
     return { version: v, suffix: parts[1] };
 }
 
-function getReleaseType(name) {
-    if (name.endsWith(".sha256")) return "hash";
-    if (name.endsWith(".asc")) return "signature";
-
-    const n = name.toLowerCase()
-    if (n.indexOf("windows") !== -1) return "windows";
-    if (name.endsWith(".AppImage") || n.indexOf("linux") !== -1) return "linux";
-
+function getPlatform(name) {
+    const n = name.toLowerCase();
+    if (n.includes("windows")) return "windows";
+    if (name.endsWith(".AppImage") || n.includes("linux")) return "linux";
     return "";
+}
+
+function isSidecar(name) {
+    return name.endsWith(".sha256") || name.endsWith(".asc");
 }
 
 async function fetchReleases() {
@@ -42,31 +42,38 @@ async function fetchReleases() {
         if (response.ok) {
             const releases = await response.json();
 
-            return releases.reduce((acc, r) => {
-                if (r.draft || !r.assets.length) return acc;
+            const recent = releases
+                .filter(r => !r.draft && r.assets.length && r.tag_name !== "nightly")
+                .filter(r => {
+                    const major = parseVersion(r.tag_name).version[0];
+                    return major !== "2" && major !== "3";
+                })
+                .slice(0, 3);
 
+            // flatten to binaries only, attaching each one's sidecars
+            return recent.flatMap(r => {
                 const v = parseVersion(r.tag_name);
 
-                // filter out legacy releases
-                if (v.version[0] === '2' || v.version[0] === '3') return acc;
+                return r.assets
+                    .filter(a => !isSidecar(a.name))
+                    .map(a => {
+                        const sha_hash = a.digest.split(":")[1];
 
-                for (let a of r.assets) {
-                    acc.push({
-                        version: v.version,
-                        suffix: v.suffix,
-                        type: getReleaseType(a.name),
-                        nightly: r.tag_name === "nightly",
-                        prerelease: r.prerelease,
-                        name: a.name,
-                        url: a.browser_download_url,
-                        created: new Date(a.created_at).toLocaleDateString(),
-                        downloads: a.download_count,
-                        size: getFileSize(a.size),
+                        return {
+                            version: v.version,
+                            suffix: v.suffix,
+                            platform: getPlatform(a.name),
+                            prerelease: r.prerelease,
+                            tag: r.tag_name,
+                            name: a.name,
+                            url: a.browser_download_url,
+                            created: new Date(a.created_at).toLocaleDateString(),
+                            downloads: a.download_count,
+                            size: getFileSize(a.size),
+                            sha256: sha_hash,
+                        };
                     });
-                }
-
-                return acc;
-            }, []);
+            });
         }
         else
             console.error(response.statusText);
@@ -78,70 +85,81 @@ async function fetchReleases() {
     return [];
 }
 
-export async function createReleasesAccordion(container) {
+function copyHash(el) {
+    const full = el.dataset.hash;
+    const shown = el.textContent;
+
+    navigator.clipboard.writeText(full).then(() => {
+        el.textContent = "copied";
+        el.classList.add("text-success");
+        el.classList.remove("hover:text-warning");
+
+        setTimeout(() => {
+            el.textContent = shown;
+            el.classList.remove("text-success");
+            el.classList.add("hover:text-warning");
+        }, 1200);
+    });
+}
+
+export async function createDownloadList(container) {
     const ICONS = {
-        "signature": "fas fa-signature",
-        "hash": "fas fa-hashtag",
-        "windows": "fab fa-windows",
-        "linux": "fab fa-linux",
+        windows: "fab fa-windows",
+        linux: "fab fa-linux",
     };
 
-    const fetchedreleases = await fetchReleases();
-    const versions = [...new Set(fetchedreleases.map(item => item.version))];
+    const items = await fetchReleases();
 
-    const byversion = fetchedreleases.reduce((acc, item) => {
-        if (!acc[item.version]) acc[item.version] = [];
-
-        acc[item.version].push(item);
-        return acc;
-    }, {});
-
-    const fragment = document.createDocumentFragment();
-
-    for (const [idx, ver] of versions.entries()) {
-        const detail = fragment.appendChild(document.createElement("details"));
-        detail.classList.add("group", "border", "border-muted", "bg-background-alt", "my-3", "cursor-pointer")
-        detail.open = idx === 0;
-
-        const releases = byversion[ver];
-
-        const summary = detail.appendChild(document.createElement("summary"))
-        summary.classList.add("text-xs", "flex", "items-center", "gap-x-3", "p-3", "font-bold", "hover:bg-muted/10");
-
-        summary.innerHTML = /*html*/`
-<i class="fa-solid fa-chevron-right text-primary text-xs transition-transform group-open:rotate-90"></i>
-<span class="${ver === 'nightly' ? 'bg-warning text-background' : 'bg-primary text-foreground'} p-1">${ver}</span>
-<div class="flex-1"></div>
-<span class="text-muted">${releases.length} files</span>
-`;
-
-        const ul = detail.appendChild(document.createElement("ul"));
-        ul.classList.add("flex", "flex-col");
-
-        for (const rel of byversion[ver]) {
-            const li = ul.appendChild(document.createElement("li"));
-            li.classList.add("border-t", "border-muted");
-
-            li.innerHTML = /*html*/`
-<a href="${rel.url}" class="flex text-sm items-center gap-x-3 p-3 hover:bg-warning/5">
-    <i class="${ICONS[rel.type]} fa-fw fa-xl text-foreground"></i>
-    <div class="flex-1">
-        <div class="text-success mb-2 text-base">${rel.name}</div>
-        <div class="flex items-center gap-x-3">
-            <div class="text-muted ${rel.nightly ? 'hidden' : ''}"><span class="text-foreground">Date: </span>${rel.created}</div>
-            <div class="text-muted"><span class="text-foreground">Size: </span>${rel.size}</div>
-            <div class="border border-warning text-warning px-1 ${rel.nightly || !rel.prerelease ? 'hidden' : ''}">prerelease</div>
-            <div class="border border-foreground text-foreground px-1 ${!rel.suffix ? 'hidden' : ''}">${rel.suffix}</div>
-        </div>
-    </div>
-    <div>
-        <div class="text-success text-right">${rel.nightly ? "built" : rel.downloads}</div>
-        <div class="text-muted">${rel.nightly ? rel.created : "downloads"}</div>
-    </div>
-</a >
-        `;
-        }
+    if (!items.length) {
+        container.innerHTML = /*html*/`
+<div class="border border-muted bg-background-alt p-3 text-sm text-muted">
+    Unable to load releases. See
+    <a href="https://github.com/redasm-dev/redasm/releases" class="text-warning">GitHub Releases</a>.
+</div>`;
+        return;
     }
 
-    container.appendChild(fragment);
+    const list = document.createElement("ul");
+    list.classList.add("flex", "flex-col", "border", "border-muted");
+
+    for (const [idx, rel] of items.entries()) {
+        const li = list.appendChild(document.createElement("li"));
+        if (idx > 0) li.classList.add("border-t", "border-muted");
+
+        li.innerHTML = /*html*/`
+<a href="${rel.url}" class="flex text-sm items-center gap-x-3 p-3 bg-background-alt hover:bg-warning/5">
+    <i class="${ICONS[rel.platform] ?? "fas fa-file"} fa-fw fa-xl text-foreground"></i>
+    <div class="flex-1 min-w-0">
+        <div class="text-success text-base break-all">${rel.name}</div>
+        <div class="flex items-center gap-x-3 flex-wrap mt-1 text-xs text-muted">
+            <span class="font-bold px-1 ${rel.prerelease ? "bg-warning text-background" : "border border-primary text-foreground"}">
+                ${rel.suffix ?? rel.version}
+            </span>
+            <span><span class="text-foreground">Size:</span> ${rel.size}</span>
+            <span><span class="text-foreground">Date:</span> ${rel.created}</span>
+            <span><span class="text-foreground">Downloads:</span> ${rel.downloads}</span>
+        </div>
+        <div class="flex items-center gap-x-2 text-xs mt-1 text-muted">
+            <span class="text-foreground">SHA256:</span>
+                <span>${rel.sha256}</span>
+        </div>
+    </div>
+</a>`;
+    }
+
+    container.appendChild(list);
+
+    // footer note
+    const more = document.createElement("div");
+    more.classList.add("flex", "justify-between", "items-center", "flex-wrap",
+        "gap-2", "mt-2", "text-xs", "text-muted");
+    more.innerHTML = /*html*/`
+        <span class="italic">Showing the 3 most recent releases</span>
+        <a target="_blank" href="https://github.com/redasm-dev/redasm/releases" class="flex items-center gap-x-1">
+            <span>All releases on GitHub</span>
+            <i class="fas fa-chevron-right"></i>
+        </a>`;
+    container.appendChild(more);
+
+    return items.length ? items[0].tag : null;
 }

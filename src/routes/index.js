@@ -5,7 +5,7 @@ import "$lib/components/featuregrid.js";
 import "$lib/components/tabcontainer.js";
 import "$lib/components/supported.js";
 import "$lib/components/notice.js";
-import { createReleasesAccordion } from "$lib/downloads.js";
+import { createDownloadList } from "$lib/downloads.js";
 import { updateCIStatus } from "$lib/ci.js";
 import { AppPage } from "$app";
 
@@ -75,50 +75,48 @@ export default class HomePage extends AppPage {
 
         <section id="download" class="flex flex-col gap-y-3">
             <section-title>Download</section-title>
-            <div class="grid grid-cols-2 gap-3">
-                <x-notice color="primary" icon="fa-hand" class="p-3 text-sm">
-                    <h5 class="uppercase font-bold pb-3">Version 3.x and below are now retired</h5>
-                    <p>
-                        REDasm is currently under total rewrite in order to address long-standing technical debt.
-                    </p>
-                    <p>
-                        Older releases remain available in <a href="https://github.com/redasm-dev/redasm/releases">GitHub Releases</a>
-                    </p>
-                </x-notice>
-                <x-notice color="warning" icon="fa-hand-point-right" class="p-3 text-sm">
-                    <h5 class="uppercase font-bold pb-3">version 4.0</h5>
-                    <p>
-                        Nightly builds are generated automatically from the latest code.<br>
-                        v4.0.0-beta2 is now available, see <a href="https://github.com/redasm-dev/redasm/releases/tag/v4.0.0-beta2">GitHub</a>
-                        for changelog.
-                    </p>
-                </x-notice>
-                <x-notice color="muted" icon="fa-pen-nib" class="col-span-2 p-3 text-sm">
-                    <h5 class="uppercase font-bold pb-3">Signature verification</h5>
+            <x-notice color="warning" icon="fa-flask" class="p-3 text-sm">
+                <h5 class="uppercase font-bold pb-3">REDasm 4.0 is in beta</h5>
+                <p>
+                    Nightly builds are generated automatically from the latest code.<br>
+                    <span class="font-bold" id="latest-version"></span> is now available, see 
+                    <a href="https://github.com/redasm-dev/redasm/releases/tag/v4.0.0-beta2">GitHub</a>
+                    for changelog.
+                </p>
+            </x-notice>
+            <div id="home__downloads" class="overflow-auto text-sm"></div>
+            <details class="group border border-muted bg-background-alt">
+                <summary class="flex items-center p-3 gap-x-2 text-muted cursor-pointer hover:text-foreground hover:bg-background">
+                    <i class="fas fa-chevron-right group-open:rotate-90 fa-fw text-primary"></i>
+                    <span>Signature Verification</span>
+                </summary>
+                <div class="p-3 text-xs">
+                <p>
+                        Builds are signed.<br>
+                        Each release ships a <i>.sha256</i> and a matching <i></u>.sha256.asc</i> signature, both available on the
+                        <a href="https://github.com/redasm-dev/redasm/releases">GitHub release page</a>.
+                </p>
+                <pre class="pt-3 text-code overflow-x-auto whitespace-pre-wrap break-all">
+                        <code>
+<span class="text-success"># import public keys</span>
+gpg --keyserver keys.openpgp.org --recv-keys B0C728D7021EEEE9D9B859043AF46EB2201FFB56 <span class="text-success"># releases</span>
+gpg --keyserver keys.openpgp.org --recv-keys A2391AFACAE2EE52B35541DD65F948A2F6BB294A <span class="text-success"># nightly</span>
 
-                    <p>Import the public key to verify:</p>
-                    <pre class="pt-3 text-code overflow-x-auto whitespace-pre-wrap break-all">
-# for release builds
-gpg --keyserver keys.openpgp.org --recv-keys B0C728D7021EEEE9D9B859043AF46EB2201FFB56
-
-# for nightly builds
-gpg --keyserver keys.openpgp.org --recv-keys A2391AFACAE2EE52B35541DD65F948A2F6BB294A
-
-# verify linux
+<span class="text-success"># verify linux</span>
 gpg --verify REDasm-VERSION-linux-x86_64.AppImage.sha256.asc REDasm-VERSION-linux-x86_64.AppImage.sha256
 sha256sum -c REDasm-VERSION-linux-x86_64.AppImage.sha256
 
-# verify windows
+<span class="text-success"># verify windows</span>
 gpg --verify REDasm-VERSION-windows-x86_64.zip.sha256.asc REDasm-VERSION-windows-x86_64.zip.sha256
 sha256sum -c REDasm-VERSION-windows-x86_64.zip.sha256
 
-# for nightly builds (replace VERSION with "nightly")
+<span class="text-success"># for nightly builds (replace VERSION with "nightly")</span>
 gpg --verify REDasm-nightly-linux-x86_64.AppImage.sha256.asc REDasm-nightly-linux-x86_64.AppImage.sha256
 sha256sum -c REDasm-nightly-linux-x86_64.AppImage.sha256
-                    </pre>
-                </x-notice>
-            </div>
-            <div id="home__downloads" class="overflow-auto text-sm"></div>
+                        </code>
+                </pre>
+</div>
+            </details>
         </section>
     </div>
 </article>
@@ -140,13 +138,15 @@ sha256sum -c REDasm-nightly-linux-x86_64.AppImage.sha256
                 vertical-align: text-bottom;
                 margin-bottom: 0;
                 margin-left: 3px;
-                border-radius: 1px;
             }
         `;
     }
 
     onCreated() {
-        createReleasesAccordion(this.querySelector("#home__downloads"));
+        createDownloadList(this.querySelector("#home__downloads")).then(v => {
+            document.querySelector("#latest-version").textContent = v;
+        });
+
         updateCIStatus();
     }
 }
