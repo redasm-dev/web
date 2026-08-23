@@ -75,15 +75,25 @@ export default class HomePage extends AppPage {
 
         <section id="download" class="flex flex-col gap-y-3">
             <section-title>Download</section-title>
-            <x-notice color="warning" icon="fa-flask" class="p-3 text-sm">
-                <h5 class="uppercase font-bold pb-3">REDasm 4.0 is in beta</h5>
-                <p>
-                    Nightly builds are generated automatically from the latest code.<br>
-                    <span class="font-bold" id="latest-version"></span> is now available, see 
-                    <a href="https://github.com/redasm-dev/redasm/releases/tag/v4.0.0-beta2">GitHub</a>
-                    for changelog.
-                </p>
-            </x-notice>
+            <div class="grid md:grid-cols-2 gap-3">
+                <x-notice color="error" icon="fa-hand" class="p-3 text-sm">
+                    <h5 class="uppercase font-bold pb-3">BETA status</h5>
+                    <p>
+                        REDasm is beta-quality software and it does not represent the final product.<br>
+                        The latest version available is <span class="font-bold" id="latest-version"></span>: see 
+                        <a id="latest-version-url" href="#">GitHub</a>
+                        for changelog.
+                    </p>
+                </x-notice>
+                <x-notice color="warning" icon="fa-moon" class="p-3 text-sm">
+                    <h5 class="uppercase font-bold pb-3">Nightly Builds</h5>
+                    <p>
+                        Nightly builds are generated automatically from the latest code.<br>
+                        If you want to try the newest fixes and features, check the 
+                        <a href="https://github.com/redasm-dev/redasm/releases#release-nightly">Nightly Build</a>.
+                    </p>
+                </x-notice>
+            </div>
             <div id="home__downloads" class="overflow-auto text-sm"></div>
             <details class="group border border-muted bg-background-alt">
                 <summary class="flex items-center p-3 gap-x-2 text-muted cursor-pointer hover:text-foreground hover:bg-background">
@@ -143,8 +153,11 @@ sha256sum -c REDasm-nightly-linux-x86_64.AppImage.sha256
     }
 
     onCreated() {
+        const URL_BASE = "https://github.com/redasm-dev/redasm/releases/tag";
+
         createDownloadList(this.querySelector("#home__downloads")).then(v => {
             document.querySelector("#latest-version").textContent = v;
+            document.querySelector("#latest-version-url").href = `${URL_BASE}/${v}`;
         });
 
         updateCIStatus();
