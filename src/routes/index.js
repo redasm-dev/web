@@ -88,9 +88,8 @@ export default class HomePage extends AppPage {
                 <x-notice color="warning" icon="fa-moon" class="p-3 text-sm">
                     <h5 class="uppercase font-bold pb-3">Nightly Builds</h5>
                     <p>
-                        Nightly builds are generated automatically from the latest code.<br>
-                        If you want to try the newest fixes and features, check the 
-                        <a href="https://github.com/redasm-dev/redasm/releases#release-nightly">Nightly Build</a>.
+                        <a href="https://github.com/redasm-dev/redasm/releases#release-nightly">Nightly builds</a>
+                        are automatically generated from the latest commits, giving you access to the newest features and fixes.
                     </p>
                 </x-notice>
             </div>
