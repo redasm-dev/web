@@ -18,13 +18,15 @@ const SUPPORTED_MATRIX = {
 
             items: [
                 { text: "PE / PE32+", tier: "S" },
-                { text: "ELF / ELF64", tier: "A" },
-                { text: "MZ (DOS)", tier: "A" },
-                { text: "NE (Win16)", tier: "B" },
-                { text: "LE / LX (OS/2)", tier: "B" },
-                { text: "PSX EXE (PS1)", tier: "B" },
+                { text: "ELF / ELF64", tier: "S" },
+                { text: "NE (Win16)", tier: "A" },
+                { text: "LE / LX (OS/2)", tier: "A" },
+                { text: "PSX EXE (PS1)", tier: "A" },
+                { text: "MZ (DOS)", tier: "B" },
                 { text: "PSX BIOS (PS1)", tier: "B" },
                 { text: "XBE (Xbox)", tier: "B" },
+                { text: "ZX Spectrum (SNA, Z80, TAP)", tier: "B" },
+                { text: "NES (iNES, mapper 0)", tier: "C" },
             ],
         },
         {
@@ -34,8 +36,10 @@ const SUPPORTED_MATRIX = {
             items: [
                 { text: "x86 / x86_64", tier: "S" },
                 { text: "MIPS", tier: "A" },
-                { text: "ARM / THUMB", tier: "B" },
+                { text: "ARM / THUMB", tier: "A" },
                 { text: "ARM64", tier: "A" },
+                { text: "Z80", tier: "B" },
+                { text: "MOS6502", tier: "B" },
             ],
         },
         {
@@ -45,6 +49,7 @@ const SUPPORTED_MATRIX = {
             items: [
                 { text: "Visual Basic Analyzer", tier: "A" },
                 { text: "MSVC RTTI Analyzer", tier: "D" },
+                { text: "MSVC EH Analyzer", tier: "D" },
             ],
         }
     ]
