@@ -5,7 +5,7 @@ export default {
         S: { description: "production ready", text: "text-[#67bd61]", border: "border-[#67bd61]" },
         A: { description: "highly stable", text: "text-[#7dafff]", border: "border-[#7dafff]" },
         B: { description: "functional", text: "text-[#ffb22e]", border: "border-[#ffb22e]" },
-        C: { description: "basic / stub", text: "text-[#757575]", border: "border-[#757575]" },
+        C: { description: "basic", text: "text-[#757575]", border: "border-[#757575]" },
         D: { description: "wip / experimental", text: "text-[#ff7575]", border: "border-[#ff7575]" },
     },
 
@@ -24,7 +24,7 @@ export default {
                 { text: "PSX BIOS (PS1)", tier: "B" },
                 { text: "XBE (Xbox)", tier: "B" },
                 { text: "ZX Spectrum (SNA, Z80, TAP)", tier: "B" },
-                { text: "NES (iNES, mapper 0)", tier: "C" },
+                { text: "NES (iNES, mapper 0)", tier: "B" },
             ],
         },
         {
