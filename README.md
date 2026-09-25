@@ -1,6 +1,6 @@
 # REDasm Download Statistics
 
-> Last updated: 2026-09-24 (data fetched daily at 04:00 UTC)
+> Last updated: 2026-09-25 (data fetched daily at 04:00 UTC)
 
 ## Windows
 
@@ -13,7 +13,7 @@
 
 | Version | Released | Windows | Linux | Total |
 |---------|----------|------- | -------|-------|
-| v4.0.0-beta1 | 2026-06-23 | 187 | 77 | 264 |
-| v4.0.0-beta2 | 2026-08-05 | 102 | 49 | 151 |
-| v4.0.0-beta3 | 2026-09-02 | 124 | 40 | 164 |
-| **All** | | **413** | **166** | **579** |
+| v4.0.0-beta1 | 2026-06-23 | 188 | 77 | 265 |
+| v4.0.0-beta2 | 2026-08-05 | 102 | 50 | 152 |
+| v4.0.0-beta3 | 2026-09-02 | 129 | 41 | 170 |
+| **All** | | **419** | **168** | **587** |
