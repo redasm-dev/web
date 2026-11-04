@@ -12,7 +12,7 @@
       "run_number": 158,
       "event": "schedule",
       "status": "completed",
-      "conclusion": "failure",
+      "conclusion": "success",
       "workflow_id": 289981595,
       "check_suite_id": 113267594265,
       "check_suite_node_id": "CS_kwDOSvFxCM8AAAAaX0ZUGQ",
@@ -22,7 +22,7 @@
 
       ],
       "created_at": "2026-11-04T08:35:34Z",
-      "updated_at": "2026-11-04T08:42:41Z",
+      "updated_at": "2026-11-04T14:59:08Z",
       "actor": {
         "login": "Dax89",
         "id": 1503603,
@@ -44,7 +44,7 @@
         "user_view_type": "public",
         "site_admin": false
       },
-      "run_attempt": 1,
+      "run_attempt": 2,
       "referenced_workflows": [
         {
           "path": "redasm-dev/workspace/.github/workflows/build-windows.yml@4495c56cbf580c467cd18a87268b97900760c521",
@@ -62,7 +62,7 @@
           "ref": "refs/heads/master"
         }
       ],
-      "run_started_at": "2026-11-04T08:35:34Z",
+      "run_started_at": "2026-11-04T14:58:29Z",
       "triggering_actor": {
         "login": "Dax89",
         "id": 1503603,
@@ -90,7 +90,7 @@
       "artifacts_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/41800694095/artifacts",
       "cancel_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/41800694095/cancel",
       "rerun_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/41800694095/rerun",
-      "previous_attempt_url": null,
+      "previous_attempt_url": "https://api.github.com/repos/redasm-dev/workspace/actions/runs/41800694095/attempts/1",
       "workflow_url": "https://api.github.com/repos/redasm-dev/workspace/actions/workflows/289981595",
       "head_commit": {
         "id": "4495c56cbf580c467cd18a87268b97900760c521",
