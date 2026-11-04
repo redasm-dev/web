@@ -1,16 +1,15 @@
 import { AppComponent } from "$app";
 
 class GitHubStats extends AppComponent {
-    REPO = "https://github.com/redasm-dev/redasm"
-    URL = "https://raw.githubusercontent.com/redasm-dev/web/refs/heads/data/repository.json";
-
+    static get gh_repo() { return "https://github.com/redasm-dev/redasm"; }
+    static get gh_url() { return "https://raw.githubusercontent.com/redasm-dev/web/refs/heads/data/repository.json"; }
     static get tag() { return "github-stats"; }
 
     static get template() {
         return /*html*/`
             <ul class="flex text-xs font-bold whitespace-nowrap">
                 <li class="border border-[#3d444d] py-1 px-3 rounded-l-sm bg-[#1f262e]">
-                    <a href="${this.REPO}" target="_blank" data-default>
+                    <a href="${GitHubStats.gh_repo}" target="_blank" data-default>
                         <i class="fas fa-star fa-lg"></i>
                         Star
                     </a>
@@ -22,7 +21,7 @@ class GitHubStats extends AppComponent {
 
     async onCreated() {
         const count = this.querySelector("#ghstats__count");
-        const response = await fetch(this.URL);
+        const response = await fetch(GitHubStats.gh_url);
 
         if (response.ok) {
             const repository = await response.json();
