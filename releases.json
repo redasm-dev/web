@@ -68,7 +68,7 @@
         "state": "uploaded",
         "size": 34380280,
         "digest": "sha256:c5d7ca794f0c6dde6f8f4b768421e9a09d0924fb44dcb4cf85634705349c0ebf",
-        "download_count": 180,
+        "download_count": 184,
         "created_at": "2026-09-02T17:32:37Z",
         "updated_at": "2026-09-02T17:32:38Z",
         "browser_download_url": "https://github.com/redasm-dev/redasm/releases/download/v4.0.0-beta3/REDasm-4.0.0-beta3-linux-x86_64.AppImage"
@@ -176,7 +176,7 @@
         "state": "uploaded",
         "size": 25383573,
         "digest": "sha256:dc9000b3a2fd6b2cbda142f6d5630b69284375cde45633191eb623668b8367ff",
-        "download_count": 370,
+        "download_count": 376,
         "created_at": "2026-09-02T17:32:36Z",
         "updated_at": "2026-09-02T17:32:38Z",
         "browser_download_url": "https://github.com/redasm-dev/redasm/releases/download/v4.0.0-beta3/REDasm-4.0.0-beta3-windows-x86_64.zip"
@@ -435,7 +435,7 @@
         "state": "uploaded",
         "size": 25237935,
         "digest": "sha256:f30f69dfa95e56cfd997053befaeba3585843d368875c7ff51e5a6b893aa3d26",
-        "download_count": 108,
+        "download_count": 109,
         "created_at": "2026-08-05T11:07:49Z",
         "updated_at": "2026-08-05T11:07:51Z",
         "browser_download_url": "https://github.com/redasm-dev/redasm/releases/download/v4.0.0-beta2/REDasm-4.0.0-beta2-windows-x86_64.zip"
@@ -1953,7 +1953,7 @@
         "state": "uploaded",
         "size": 49462548,
         "digest": null,
-        "download_count": 2247,
+        "download_count": 2249,
         "created_at": "2021-05-16T16:06:16Z",
         "updated_at": "2021-05-16T16:06:46Z",
         "browser_download_url": "https://github.com/redasm-dev/redasm/releases/download/v2.1.1/REDasm_2.1.1_Windows_x86_64.zip"
