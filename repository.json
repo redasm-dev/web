@@ -83,7 +83,7 @@
   "has_wiki": false,
   "has_pages": false,
   "has_discussions": false,
-  "forks_count": 159,
+  "forks_count": 158,
   "mirror_url": null,
   "archived": false,
   "disabled": false,
@@ -109,7 +109,7 @@
     "software-preservation"
   ],
   "visibility": "public",
-  "forks": 159,
+  "forks": 158,
   "open_issues": 0,
   "watchers": 1832,
   "default_branch": "master",
@@ -145,6 +145,6 @@
     "user_view_type": "public",
     "site_admin": false
   },
-  "network_count": 159,
+  "network_count": 158,
   "subscribers_count": 48
 }
