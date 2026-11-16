@@ -20,9 +20,25 @@ function updateAppTitle(newtitle) {
     title.textContent = newtitle;
 }
 
+function safeDecode(v) {
+    try { return decodeURIComponent(v); }
+    catch { return v; } // malformed %-sequence: keep the raw value
+}
+
+function scrollToHash() {
+    const id = safeDecode(window.location.hash.slice(1));
+    const el = id ? document.getElementById(id) : null;
+    if (el) el.scrollIntoView();
+    else window.scrollTo(0, 0);
+}
+
 export function navigate(path) {
-    window.history.pushState(null, null, path);
+    const target = new URL(path, window.location.href);
+    if (target.href === window.location.href) return;
+
+    window.history.pushState(null, null, target.pathname + target.search + target.hash);
     App.instance.resolveRoute();
+    scrollToHash();
 }
 
 export function safe(v) {
@@ -30,6 +46,7 @@ export function safe(v) {
     e.textContent = v;
     return e.innerHTML;
 }
+
 
 export function createTable(params) {
     params = params || {};
@@ -256,10 +273,8 @@ class NotFoundPage extends AppPage {
     }
 
     get title() { return "Not Found"; }
-    onCreated() { this.querySelector(".x-path").textContent = window.location.pathname; }
+    onCreated() { this.querySelector(".x-path").textContent = safeDecode(window.location.pathname); }
 }
-
-NotFoundPage.register();
 
 // ---- ROUTER ---------------------------------------------------------------
 export class App {
@@ -279,6 +294,7 @@ export class App {
         if (!this.main) throw new Error(`Main selector "${this.options.main}" not found`);
 
         this.routes = [];
+        (this.options.errorpage || NotFoundPage).register();
 
         if (typeof (routes) == "object") {
             for (const [path, page] of Object.entries(routes))
@@ -288,9 +304,10 @@ export class App {
         document.body.addEventListener("click", e => {
             const a = e.target.closest("a"); // handle clicks on children of <a>
             if (!a || a.target === "_blank" || a.hasAttribute("download")) return;
+            if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
 
-            const href = a.getAttribute("href"); // get unprocessed href
-            if (!href || href.includes('#')) return;
+            const href = a.getAttribute("href");
+            if (!href || href.startsWith("#")) return; // pure in-page anchors: let the browser handle them
 
             let url;
             try {
@@ -300,7 +317,7 @@ export class App {
             catch { return; }
 
             e.preventDefault();
-            navigate(url.pathname + url.hash);
+            navigate(url.pathname + url.search + url.hash);
         });
 
         this.resolveRoute();
@@ -326,23 +343,30 @@ export class App {
             test: path => regex.test(path),
             getParams: path => {
                 const p = path.match(regex);
-                if (p) return Object.fromEntries(p.slice(1).map((v, i) => [params[i], v])) || {};
+                if (p) return Object.fromEntries(p.slice(1).map((v, i) => [params[i], safeDecode(v)]));
                 return {};
             }
         };
     }
 
     resolveRoute() {
-        const path = window.location.pathname;
+        let path = window.location.pathname;
+
+        // /about/ -> /about (canonical URL, no duplicate pages)
+        if (path.length > 1 && path.endsWith("/")) {
+            path = path.replace(/\/+$/, "") || "/";
+            window.history.replaceState(null, null, path + window.location.search + window.location.hash);
+        }
+
         if (this.lastpath === path) return;
 
         this.lastpath = path;
 
-        const r = this.routes.find(x => x.test(path)) ||
-            this._createRoute(path, this.options.errorpage || NotFoundPage);
+        const r = this.routes.find(x => x.test(path));
+        const tag = r ? r.tag : (this.options.errorpage || NotFoundPage).tag;
+        const params = r ? r.getParams(path) : {};
 
-        const page = document.createElement(r.tag);
-        const params = r.getParams(path);
+        const page = document.createElement(tag);
 
         for (const [name, value] of Object.entries(params))
             page.setAttribute(name, value);
