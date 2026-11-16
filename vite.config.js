@@ -146,8 +146,51 @@ function generateRobotsTxt() {
     }
 }
 
+function generateRedirects() {
+    let config;
+
+    return {
+        name: "generate-redirects",
+        apply: "build",
+
+        configResolved(resolvedconfig) {
+            config = resolvedconfig;
+        },
+
+        async closeBundle() {
+            const routes = await getRoutes();
+            const rules = new Set();
+
+            for (const x of routes) {
+                if (x === "index") continue; // "/" is served by index.html directly
+
+                const rule = "/" + x.replace(/\[(\w+)\]/g, ":$1"); // [id] -> :id
+                rules.add(rule);
+                rules.add(rule + "/"); // trailing-slash variant (see note)
+            }
+
+            const outdir = config.build.outDir;
+            await ensureDir(outdir);
+
+            // Only needed once you add more routes
+            if (rules.size) {
+                config.logger.info("Generating _redirects");
+                await fs.writeFile(
+                    path.join(outdir, "_redirects"),
+                    [...rules].map(r => `${r}  /index.html  200`).join("\n") + "\n"
+                );
+            }
+
+            // Unmatched URLs get the app shell with a real 404 status;
+            // the router then renders NotFoundPage.
+            config.logger.info("Generating 404.html");
+            await fs.copyFile(path.join(outdir, "index.html"), path.join(outdir, "404.html"));
+        }
+    }
+}
+
 export default defineConfig({
-    plugins: [tailwindcss(), generateApp(), generateSiteMap(), generateRobotsTxt()],
+    plugins: [tailwindcss(), generateApp(), generateSiteMap(), generateRobotsTxt(), generateRedirects()],
     root: "src",
     publicDir: path.resolve(__dirname, "public"),
 
