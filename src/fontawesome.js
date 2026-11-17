@@ -21,6 +21,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
+    faApple,
     faXTwitter,
     faMastodon,
     faReddit,
@@ -51,6 +52,7 @@ export default function initFontAwesome() {
         faMagnifyingGlass,
         faFolderOpen,
 
+        faApple,
         faXTwitter,
         faMastodon,
         faReddit,

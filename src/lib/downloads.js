@@ -28,11 +28,12 @@ function getPlatform(name) {
     const n = name.toLowerCase();
     if (n.includes("windows")) return "windows";
     if (name.endsWith(".AppImage") || n.includes("linux")) return "linux";
+    if (n.endsWith(".dmg") || n.includes("macos")) return "macos";
     return "";
 }
 
 function isSidecar(name) {
-    return name.endsWith(".sha256") || name.endsWith(".asc");
+    return name.endsWith(".sha256") || name.endsWith(".asc") || name.endsWith(".zsync");
 }
 
 async function fetchReleases() {
@@ -59,7 +60,7 @@ async function fetchReleases() {
                 return r.assets
                     .filter(a => !isSidecar(a.name))
                     .map(a => {
-                        const sha_hash = a.digest.split(":")[1];
+                        const sha_hash = a.digest?.split(":")[1] ?? "";
 
                         return {
                             version: v.version,
@@ -87,27 +88,11 @@ async function fetchReleases() {
     return [];
 }
 
-function copyHash(el) {
-    const full = el.dataset.hash;
-    const shown = el.textContent;
-
-    navigator.clipboard.writeText(full).then(() => {
-        el.textContent = "copied";
-        el.classList.add("text-success");
-        el.classList.remove("hover:text-warning");
-
-        setTimeout(() => {
-            el.textContent = shown;
-            el.classList.remove("text-success");
-            el.classList.add("hover:text-warning");
-        }, 1200);
-    });
-}
-
 export async function createDownloadList(container) {
     const ICONS = {
         windows: "fab fa-windows",
         linux: "fab fa-linux",
+        macos: "fab fa-apple",
     };
 
     const items = await fetchReleases();
