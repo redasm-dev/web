@@ -2,13 +2,14 @@ import { defineConfig } from "vite";
 import tailwindcss from "@tailwindcss/vite";
 import fs from "fs/promises";
 import path from "path";
-import pkg from "./package.json";
+import pkg from "./package.json" with {type: "json"};
 
 const APP_TMPDIR = ".app";
-const srcdir = path.resolve(__dirname, "src");
+const DIR_NAME = import.meta.dirname;
+const SRC_DIR = path.resolve(DIR_NAME, "src");
 
 async function getRoutes() {
-    const routes = (await fs.readdir(path.resolve(srcdir, "routes"), { withFileTypes: true }))
+    const routes = (await fs.readdir(path.resolve(SRC_DIR, "routes"), { withFileTypes: true }))
         .filter(x => x.isFile() && path.extname(x.name).toLowerCase() === ".js")
         .map(x => path.basename(x.name, ".js"));
 
@@ -192,18 +193,18 @@ function generateRedirects() {
 export default defineConfig({
     plugins: [tailwindcss(), generateApp(), generateSiteMap(), generateRobotsTxt(), generateRedirects()],
     root: "src",
-    publicDir: path.resolve(__dirname, "public"),
+    publicDir: path.resolve(DIR_NAME, "public"),
 
     resolve: {
         alias: {
-            "$src": srcdir,
-            "$lib": path.resolve(srcdir, "lib"),
-            "$app": path.resolve(__dirname, APP_TMPDIR),
+            "$src": SRC_DIR,
+            "$lib": path.resolve(SRC_DIR, "lib"),
+            "$app": path.resolve(DIR_NAME, APP_TMPDIR),
         }
     },
 
     build: {
-        outDir: path.resolve(__dirname, "dist"),
+        outDir: path.resolve(DIR_NAME, "dist"),
         emptyOutDir: true,
 
         rolldownOptions: {
