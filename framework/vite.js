@@ -29,6 +29,7 @@ import fs from "fs/promises";
 import path from "path";
 import { parse } from "parse5";
 import { runnerImport } from "vite";
+import { listFiles, relativePath } from "./files.js";
 
 // ---- PARSING ----------------------------------------------------------------
 function findChild(node, name) {
@@ -138,22 +139,10 @@ export function mergePage(layout, page, pagefile, layoutfile = "layout") {
 }
 
 // ---- PAGES ------------------------------------------------------------------
-async function walk(dir) {
-    const files = [];
-
-    for (const e of await fs.readdir(dir, { withFileTypes: true })) {
-        const p = path.join(dir, e.name);
-        if (e.isDirectory()) files.push(...await walk(p));
-        else if (e.isFile() && e.name.endsWith(".html")) files.push(p);
-    }
-
-    return files;
-}
-
 // index.html -> "/", 404.html -> "/404", a/b.html -> "/a/b"
 export async function getPages(pagesdir) {
-    return (await walk(pagesdir)).sort().map(file => {
-        const name = path.relative(pagesdir, file).split(path.sep).join("/");
+    return (await listFiles(pagesdir, ".html")).map(file => {
+        const name = relativePath(pagesdir, file);
         const url = "/" + name.replace(/(^|\/)index\.html$/, "$1").replace(/\.html$/, "");
         return { file, name, url };
     });
@@ -276,7 +265,7 @@ export default function layout({ layouts, pages }) {
         configResolved(config) {
             root = config.root;
             aliases = config.resolve.alias;
-            prefix = path.relative(root, pages).split(path.sep).join("/");
+            prefix = relativePath(root, pages);
         },
 
         transformIndexHtml: {
