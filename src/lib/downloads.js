@@ -112,10 +112,10 @@ export async function createDownloadList(container) {
         if (idx > 0) li.classList.add("border-t", "border-muted");
 
         li.innerHTML = /*html*/`
-<a href="${rel.url}" class="flex text-sm items-center gap-x-3 p-3 bg-background-alt hover:bg-warning/5">
+<div class="flex text-sm items-center gap-x-3 p-3 bg-background-alt">
     <i class="${ICONS[rel.platform] ?? "fas fa-file"} fa-fw fa-xl text-foreground"></i>
     <div class="flex-1 min-w-0">
-        <div class="text-success text-base break-all">${rel.name}</div>
+        <a data-default href="${rel.url}" class="text-success text-base break-all hover:text-highlight hover:underline">${rel.name}</a>
         <div class="flex items-center gap-x-3 flex-wrap mt-1 text-xs text-muted">
             <span class="font-bold px-1 ${rel.prerelease ? "bg-warning text-background" : "border border-primary text-foreground"}">
                 ${rel.suffix ?? rel.version}
@@ -129,7 +129,7 @@ export async function createDownloadList(container) {
                 <span>${rel.sha256}</span>
         </div>
     </div>
-</a>`;
+</div>`;
     }
 
     container.appendChild(list);
