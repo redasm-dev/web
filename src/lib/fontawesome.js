@@ -1,4 +1,6 @@
-import { library, dom } from "@fortawesome/fontawesome-svg-core";
+import { config, library, dom } from "@fortawesome/fontawesome-svg-core";
+
+config.keepOriginalSource = false;
 
 import {
     faStar,
