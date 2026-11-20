@@ -1,35 +1,18 @@
 import { AppComponent } from "$framework/component.js";
 
-class FeatureGrid extends AppComponent {
-    static get tag() { return "feature-grid"; }
-
-    onCreated() {
-        this.role = "tablist";
-
-        this.classList.add("grid", "overflow-hidden",
-            "bg-muted", "gap-[1px]", "text-sm", "border", "border-muted");
-    }
-}
-
+// <feature-grid> and <feature-item> are styled in global.css; the heading is part of
+// the content (<feature-item><h3>...</h3>...</feature-item>), so it's in the HTML.
+// JavaScript only adds the decorative caret in front of it.
 class FeatureItem extends AppComponent {
     static get tag() { return "feature-item"; }
 
-    static get properties() {
-        return { heading: "" };
-    }
-
     onCreated() {
-        this.role = "tabpanel";
-        this.classList.add("bg-background-alt", "p-5");
+        const heading = this.querySelector(":scope > h3");
+        if (!heading) return;
 
-        const elheading = this.insertBefore(document.createElement("h5"), this.firstChild);
-        elheading.classList.add("flex", "items-center", "font-bold", "pb-3", "gap-x-2");
-
-        const i = elheading.appendChild(document.createElement("i"));
+        const i = heading.insertBefore(document.createElement("i"), heading.firstChild);
         i.classList.add("fas", "fa-caret-right", "fa-xs", "text-primary");
-        elheading.appendChild(document.createTextNode(this.heading));
     }
 }
 
-FeatureGrid.register();
 FeatureItem.register();

@@ -29,21 +29,14 @@
     <script type="module">
         import "$src/components/badge.js";
         import "$src/components/snippet.js";
-        import "$src/components/section.js";
         import "$src/components/featuregrid.js";
         import "$src/components/supported.js";
         import "$src/components/notice.js";
-        import {createDownloadList, createPackageList} from "$lib/downloads.js";
+        import {createDownloadList} from "$lib/downloads.js";
         import {updateCIStatus} from "$lib/ci.js";
 
-        const URL_BASE = "https://github.com/redasm-dev/redasm/releases/tag";
+        createDownloadList(document.querySelector("#home__downloads"));
 
-        createDownloadList(document.querySelector("#home__downloads")).then(v => {
-            document.querySelector("#latest-version").textContent = v;
-            document.querySelector("#latest-version-url").href = `${URL_BASE}/${v}`;
-        });
-
-        createPackageList(document.querySelector("#home__packages"));
         updateCIStatus();
     </script>
 </head>
@@ -103,13 +96,15 @@
         </div>
         <div class="px-14">
             <section>
-                <section-title>Overview</section-title>
+                <section-title><h2>Overview</h2></section-title>
                 <feature-grid class="grid-cols-1 md:grid-cols-2">
-                    <feature-item heading="Interactive listing">
+                    <feature-item>
+                        <h3>Interactive listing</h3>
                         Navigate code and data with cross-references,
                         rename symbols, add comments and display control flow graph.
                     </feature-item>
-                    <feature-item heading="Plugin architecture">
+                    <feature-item>
+                        <h3>Plugin architecture</h3>
                         REDasm provides a C API, carefully designed to be simple and intuitive to use.<br>
                         The C API makes it easy to integrate other programming languages and the core library is
                         designed to be used headless for automated analysis.
@@ -118,20 +113,21 @@
             </section>
 
             <section class="flex flex-col gap-y-3">
-                <section-title>Features</section-title>
-                <x-supported></x-supported>
+                <section-title><h2>Features</h2></section-title>
+                <x-supported>
+                    <fw-buildtime src="$lib/features.build.js" export="renderMatrix"></fw-buildtime>
+                </x-supported>
             </section>
 
             <section id="download" class="flex flex-col gap-y-3">
-                <section-title>Download</section-title>
+                <section-title><h2>Download</h2></section-title>
                 <div class="grid md:grid-cols-2 gap-3">
                     <x-notice color="error" icon="fa-hand" class="p-3 text-sm">
                         <h3 class="uppercase font-bold pb-3">BETA status</h3>
                         <p>
                             REDasm is beta-quality software and it does not represent the final product.<br>
-                            The latest version available is <span class="font-bold" id="latest-version"></span>: see
-                            <a id="latest-version-url" href="#">GitHub</a>
-                            for changelog.
+                            See <a href="https://github.com/redasm-dev/redasm/releases/latest">GitHub</a>
+                            for the latest version and its changelog.
                         </p>
                     </x-notice>
                     <x-notice color="warning" icon="fa-moon" class="p-3 text-sm">
@@ -143,7 +139,14 @@
                         </p>
                     </x-notice>
                 </div>
-                <div id="home__downloads" class="overflow-auto text-sm"></div>
+                <div id="home__downloads" class="overflow-auto text-sm">
+                    <noscript>
+                        <div class="border border-muted bg-background-alt p-3 text-sm">
+                            Downloads for Windows and Linux are on
+                            <a href="https://github.com/redasm-dev/redasm/releases">GitHub Releases</a>.
+                        </div>
+                    </noscript>
+                </div>
                 <details class="group border border-muted bg-background-alt">
                     <summary
                         class="flex items-center p-3 gap-x-2 text-muted cursor-pointer hover:text-foreground hover:bg-background">
@@ -178,12 +181,45 @@ sha256sum -c REDasm-nightly-linux-x86_64.AppImage.sha256</code></pre>
                 </details>
             </section>
             <section id="packages" class="flex flex-col gap-y-3">
-                <section-title>Packages</section-title>
+                <section-title><h2>Packages</h2></section-title>
                 <p>
                     REDasm is also available in various package managers, which provide
                     a more integrated installation & update experience.
                 </p>
                 <div id="home__packages" class="bg-background-alt border border-muted p-4">
+                    <h3 class="flex items-center gap-x-3">
+                        <div class="font-bold">Scoop</div>
+                        <div class="text-xs text-highlight opacity-75 border border-highlight px-1 rounded">Official</div>
+                    </h3>
+                    <!-- beautify ignore:start -->
+                    <pre class="text-code text-sm overflow-x-auto whitespace-pre-wrap break-all pl-4"><code>scoop install git
+scoop bucket add redasm https://github.com/redasm-dev/scoop-redasm
+scoop install redasm</code></pre>
+                    <!-- beautify ignore:end -->
+                    <h3 class="flex items-center gap-x-3 mt-6">
+                        <div class="font-bold">Arch Linux (AUR)</div>
+                        <div class="text-xs text-highlight opacity-75 border border-highlight px-1 rounded">Official</div>
+                    </h3>
+                    <!-- beautify ignore:start -->
+                    <pre class="text-code text-sm overflow-x-auto whitespace-pre-wrap break-all pl-4"><code>Replace `yay` with your AUR helper.
+<span class="text-success"># beta</span>
+yay -S redasm-beta
+<span class="text-success"># nightly</span>
+yay -S redasm-git</code></pre>
+                    <!-- beautify ignore:end -->
+                    <h3 class="flex items-center gap-x-3 mt-6">
+                        <div class="font-bold">Pentoo</div>
+                    </h3>
+                    <!-- beautify ignore:start -->
+                    <pre class="text-code text-sm overflow-x-auto whitespace-pre-wrap break-all pl-4"><code>Split in various packages:
+<span class="pl-2">- libredasm</span>
+<span class="pl-2">- redasm-gui</span>
+<span class="pl-2">- redasm-loaders</span>
+<span class="pl-2">- redasm-processors</span>
+<span class="pl-2">- redasm-analyzers</span>
+<span class="pl-2">- redasm-commands</span>
+<span class="pl-2">- redasm-kb</span></code></pre>
+                    <!-- beautify ignore:end -->
                 </div>
             </section>
         </div>

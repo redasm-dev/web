@@ -1,5 +1,3 @@
-import Packages from "$lib/packages.js"
-
 function getFileSize(bytes, si = false, dp = 1) {
     const thresh = si ? 1000 : 1024;
     if (Math.abs(bytes) < thresh) return bytes + " B";
@@ -147,35 +145,4 @@ export async function createDownloadList(container) {
             <i class="fas fa-chevron-right"></i>
         </a>`;
     container.appendChild(more);
-
-    return items.length ? items[0].tag : null;
-}
-
-export function createPackageList(container) {
-    for (const [i, f] of Packages.entries()) {
-        const title_container = container.appendChild(document.createElement("h3"));
-        title_container.classList.add("flex", "items-center", "gap-x-3");
-        if (i > 0) title_container.classList.add("mt-6");
-
-        const title = title_container.appendChild(document.createElement("div"));
-        title.classList.add("font-bold");
-        title.textContent = f.channel;
-
-        if (f.official) {
-            const title_badge = title_container.appendChild(document.createElement("div"));
-            title_badge.classList.add("text-xs", "text-highlight", "opacity-75", "border", "border-highlight", "px-1", "rounded");
-            title_badge.textContent = "Official";
-        }
-
-        const code = f.commands.map(x => {
-            if (x.startsWith("#")) return `<span class="text-success">${x}</span>`;
-            if (x.startsWith("-")) return `<span class="pl-2">${x}</span>`
-            return x;
-        }).join("\n");
-
-        const content = container.appendChild(document.createElement("pre"));
-        content.classList.add("text-code", "text-sm", "overflow-x-auto",
-            "whitespace-pre-wrap", "break-all", "pl-4");
-        content.innerHTML = `<code>${code}</code>`;
-    }
 }

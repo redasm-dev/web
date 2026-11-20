@@ -37,3 +37,38 @@ a:not([data-default]), a:visited:not([data-default]) {
 a:not([data-default]):hover {
     @apply text-highlight
 }
+
+/* ---- components ---------------------------------------------------------------
+ * Fixed styling lives here instead of in each component's onCreated, so elements
+ * look right before (or without) JavaScript. Page classes (utilities) still win. */
+@layer components {
+    section-title {
+        @apply flex items-center pt-8 pb-4 gap-x-1 text-sm font-bold tracking-[0.18em] whitespace-nowrap;
+    }
+
+    section-title::before {
+        content: "#";
+        @apply text-primary mr-1;
+    }
+
+    section-title::after {
+        content: "";
+        @apply flex-1 h-px bg-muted ml-2;
+    }
+
+    section-title > h2 {
+        @apply uppercase;
+    }
+
+    feature-grid {
+        @apply grid overflow-hidden bg-muted gap-[1px] text-sm border border-muted;
+    }
+
+    feature-item {
+        @apply bg-background-alt p-5;
+    }
+
+    feature-item > h3 {
+        @apply flex items-center font-bold pb-3 gap-x-2;
+    }
+}

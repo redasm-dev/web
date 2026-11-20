@@ -1,6 +1,12 @@
 // Layouts: every page in the pages folder is merged into a layout from the layouts folder.
-// A page picks its layout with <html data-layout="name"> (layouts/name.html);
+// A page picks its layout with <html data-fw-layout="name"> (layouts/name.html);
 // without it, layouts/default.html is used.
+//
+// Build time: <fw-buildtime src="$lib/x.build.js" export="fn" ...></fw-buildtime> is
+// replaced by what fn({ ...other attributes }) returns, computed in Node.
+//
+// Everything the framework reads from HTML uses the fw- prefix (tags) or data-fw-
+// (attributes), so it can't clash with the site's own tags and attributes.
 //
 // A page is a plain, self-describing HTML document:
 //
@@ -21,6 +27,7 @@
 import fs from "fs/promises";
 import path from "path";
 import { parse } from "parse5";
+import { runnerImport } from "vite";
 
 // ---- PARSING ----------------------------------------------------------------
 function findChild(node, name) {
@@ -154,13 +161,15 @@ export async function getPages(pagesdir) {
 // ---- LAYOUTS ----------------------------------------------------------------
 const DEFAULT_LAYOUT = "default";
 
-// <html data-layout="article"> -> "article". Attributes of <html> never reach the
+const LAYOUT_ATTRIBUTE = "data-fw-layout";
+
+// <html data-fw-layout="article"> -> "article". Attributes of <html> never reach the
 // output (only <head> and <body> are merged), so this needs no stripping.
 function getLayoutName(page, pagefile) {
-    const name = getAttr(page.html, "data-layout")?.trim() || DEFAULT_LAYOUT;
+    const name = getAttr(page.html, LAYOUT_ATTRIBUTE)?.trim() || DEFAULT_LAYOUT;
 
     if (!/^[\w-]+(\/[\w-]+)*$/.test(name)) // plain names only: no "..", no extensions
-        throw new Error(`${pagefile}: invalid data-layout "${name}"`);
+        throw new Error(`${pagefile}: invalid ${LAYOUT_ATTRIBUTE} "${name}"`);
 
     return name;
 }
@@ -177,12 +186,80 @@ async function readLayout(layoutsdir, name, pagefile) {
     }
 }
 
+// ---- BUILD TIME -------------------------------------------------------------
+const BUILDTIME_TAG = "fw-buildtime";
+const BUILDTIME_SUFFIX = ".build.js"; // Node-only modules; the browser may never import them
+
+// Every <fw-buildtime>, outermost first (output is never searched again: no recursion).
+function findBuildtime(node, found = []) {
+    for (const c of node.childNodes ?? []) {
+        if (c.nodeName === BUILDTIME_TAG) found.push(c);
+        else findBuildtime(c, found);
+    }
+
+    return found;
+}
+
+async function renderBuildtime(source, pagefile, load) {
+    const elements = findBuildtime(parse(source, { sourceCodeLocationInfo: true }));
+    const edits = [];
+
+    for (const el of elements) {
+        const { src, export: name = "default", ...params } = Object.fromEntries(el.attrs.map(x => [x.name, x.value]));
+        const where = `${pagefile}: <${BUILDTIME_TAG} src="${src ?? ""}">`;
+
+        if (!el.sourceCodeLocation?.endTag) throw new Error(`${where} must have a closing tag`);
+        if (!src?.endsWith(BUILDTIME_SUFFIX)) throw new Error(`${where}: src must be a *${BUILDTIME_SUFFIX} module`);
+
+        const fn = (await load(src, where))[name];
+        if (typeof fn !== "function") throw new Error(`${where}: "${name}" is not an exported function`);
+
+        let output;
+
+        try { output = await fn(params); }
+        catch (e) { throw new Error(`${where}: ${e.message}`, { cause: e }); }
+
+        const loc = el.sourceCodeLocation;
+        edits.push({ start: loc.startOffset, end: loc.endOffset, text: output == null ? "" : String(output) });
+    }
+
+    let result = source;
+
+    for (const e of edits.sort((a, b) => b.start - a.start))
+        result = result.slice(0, e.start) + e.text + result.slice(e.end);
+
+    return result;
+}
+
 // ---- PLUGIN -----------------------------------------------------------------
 // Pages live in a folder inside Vite's root (e.g. src/pages) but are served and built
 // at the top level: pages/index.html is "/" in dev and dist/index.html in the build.
 // That mapping is the plugin's business; the site's own files don't know about it.
 export default function layout({ layouts, pages }) {
     let root, prefix; // prefix: pages folder relative to the root, e.g. "pages"
+    let aliases = [], server = null, modules = new Map();
+
+    // "$lib/x.build.js" or "/lib/x.build.js" -> absolute path
+    function resolveSource(src, where) {
+        const a = aliases.find(x => typeof x.find === "string" && src.startsWith(x.find + "/"));
+        if (a) return path.join(a.replacement, src.slice(a.find.length));
+        if (src.startsWith("/")) return path.join(root, src);
+        throw new Error(`${where}: src must start with an alias or "/" (the root)`);
+    }
+
+    // Dev: Vite's own Node loader, which also tracks changes (see hotUpdate).
+    // Build: runnerImport, with the same aliases; each module is loaded once per build.
+    async function loadModule(src, where) {
+        const file = resolveSource(src, where);
+        if (server) return server.ssrLoadModule(file);
+
+        if (!modules.has(file)) {
+            modules.set(file, runnerImport(file, { configFile: false, root, resolve: { alias: aliases } })
+                .then(x => x.module));
+        }
+
+        return modules.get(file);
+    }
 
     const inDir = (dir, file) => file.startsWith(dir + path.sep) && file.endsWith(".html");
 
@@ -197,6 +274,7 @@ export default function layout({ layouts, pages }) {
 
         configResolved(config) {
             root = config.root;
+            aliases = config.resolve.alias;
             prefix = path.relative(root, pages).split(path.sep).join("/");
         },
 
@@ -206,8 +284,20 @@ export default function layout({ layouts, pages }) {
                 const pagefile = path.relative(root, ctx.filename);
                 const page = parseDocument(html);
                 const layout = await readLayout(layouts, getLayoutName(page, pagefile), pagefile);
-                return mergePage(parseDocument(layout.source), page, pagefile, path.relative(root, layout.file));
+                const merged = mergePage(parseDocument(layout.source), page, pagefile, path.relative(root, layout.file));
+                return renderBuildtime(merged, pagefile, loadModule);
             },
+        },
+
+        // *.build.js modules run in Node only: refuse them in browser code. transform sees
+        // every module that ends up in the browser, however it was imported or resolved.
+        transform(_, id) {
+            if (this.environment.name === "client" && id.split("?")[0].endsWith(BUILDTIME_SUFFIX))
+                this.error(`${path.relative(root, id.split("?")[0])} is a build-time module and can't be imported by browser code`);
+        },
+
+        buildStart() {
+            modules.clear();
         },
 
         // Build: Vite names each page after its path in the root (pages/index.html);
@@ -226,7 +316,8 @@ export default function layout({ layouts, pages }) {
 
         // Dev: serve "/" as pages/index.html, "/a/b" as pages/a/b.html, and so on.
         // Only the URL is rewritten; Vite serves the page itself as usual.
-        configureServer(server) {
+        configureServer(devserver) {
+            server = devserver;
             server.watcher.add(layouts);
 
             server.middlewares.use(async (req, _, next) => {
@@ -245,7 +336,13 @@ export default function layout({ layouts, pages }) {
         // Vite's own reload message names the file (/pages/index.html), which doesn't
         // match the URL the browser shows ("/"), so the browser would ignore it.
         // For layouts and pages, reload all open pages instead.
-        hotUpdate({ file }) {
+        // A build-time module (or anything it imports) changed: pages using it are stale.
+        hotUpdate({ file, modules }) {
+            if (this.environment.name === "ssr") {
+                if (modules.length) server.environments.client.hot.send({ type: "full-reload" });
+                return;
+            }
+
             if (this.environment.name !== "client") return;
 
             if (inDir(layouts, file) || inDir(pages, file)) {

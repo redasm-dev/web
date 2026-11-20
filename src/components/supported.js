@@ -1,50 +1,18 @@
 import { AppComponent } from "$framework/component.js";
 import Features from "$lib/features.js";
 
+// The desktop matrix and the legend are static HTML, rendered at build time by
+// features.build.js. In the browser, this only adds the mobile tabs.
 class Supported extends AppComponent {
     static get tag() { return "x-supported"; }
 
-    static get template() {
-        return /*html*/`
-<div class="flex flex-col gap-y-3 text-sm">
-    <div class="supported-matrix hidden md:grid grid-cols-3 bg-background-alt divide-x divide-muted border border-muted"></div>
-    <div class="supported-matrix-mobile md:hidden flex flex-col gap-y-3"></div>
-    <div class="supported-legend bg-background-alt border border-muted"></div>
-</div>
-`;
-    }
-
     onCreated() {
-        this._createMatrix();
         this._createMatrixMobile();
-        this._createLegend();
-    }
-
-    _createMatrix() {
-        const s_matrix = this.querySelector(".supported-matrix");
-
-        for (const mi of Features.matrix) {
-            const matrix_item = s_matrix.appendChild(document.createElement("div"));
-
-            const container = matrix_item.appendChild(document.createElement("div"));
-            container.classList.add("flex", "items-center", "uppercase", "pl-3", "py-3", "gap-x-3",
-                "border-b", "border-muted");
-
-            const icon = container.appendChild(document.createElement("i"));
-            icon.classList.add("text-primary", "fas", "fa-fw", "fa-lg", mi.icon);
-
-            const text = container.appendChild(document.createElement("span"));
-            text.classList.add("flex-1", "pr-3");
-            text.textContent = mi.title;
-
-            const items_container = matrix_item.appendChild(document.createElement("div"));
-            items_container.classList.add("p-3");
-            this._createMatrixItems(items_container, mi.items);
-        }
     }
 
     _createMatrixMobile() {
         const s_matrix = this.querySelector(".supported-matrix-mobile");
+        if (!s_matrix) return;
 
         const ul = s_matrix.appendChild(document.createElement("ul"));
         ul.classList.add("flex", "flex-col", "gap-y-1");
@@ -82,35 +50,13 @@ class Supported extends AppComponent {
         }
     }
 
-    _createLegend() {
-        const s_legend = this.querySelector(".supported-legend");
-
-        const container = s_legend.appendChild(document.createElement("div"));
-        container.classList.add("mx-auto", "grid", "grid-cols-2", "md:flex", "justify-between", "gap-2", "md:gap-6", "p-3");
-
-        for (const tier of Features.tiers)
-            container.appendChild(this._createTierIcon(tier, true));
-    }
-
-    _createTierIcon(tier, label) {
+    _createTierIcon(tier) {
         const icon_el = document.createElement("div");
         icon_el.classList.add("w-[24px]", "h-[24px]", "flex", "justify-center",
             "items-center", "p-1", "border",
             Features.tier_details[tier].border, Features.tier_details[tier].text);
         icon_el.textContent = tier;
-
-        if (label !== true) return icon_el;
-
-        const tier_el = document.createElement("div");
-        tier_el.classList.add("flex", "gap-x-2", "items-center");
-
-        tier_el.appendChild(icon_el);
-
-        const text_el = tier_el.appendChild(document.createElement("div"));
-        text_el.classList.add("flex-1");
-        text_el.textContent = Features.tier_details[tier].description;
-
-        return tier_el;
+        return icon_el;
     }
 
     _createMatrixItems(container, items) {
