@@ -71,7 +71,7 @@ function getKey(el) {
     }
 }
 
-function parseDocument(source) {
+export function parseDocument(source) {
     const doc = parse(source, { sourceCodeLocationInfo: true });
     const html = findChild(doc, "html");
     const head = findChild(html, "head");
@@ -86,14 +86,12 @@ function parseDocument(source) {
             source: source.slice(x.sourceCodeLocation.startOffset, x.sourceCodeLocation.endOffset),
         }));
 
-    return { source, head, body, headtags };
+    return { source, html, head, body, headtags };
 }
 
 // ---- MERGING ----------------------------------------------------------------
-export function mergePage(layoutsource, pagesource, pagefile, layoutfile = "layout") {
-    const layout = parseDocument(layoutsource);
-    const page = parseDocument(pagesource);
-
+// layout and page are parsed documents (parseDocument), so each file is parsed once.
+export function mergePage(layout, page, pagefile, layoutfile = "layout") {
     const main = findDeep(layout.body, "main");
     if (!main) throw new Error(`${layoutfile}: <main> not found`);
 
@@ -123,7 +121,7 @@ export function mergePage(layoutsource, pagesource, pagefile, layoutfile = "layo
     edits.push({ start: mainrange.start, end: mainrange.end, text: page.source.slice(pagebody.start, pagebody.end) });
 
     // apply from the end, so earlier offsets stay valid
-    let result = layoutsource;
+    let result = layout.source;
 
     for (const e of edits.sort((a, b) => b.start - a.start))
         result = result.slice(0, e.start) + e.text + result.slice(e.end);
@@ -158,9 +156,8 @@ const DEFAULT_LAYOUT = "default";
 
 // <html data-layout="article"> -> "article". Attributes of <html> never reach the
 // output (only <head> and <body> are merged), so this needs no stripping.
-function getLayoutName(source, pagefile) {
-    const html = findChild(parse(source), "html");
-    const name = getAttr(html, "data-layout")?.trim() || DEFAULT_LAYOUT;
+function getLayoutName(page, pagefile) {
+    const name = getAttr(page.html, "data-layout")?.trim() || DEFAULT_LAYOUT;
 
     if (!/^[\w-]+(\/[\w-]+)*$/.test(name)) // plain names only: no "..", no extensions
         throw new Error(`${pagefile}: invalid data-layout "${name}"`);
@@ -207,8 +204,9 @@ export default function layout({ layouts, pages }) {
             order: "pre", // before Vite looks at scripts and styles
             async handler(html, ctx) {
                 const pagefile = path.relative(root, ctx.filename);
-                const layout = await readLayout(layouts, getLayoutName(html, pagefile), pagefile);
-                return mergePage(layout.source, html, pagefile, path.relative(root, layout.file));
+                const page = parseDocument(html);
+                const layout = await readLayout(layouts, getLayoutName(page, pagefile), pagefile);
+                return mergePage(parseDocument(layout.source), page, pagefile, path.relative(root, layout.file));
             },
         },
 
