@@ -1,6 +1,6 @@
 // Build time (Node): renders the feature matrix from features.js into static HTML,
 // so the supported formats and architectures are in the page for every crawler.
-// Used by <fw-buildtime src="$lib/features.build.js" export="renderMatrix"> in pages/index.html;
+// Used by <fw-buildtime script="$lib/features.build.js" do="renderMatrix"> in pages/index.html;
 // <x-supported> then only adds the mobile tabs in the browser.
 import { html } from "$framework/html.js";
 import Features from "$lib/features.js";

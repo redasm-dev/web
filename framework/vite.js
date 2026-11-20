@@ -2,8 +2,9 @@
 // A page picks its layout with <html data-fw-layout="name"> (layouts/name.html);
 // without it, layouts/default.html is used.
 //
-// Build time: <fw-buildtime src="$lib/x.build.js" export="fn" ...></fw-buildtime> is
+// Build time: <fw-buildtime script="$lib/x.build.js" do="fn" ...></fw-buildtime> is
 // replaced by what fn({ ...other attributes }) returns, computed in Node.
+// do defaults to the module's default export.
 //
 // Everything the framework reads from HTML uses the fw- prefix (tags) or data-fw-
 // (attributes), so it can't clash with the site's own tags and attributes.
@@ -205,13 +206,13 @@ async function renderBuildtime(source, pagefile, load) {
     const edits = [];
 
     for (const el of elements) {
-        const { src, export: name = "default", ...params } = Object.fromEntries(el.attrs.map(x => [x.name, x.value]));
-        const where = `${pagefile}: <${BUILDTIME_TAG} src="${src ?? ""}">`;
+        const { script, do: name = "default", ...params } = Object.fromEntries(el.attrs.map(x => [x.name, x.value]));
+        const where = `${pagefile}: <${BUILDTIME_TAG} script="${script ?? ""}">`;
 
         if (!el.sourceCodeLocation?.endTag) throw new Error(`${where} must have a closing tag`);
-        if (!src?.endsWith(BUILDTIME_SUFFIX)) throw new Error(`${where}: src must be a *${BUILDTIME_SUFFIX} module`);
+        if (!script?.endsWith(BUILDTIME_SUFFIX)) throw new Error(`${where}: script must be a *${BUILDTIME_SUFFIX} module`);
 
-        const fn = (await load(src, where))[name];
+        const fn = (await load(script, where))[name];
         if (typeof fn !== "function") throw new Error(`${where}: "${name}" is not an exported function`);
 
         let output;
@@ -244,7 +245,7 @@ export default function layout({ layouts, pages }) {
         const a = aliases.find(x => typeof x.find === "string" && src.startsWith(x.find + "/"));
         if (a) return path.join(a.replacement, src.slice(a.find.length));
         if (src.startsWith("/")) return path.join(root, src);
-        throw new Error(`${where}: src must start with an alias or "/" (the root)`);
+        throw new Error(`${where}: script must start with an alias or "/" (the root)`);
     }
 
     // Dev: Vite's own Node loader, which also tracks changes (see hotUpdate).
