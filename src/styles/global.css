@@ -72,3 +72,59 @@ a:not([data-default]):hover {
         @apply flex items-center font-bold pb-3 gap-x-2;
     }
 }
+
+/* ---- feature matrix (markup rendered at build time by lib/features.build.js) -----
+ * Radio tabs: each <input> is followed by its <label> and its panel. Labels come first
+ * (order 0), panels after (order 1); only the panel after the checked input is shown.
+ * Mobile: labels take the full width (stacked); desktop: they share one row. */
+@layer components {
+    x-supported {
+        @apply flex flex-col gap-y-3 text-sm;
+    }
+
+    .supported-matrix {
+        @apply flex flex-wrap gap-1;
+    }
+
+    .supported-matrix > input {
+        @apply sr-only;
+    }
+
+    .supported-matrix > label {
+        @apply basis-full md:basis-0 md:flex-1 flex items-center justify-center gap-x-2 px-2 py-1
+               cursor-pointer uppercase border border-muted text-muted bg-background-alt;
+    }
+
+    .supported-matrix > label:hover {
+        @apply text-foreground;
+    }
+
+    .supported-matrix > input:checked + label {
+        @apply bg-primary border-primary text-foreground;
+    }
+
+    .supported-matrix > input:focus-visible + label {
+        @apply outline-2 outline-highlight;
+    }
+
+    .supported-panel {
+        @apply hidden order-1 basis-full mt-2 p-3 bg-background-alt border border-muted
+               md:grid-cols-2 gap-x-12;
+    }
+
+    .supported-matrix > input:checked + label + .supported-panel {
+        @apply grid;
+    }
+
+    .supported-panel > li {
+        @apply flex items-center justify-between gap-x-3 py-1;
+    }
+
+    .supported-legend {
+        @apply grid grid-cols-2 md:flex justify-between gap-2 md:gap-6 p-3 bg-background-alt border border-muted;
+    }
+
+    .supported-legend > div {
+        @apply flex gap-x-2 items-center;
+    }
+}
