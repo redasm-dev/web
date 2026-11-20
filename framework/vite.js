@@ -71,7 +71,7 @@ function getKey(el) {
     }
 }
 
-function parseDocument(source, file) {
+function parseDocument(source) {
     const doc = parse(source, { sourceCodeLocationInfo: true });
     const html = findChild(doc, "html");
     const head = findChild(html, "head");
@@ -91,8 +91,8 @@ function parseDocument(source, file) {
 
 // ---- MERGING ----------------------------------------------------------------
 export function mergePage(layoutsource, pagesource, pagefile, layoutfile = "layout") {
-    const layout = parseDocument(layoutsource, layoutfile);
-    const page = parseDocument(pagesource, pagefile);
+    const layout = parseDocument(layoutsource);
+    const page = parseDocument(pagesource);
 
     const main = findDeep(layout.body, "main");
     if (!main) throw new Error(`${layoutfile}: <main> not found`);
