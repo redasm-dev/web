@@ -1,4 +1,4 @@
-import { AppComponent } from "$app";
+import { AppComponent } from "$framework/component.js";
 
 class GitHubStats extends AppComponent {
     static get gh_repo() { return "https://github.com/redasm-dev/redasm"; }

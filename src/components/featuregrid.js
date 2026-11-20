@@ -1,4 +1,4 @@
-import { AppComponent } from "$app";
+import { AppComponent } from "$framework/component.js";
 
 class FeatureGrid extends AppComponent {
     static get tag() { return "feature-grid"; }

@@ -1,4 +1,4 @@
-import { AppComponent } from "$app";
+import { AppComponent } from "$framework/component.js";
 
 class TabPanel extends AppComponent {
     static get tag() { return "tab-panel"; }

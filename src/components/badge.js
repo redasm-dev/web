@@ -1,4 +1,4 @@
-import { AppComponent } from "$app";
+import { AppComponent } from "$framework/component.js";
 import Colors from "$lib/colors.js";
 
 class Badge extends AppComponent {

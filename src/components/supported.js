@@ -1,4 +1,4 @@
-import { AppComponent } from "$app";
+import { AppComponent } from "$framework/component.js";
 import Features from "$lib/features.js";
 
 class Supported extends AppComponent {

@@ -3,72 +3,11 @@ import tailwindcss from "@tailwindcss/vite";
 import fs from "fs/promises";
 import path from "path";
 import pkg from "./package.json" with {type: "json"};
+import layout, { getPages } from "./framework/vite.js";
 
-const APP_TMPDIR = ".app";
 const DIR_NAME = import.meta.dirname;
 const SRC_DIR = path.resolve(DIR_NAME, "src");
-
-async function getRoutes() {
-    const routes = (await fs.readdir(path.resolve(SRC_DIR, "routes"), { withFileTypes: true }))
-        .filter(x => x.isFile() && path.extname(x.name).toLowerCase() === ".js")
-        .map(x => path.basename(x.name, ".js"));
-
-    return routes;
-}
-
-function escapeParam(r) {
-    return r.replace(/[\[\]]/g, '_');
-}
-
-async function ensureDir(dir) {
-    try { await fs.access(dir); }
-    catch { await fs.mkdir(dir, { recursive: true }); }
-}
-
-function generateApp() {
-    let config;
-
-    return {
-        name: "generate-app",
-
-        configResolved(resolvedconfig) {
-            config = resolvedconfig;
-        },
-
-        async buildStart() {
-            try { await fs.access(APP_TMPDIR); }
-            catch { await fs.mkdir(APP_TMPDIR, { recursive: true }); }
-
-            const routes = await getRoutes();
-
-            const routesimports = routes.reduce((acc, x) => {
-                config.logger.info(`Found route /${x}`);
-                acc.push(`import ${escapeParam(x)}_page from "$src/routes/${x}.js";`);
-                return acc;
-            }, []);
-
-            const routesmap = routes.map(x => {
-                return `       "/${x === "index" ? "" : x}": ${escapeParam(x)}_page,`
-
-            });
-
-            const APP_TEMPLATE =
-                `import { App } from "$src/app.js"\n` +
-                `${routesimports.join("\n")}\n` +
-                `\n` +
-                `export * from "$src/app.js";\n` +
-                `\n` +
-                `export function initApp(options) {\n` +
-                `   new App({\n` +
-                `${routesmap.join("\n")}\n` +
-                `    }, options);\n` +
-                `}\n`;
-
-            await ensureDir(APP_TMPDIR);
-            await fs.writeFile(path.join(APP_TMPDIR, "index.js"), APP_TEMPLATE);
-        },
-    }
-}
+const PAGES_DIR = path.resolve(SRC_DIR, "pages");
 
 function generateSiteMap() {
     let config;
@@ -87,18 +26,13 @@ function generateSiteMap() {
                 return;
             }
 
-            const homepage = pkg.homepage.replace(/\/+$/, "") + "/";
-            const routes = await getRoutes();
+            const homepage = pkg.homepage.replace(/\/+$/, "");
+            const urls = (await getPages(PAGES_DIR)).map(x => x.url).filter(x => x !== "/404");
 
-            if (!routes.length) {
-                config.logger.warn("No routes found, skipping sitemap generation");
-                return;
-            }
-
-            const urlset = routes.map(x => {
+            const urlset = urls.map(x => {
                 return "" +
                     `    <url>\n` +
-                    `        <loc>${homepage}${x === "index" ? "" : x}</loc>\n` +
+                    `        <loc>${homepage}${x}</loc>\n` +
                     `    </url>`;
             });
 
@@ -109,97 +43,26 @@ function generateSiteMap() {
                 `</urlset>`;
 
             config.logger.info("Generating sitemap.xml");
-            await ensureDir(config.build.outDir);
             await fs.writeFile(path.join(config.build.outDir, "sitemap.xml"), SITEMAP_TEMPLATE);
         }
     }
 }
 
-function generateRobotsTxt() {
-    let config;
-
-    return {
-        name: "generate-robotstxt",
-        apply: "build",
-
-        configResolved(resolvedconfig) {
-            config = resolvedconfig;
-        },
-
-        async closeBundle() {
-            if (!pkg.homepage) {
-                config.logger.warn("Homepage not set, skipping robots.txt generation");
-                return;
-            }
-
-            const homepage = pkg.homepage.replace(/\/+$/, "") + "/";
-
-            const ROBOTS_TEMPLATE =
-                `User-agent: *\n` +
-                `Allow: /\n` +
-                `\n` +
-                `Sitemap: ${homepage}sitemap.xml\n`;
-
-            config.logger.info("Generating robots.txt");
-            await ensureDir(config.build.outDir);
-            await fs.writeFile(path.join(config.build.outDir, "robots.txt"), ROBOTS_TEMPLATE);
-        }
-    }
-}
-
-function generateRedirects() {
-    let config;
-
-    return {
-        name: "generate-redirects",
-        apply: "build",
-
-        configResolved(resolvedconfig) {
-            config = resolvedconfig;
-        },
-
-        async closeBundle() {
-            const routes = await getRoutes();
-            const rules = new Set();
-
-            for (const x of routes) {
-                if (x === "index") continue; // "/" is served by index.html directly
-
-                const rule = "/" + x.replace(/\[(\w+)\]/g, ":$1"); // [id] -> :id
-                rules.add(rule);
-                rules.add(rule + "/"); // trailing-slash variant (see note)
-            }
-
-            const outdir = config.build.outDir;
-            await ensureDir(outdir);
-
-            // Only needed once you add more routes
-            if (rules.size) {
-                config.logger.info("Generating _redirects");
-                await fs.writeFile(
-                    path.join(outdir, "_redirects"),
-                    [...rules].map(r => `${r}  /index.html  200`).join("\n") + "\n"
-                );
-            }
-
-            // Unmatched URLs get the app shell with a real 404 status;
-            // the router then renders NotFoundPage.
-            config.logger.info("Generating 404.html");
-            await fs.copyFile(path.join(outdir, "index.html"), path.join(outdir, "404.html"));
-        }
-    }
-}
-
 export default defineConfig({
-    plugins: [tailwindcss(), generateApp(), generateSiteMap(), generateRobotsTxt(), generateRedirects()],
-    root: "src",
+    plugins: [
+        tailwindcss(),
+        layout({ layouts: path.resolve(SRC_DIR, "layouts"), pages: PAGES_DIR }),
+        generateSiteMap(),
+    ],
+
+    root: SRC_DIR,
     publicDir: path.resolve(DIR_NAME, "public"),
 
     resolve: {
         alias: {
+            "$framework": path.resolve(DIR_NAME, "framework"),
             "$src": SRC_DIR,
             "$lib": path.resolve(SRC_DIR, "lib"),
-            "$app": path.resolve(DIR_NAME, APP_TMPDIR),
         }
     },
 
@@ -211,8 +74,7 @@ export default defineConfig({
             output: {
                 codeSplitting: {
                     groups: [
-                        { name: "routes", test: /\/src\/routes\// },
-                        { name: "lib", test: /\/src\/lib\// },
+                        { name: "lib", test: /\/src\/(lib|components)\// },
                         { name: "vendor", test: /\/node_modules\// },
                     ]
                 }

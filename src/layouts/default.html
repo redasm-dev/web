@@ -6,12 +6,14 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260826" />
     <link rel="shortcut icon" href="/favicon.ico?v=20260826" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=20260826" />
-    <meta name="apple-mobile-web-app-title" content="REDasm" />
     <link rel="manifest" href="/site.webmanifest?v=20260826" />
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+    <link rel="stylesheet" href="/styles/global.css">
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark">
+    <meta name="apple-mobile-web-app-title" content="REDasm" />
     <meta name="title" content="REDasm: The Open Source Disassembler">
     <meta name="description"
         content="A cross platform, free and open source disassembler that supports multiple architectures, legacy formats and plugins. No license restrictions">
@@ -35,7 +37,6 @@
     <!-- Mastodon -->
     <link rel="me" href="https://infosec.exchange/@redasm">
 
-    <link rel="stylesheet" href="/app.css">
     <title>REDasm: The Open Source Disassembler</title>
 
     <script type="application/ld+json">
@@ -55,7 +56,7 @@
         "author": { "@type": "Person", "name": "Antonio Davide", "url": "https://github.com/Dax89" },
         "downloadUrl": "https://github.com/redasm-dev/redasm/releases"
         }
-</script>
+        </script>
 </head>
 
 <body class="min-h-screen flex flex-col text-foreground bg-background">
@@ -126,20 +127,15 @@
                 by <a target="_blank" href="https://github.com/Dax89">Dax</a>
             </p>
             <p>
-                redasm.dev v2.6.5
+                redasm.dev v2.9.9
             </p>
         </div>
     </footer>
     <script type="module">
-        import "$lib/components/ghstats.js";
-        import initFontAwesome from "./fontawesome.js";
-        import {initApp} from "$app";
+        import "$src/components/ghstats.js";
+        import initFontAwesome from "$lib/fontawesome.js";
 
         initFontAwesome();
-        initApp({
-            name: "REDasm",
-            description: "The Open Source Disassembler",
-        });
     </script>
 </body>
 

@@ -1,4 +1,4 @@
-import { AppComponent } from "$app";
+import { AppComponent } from "$framework/component.js";
 
 const CODE_STYLES = {
     c0: "text-[#202020]",

@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Not Found - REDasm</title>
+    <meta name="robots" content="noindex">
+    <script type="module">
+        let path = window.location.pathname;
+        try { path = decodeURIComponent(path); } catch { } // malformed %-sequence: keep the raw value
+        document.querySelector(".x-path").textContent = path;
+    </script>
+</head>
+
+<body>
+    <p style="text-align: center">
+        <b>404</b>. That's an error.<br><br>
+        The requested URL <i class="x-path"></i> was not found on this server.<br>
+        That's all we know.
+    </p>
+</body>
+
+</html>
