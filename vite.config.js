@@ -7,7 +7,9 @@ import layout, { getPages } from "./framework/vite.js";
 
 const DIR_NAME = import.meta.dirname;
 const SRC_DIR = path.resolve(DIR_NAME, "src");
-const PAGES_DIR = path.resolve(SRC_DIR, "pages");
+const PAGES = [
+    { dir: path.resolve(SRC_DIR, "pages"), url: "/" },
+];
 
 function generateSiteMap() {
     let config;
@@ -27,7 +29,7 @@ function generateSiteMap() {
             }
 
             const homepage = pkg.homepage.replace(/\/+$/, "");
-            const urls = (await getPages(PAGES_DIR)).map(x => x.url).filter(x => x !== "/404");
+            const urls = (await getPages(PAGES, { command: "build" })).map(x => x.url).filter(x => x !== "/404");
 
             const urlset = urls.map(x => {
                 return "" +
@@ -51,7 +53,7 @@ function generateSiteMap() {
 export default defineConfig({
     plugins: [
         tailwindcss(),
-        layout({ layouts: path.resolve(SRC_DIR, "layouts"), pages: PAGES_DIR }),
+        layout({ layouts: path.resolve(SRC_DIR, "layouts"), pages: PAGES }),
         generateSiteMap(),
     ],
 
