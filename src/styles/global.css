@@ -6,12 +6,15 @@
 @theme {
     --color-background: #2f2f2f;
     --color-foreground: #f4f1d6;
-    --color-muted: #757575;
+    --color-muted: #757575;       /* borders, separators, icons */
+    --color-muted-text: #9a9a9a;  /* secondary text (contrast 4.8:1 on background) */
     --color-error: #ff7575;
     --color-warning: #ffb22e;
     --color-success: #67bd61;
     --color-highlight: #ffb22e;
-    --color-primary: #c03131;
+    --color-primary: #c03131;          /* brand red: backgrounds, borders, accents */
+    --color-branding: #e04545;   /* red text, large only (3.3:1 on background) */
+    --color-link: #7dafff;
     --color-code: #b4bec8;
     --color-background-alt: #202020;
 }
@@ -30,12 +33,10 @@ body {
     font-family: "JetBrains Mono", monospace;
 }
 
-a:not([data-default]), a:visited:not([data-default]) {
-    @apply text-primary
-}
-
-a:not([data-default]):hover {
-    @apply text-highlight
+@layer base {
+    a:not([data-default]), a:visited:not([data-default]) {
+        @apply text-link underline decoration-link/40 decoration-1 underline-offset-4 hover:decoration-link;
+    }
 }
 
 /* ---- components ---------------------------------------------------------------

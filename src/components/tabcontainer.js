@@ -34,7 +34,7 @@ class TabContainer extends AppComponent {
         panels.forEach((x, index) => {
             const li = document.createElement("li");
             li.role = "presentation";
-            li.classList.add("mt-1", "text-muted");
+            li.classList.add("mt-1", "text-muted-text");
 
             const btn = li.appendChild(document.createElement("button"));
             btn.role = "tab";

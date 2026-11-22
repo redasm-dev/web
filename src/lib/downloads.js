@@ -97,9 +97,9 @@ export async function createDownloadList(container) {
 
     if (!items.length) {
         container.innerHTML = /*html*/`
-<div class="border border-muted bg-background-alt p-3 text-sm text-muted">
+<div class="border border-muted bg-background-alt p-3 text-sm text-muted-text">
     Unable to load releases. See
-    <a href="https://github.com/redasm-dev/redasm/releases" class="text-warning">GitHub Releases</a>.
+    <a href="https://github.com/redasm-dev/redasm/releases">GitHub Releases</a>.
 </div>`;
         return;
     }
@@ -115,8 +115,8 @@ export async function createDownloadList(container) {
 <div class="flex text-sm items-center gap-x-3 p-3 bg-background-alt">
     <i class="${ICONS[rel.platform] ?? "fas fa-file"} fa-fw fa-xl text-foreground"></i>
     <div class="flex-1 min-w-0">
-        <a data-default href="${rel.url}" class="text-success text-base break-all hover:text-highlight hover:underline">${rel.name}</a>
-        <div class="flex items-center gap-x-3 flex-wrap mt-1 text-xs text-muted">
+        <a href="${rel.url}" class="text-base break-all no-underline">${rel.name}</a>
+        <div class="flex items-center gap-x-3 flex-wrap mt-1 text-xs text-muted-text">
             <span class="font-bold px-1 ${rel.prerelease ? "bg-warning text-background" : "border border-primary text-foreground"}">
                 ${rel.suffix ?? rel.version}
             </span>
@@ -124,7 +124,7 @@ export async function createDownloadList(container) {
             <span><span class="text-foreground">Date:</span> ${rel.created}</span>
             <span><span class="text-foreground">Downloads:</span> ${rel.downloads}</span>
         </div>
-        <div class="flex items-center gap-x-2 text-xs mt-1 text-muted">
+        <div class="flex items-center gap-x-2 text-xs mt-1 text-muted-text">
             <span class="text-foreground">SHA256:</span>
                 <span>${rel.sha256}</span>
         </div>
@@ -137,12 +137,11 @@ export async function createDownloadList(container) {
     // footer note
     const more = document.createElement("div");
     more.classList.add("flex", "justify-between", "items-center", "flex-wrap",
-        "gap-2", "mt-2", "text-xs", "text-muted");
+        "gap-2", "mt-2", "text-xs", "text-muted-text");
     more.innerHTML = /*html*/`
         <span class="italic">Showing the 3 most recent releases</span>
-        <a target="_blank" href="https://github.com/redasm-dev/redasm/releases" class="flex items-center gap-x-1">
-            <span>All releases on GitHub</span>
-            <i class="fas fa-chevron-right"></i>
+        <a target="_blank" href="https://github.com/redasm-dev/redasm/releases">
+            All releases on GitHub<i class="fas fa-chevron-right ml-1"></i>
         </a>`;
     container.appendChild(more);
 }

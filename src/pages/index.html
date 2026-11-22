@@ -47,8 +47,8 @@
                 <div class="flex-1 flex flex-col gap-y-8">
                     <div class="leading-[1.15]">
                         <h1 class="text-[1.9rem] mb-1 font-bold tracking-[-0.02em]"><span
-                                class="text-primary">RE</span>Dasm</h1>
-                        <p class="text-muted tracking-[0.08em]">The Open Source Disassembler</p>
+                                class="text-branding">RE</span>Dasm</h1>
+                        <p class="text-muted-text tracking-[0.08em]">The Open Source Disassembler</p>
                     </div>
                     <p class="leading-[1.75]">
                         For hobbyists and professional reverse engineers.<br>
@@ -79,14 +79,15 @@
                         </div>
                     </div>
                     <div>
-                        <div class="inline-flex items-end gap-x-2 text-muted">
+                        <div class="inline-flex items-end gap-x-2 text-muted-text">
                             <i class="fab fa-windows fa-lg"></i>
                             <i class="fab fa-linux fa-lg"></i>
                         </div>
                     </div>
                     <div class="flex flex-col gap-y-1">
-                        <x-badge id="x-badge-ci" class="uppercase" color="muted" label="     CI" value="…"></x-badge>
-                        <x-badge id="x-badge-nightly" class="uppercase" color="muted" label="Nightly"
+                        <x-badge id="x-badge-ci" class="uppercase" color="muted-text" label="     CI"
+                            value="…"></x-badge>
+                        <x-badge id="x-badge-nightly" class="uppercase" color="muted-text" label="Nightly"
                             value="…"></x-badge>
                     </div>
                 </div>
@@ -95,7 +96,9 @@
         </div>
         <div class="px-14">
             <section>
-                <section-title><h2>Overview</h2></section-title>
+                <section-title>
+                    <h2>Overview</h2>
+                </section-title>
                 <feature-grid class="grid-cols-1 md:grid-cols-2">
                     <feature-item>
                         <h3>Interactive listing</h3>
@@ -112,14 +115,18 @@
             </section>
 
             <section class="flex flex-col gap-y-3">
-                <section-title><h2>Features</h2></section-title>
+                <section-title>
+                    <h2>Features</h2>
+                </section-title>
                 <x-supported>
                     <fw-buildtime script="$lib/features.build.js" do="renderMatrix"></fw-buildtime>
                 </x-supported>
             </section>
 
             <section id="download" class="flex flex-col gap-y-3">
-                <section-title><h2>Download</h2></section-title>
+                <section-title>
+                    <h2>Download</h2>
+                </section-title>
                 <div class="grid md:grid-cols-2 gap-3">
                     <x-notice color="error" icon="fa-hand" class="p-3 text-sm">
                         <h3 class="uppercase font-bold pb-3">BETA status</h3>
@@ -148,7 +155,7 @@
                 </div>
                 <details class="group border border-muted bg-background-alt">
                     <summary
-                        class="flex items-center p-3 gap-x-2 text-muted cursor-pointer hover:text-foreground hover:bg-background">
+                        class="flex items-center p-3 gap-x-2 text-muted-text cursor-pointer hover:text-foreground hover:bg-background">
                         <i class="fas fa-chevron-right group-open:rotate-90 fa-fw text-primary"></i>
                         <span>Signature Verification</span>
                     </summary>
@@ -180,7 +187,9 @@ sha256sum -c REDasm-nightly-linux-x86_64.AppImage.sha256</code></pre>
                 </details>
             </section>
             <section id="packages" class="flex flex-col gap-y-3">
-                <section-title><h2>Packages</h2></section-title>
+                <section-title>
+                    <h2>Packages</h2>
+                </section-title>
                 <p>
                     REDasm is also available in various package managers, which provide
                     a more integrated installation & update experience.
@@ -188,7 +197,8 @@ sha256sum -c REDasm-nightly-linux-x86_64.AppImage.sha256</code></pre>
                 <div id="home__packages" class="bg-background-alt border border-muted p-4">
                     <h3 class="flex items-center gap-x-3">
                         <div class="font-bold">Scoop</div>
-                        <div class="text-xs text-highlight opacity-75 border border-highlight px-1 rounded">Official</div>
+                        <div class="text-xs text-highlight opacity-75 border border-highlight px-1 rounded">Official
+                        </div>
                     </h3>
                     <!-- beautify ignore:start -->
                     <pre class="text-code text-sm overflow-x-auto whitespace-pre-wrap break-all pl-4"><code>scoop install git
@@ -197,7 +207,8 @@ scoop install redasm</code></pre>
                     <!-- beautify ignore:end -->
                     <h3 class="flex items-center gap-x-3 mt-6">
                         <div class="font-bold">Arch Linux (AUR)</div>
-                        <div class="text-xs text-highlight opacity-75 border border-highlight px-1 rounded">Official</div>
+                        <div class="text-xs text-highlight opacity-75 border border-highlight px-1 rounded">Official
+                        </div>
                     </h3>
                     <!-- beautify ignore:start -->
                     <pre class="text-code text-sm overflow-x-auto whitespace-pre-wrap break-all pl-4"><code>Replace `yay` with your AUR helper.
