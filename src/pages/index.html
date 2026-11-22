@@ -172,16 +172,16 @@ gpg --keyserver keys.openpgp.org --recv-keys B0C728D7021EEEE9D9B859043AF46EB2201
 gpg --keyserver keys.openpgp.org --recv-keys A2391AFACAE2EE52B35541DD65F948A2F6BB294A <span class="text-success"># nightly</span>
 
 <span class="text-success"># verify linux</span>
-gpg --verify REDasm-VERSION-linux-x86_64.AppImage.sha256.asc REDasm-VERSION-linux-x86_64.AppImage.sha256
-sha256sum -c REDasm-VERSION-linux-x86_64.AppImage.sha256
+gpg --verify REDasm-VERSION-x86_64.AppImage.sha256.asc REDasm-VERSION-x86_64.AppImage.sha256
+sha256sum -c REDasm-VERSION-x86_64.AppImage.sha256
 
 <span class="text-success"># verify windows</span>
 gpg --verify REDasm-VERSION-windows-x86_64.zip.sha256.asc REDasm-VERSION-windows-x86_64.zip.sha256
 sha256sum -c REDasm-VERSION-windows-x86_64.zip.sha256
 
 <span class="text-success"># for nightly builds (replace VERSION with "nightly")</span>
-gpg --verify REDasm-nightly-linux-x86_64.AppImage.sha256.asc REDasm-nightly-linux-x86_64.AppImage.sha256
-sha256sum -c REDasm-nightly-linux-x86_64.AppImage.sha256</code></pre>
+gpg --verify REDasm-nightly-x86_64.AppImage.sha256.asc REDasm-linux-x86_64.AppImage.sha256
+sha256sum -c REDasm-nightly-x86_64.AppImage.sha256</code></pre>
                     <!-- beautify ignore:end -->
                     </div>
                 </details>
