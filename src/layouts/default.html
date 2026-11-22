@@ -63,39 +63,47 @@
     <header class="bg-background-alt text-muted sticky top-0 z-20 px-6 md:px-12 border-b border-background">
         <nav class="flex justify-between h-[48px]">
             <a data-default href="/">
-                <img alt="REDasm" class="h-full py-2" src="/logo.png">
+                <img alt="REDasm" class="h-full py-2 shrink-0" src="/logo.png">
             </a>
             <div class="flex-1"></div>
-            <ul class="flex flex-row gap-x-4 my-auto">
+            <ul class="flex flex-row items-center gap-x-3 sm:gap-x-4 my-auto">
+                <li class="pr-3 sm:pr-4 border-r border-muted">
+                    <a data-default href="https://blog.redasm.dev"
+                        class="inline-flex items-center gap-x-1.5 text-sm font-bold text-muted-text hover:text-foreground">
+                        Blog <i class="fas fa-arrow-up-right-from-square fa-xs"></i>
+                    </a>
+                </li>
                 <li>
-                    <a data-default target="_blank" class="hover:text-highlight"
+                    <a data-default target="_blank" class="hover:text-foreground"
                         href="https://github.com/redasm-dev/redasm">
                         <i class="fab fa-github fa-fw fa-lg" aria-label="GitHub"></i>
                     </a>
                 </li>
-                <li>
-                    <a data-default target="_blank" class="hover:text-highlight" href="https://discord.redasm.dev">
+                <li class="hidden sm:block">
+                    <a data-default target="_blank" class="hover:text-foreground" href="https://discord.redasm.dev">
                         <i class="fab fa-discord fa-fw fa-lg" aria-label="Discord"></i>
                     </a>
                 </li>
-                <li>
-                    <a data-default target="_blank" class="hover:text-highlight" href="https://www.reddit.com/r/REDasm">
+                <li class="hidden sm:block">
+                    <a data-default target="_blank" class="hover:text-foreground"
+                        href="https://www.reddit.com/r/REDasm">
                         <i class="fab fa-reddit fa-fw fa-lg" aria-label="Reddit"></i>
                     </a>
                 </li>
-                <li>
-                    <a data-default target="_blank" class="hover:text-highlight" href="https://x.com/re_dasm">
+                <li class="hidden sm:block">
+                    <a data-default target="_blank" class="hover:text-foreground" href="https://x.com/re_dasm">
                         <i class="fab fa-x-twitter fa-fw fa-lg" aria-label="X"></i>
                     </a>
                 </li>
-                <li>
-                    <a data-default target="_blank" class="hover:text-highlight"
+                <li class="hidden sm:block">
+                    <a data-default target="_blank" class="hover:text-foreground"
                         href="https://infosec.exchange/@redasm">
                         <i class="fab fa-mastodon fa-fw fa-lg" aria-label="Mastodon"></i>
                     </a>
                 </li>
-                <li>
-                    <a data-default target="_blank" class="hover:text-highlight" href="https://www.youtube.com/@redasm">
+                <li class="hidden sm:block">
+                    <a data-default target="_blank" class="hover:text-foreground"
+                        href="https://www.youtube.com/@redasm">
                         <i class="fab fa-youtube fa-fw fa-lg" aria-label="YouTube"></i>
                     </a>
                 </li>
@@ -106,13 +114,35 @@
         <main></main>
     </div>
     <footer class="bg-background-alt text-muted-text text-xs py-3 px-6 md:px-12">
-        <div class="flex flex-col md:flex-row justify-between gap-y-4">
+        <div class="flex flex-col md:flex-row justify-between gap-y-4 md:gap-x-12">
             <section class="flex-1">
                 <h2 class="font-bold text-foreground uppercase py-2">License</h2>
                 <p class="text-sm">
                     REDasm is Open Source Software and
                     it's released under GNU GPL3 License
                 </p>
+            </section>
+            <section class="md:hidden">
+                <h2 class="font-bold text-foreground uppercase py-1">Community</h2>
+                <ul class="flex flex-row flex-wrap gap-x-4 gap-y-2 text-muted py-1">
+                    <li><a data-default target="_blank" class="hover:text-foreground"
+                            href="https://github.com/redasm-dev/redasm"><i class="fab fa-github fa-fw fa-lg"
+                                aria-label="GitHub"></i></a></li>
+                    <li><a data-default target="_blank" class="hover:text-foreground"
+                            href="https://discord.redasm.dev"><i class="fab fa-discord fa-fw fa-lg"
+                                aria-label="Discord"></i></a></li>
+                    <li><a data-default target="_blank" class="hover:text-foreground"
+                            href="https://www.reddit.com/r/REDasm"><i class="fab fa-reddit fa-fw fa-lg"
+                                aria-label="Reddit"></i></a></li>
+                    <li><a data-default target="_blank" class="hover:text-foreground" href="https://x.com/re_dasm"><i
+                                class="fab fa-x-twitter fa-fw fa-lg" aria-label="X"></i></a></li>
+                    <li><a data-default target="_blank" class="hover:text-foreground"
+                            href="https://infosec.exchange/@redasm"><i class="fab fa-mastodon fa-fw fa-lg"
+                                aria-label="Mastodon"></i></a></li>
+                    <li><a data-default target="_blank" class="hover:text-foreground"
+                            href="https://www.youtube.com/@redasm"><i class="fab fa-youtube fa-fw fa-lg"
+                                aria-label="YouTube"></i></a></li>
+                </ul>
             </section>
             <section>
                 <h2 class="font-bold text-foreground uppercase py-1">Stats</h2>

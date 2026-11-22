@@ -20,6 +20,7 @@ import {
     faMicrochip,
     faMagnifyingGlass,
     faFolderOpen,
+    faArrowUpRightFromSquare,
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
@@ -53,6 +54,7 @@ export default function initFontAwesome() {
         faMicrochip,
         faMagnifyingGlass,
         faFolderOpen,
+        faArrowUpRightFromSquare,
 
         faApple,
         faXTwitter,
