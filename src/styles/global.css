@@ -20,13 +20,13 @@
 }
 
 ::selection {
-  background-color: var(--color-primary);
-  color: var(--color-foreground);
+  background-color: var(--color-foreground);
+  color: var(--color-background);
 }
 
 ::-moz-selection {
-  background-color: var(--color-primary);
-  color: var(--color-foreground);
+  background-color: var(--color-foreground);
+  color: var(--color-background);
 }
 
 body {
