@@ -13,11 +13,13 @@ function tierIcon(tier) {
 }
 
 export function renderMatrix() {
-    return html`<div class="supported-matrix">${Features.matrix.map((m, i) => html`
+    return html`
+<div class="supported-matrix">
+    ${Features.matrix.map((m, i) => html`
     <input type="radio" name="supported-matrix" id="supported-${m.title}"${i === 0 && html` checked`}>
     <label for="supported-${m.title}"><i class="fas fa-fw ${m.icon}"></i>${m.title}</label>
     <ul class="supported-panel">${m.items.map(x => html`
-        <li><span>${x.text}</span>${tierIcon(x.tier)}</li>`)}
+        <li>${tierIcon(x.tier)}<span>${x.text}</span></li>`)}
     </ul>`)}
 </div>
 <div class="supported-legend">${Features.tiers.map(t => html`
