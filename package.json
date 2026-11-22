@@ -1,7 +1,7 @@
 {
   "name": "redasm.dev",
   "private": true,
-  "version": "2.0.0",
+  "version": "2.9.9",
   "homepage": "https://redasm.dev",
   "type": "module",
   "engines": {

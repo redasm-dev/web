@@ -5,6 +5,8 @@ import path from "path";
 import pkg from "./package.json" with {type: "json"};
 import layout, { getPages } from "./framework/vite.js";
 
+process.env.VITE_APP_VERSION = pkg.version;
+
 const DIR_NAME = import.meta.dirname;
 const SRC_DIR = path.resolve(DIR_NAME, "src");
 const PAGES = [
