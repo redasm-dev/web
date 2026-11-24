@@ -24,7 +24,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
-    faApple,
     faXTwitter,
     faMastodon,
     faReddit,
@@ -33,6 +32,7 @@ import {
     faGithub,
     faWindows,
     faLinux,
+    faApple,
 } from "@fortawesome/free-brands-svg-icons";
 
 export default function initFontAwesome() {
