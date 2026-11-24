@@ -20,6 +20,8 @@ export default {
                 { text: "NE (Win16)", tier: "A" },
                 { text: "LE / LX (OS/2)", tier: "A" },
                 { text: "PSX EXE (PS1)", tier: "A" },
+                { text: "GameBoy (Classic & Color)", tier: "A" },
+                { text: "GameBoy Advance", tier: "A" },
                 { text: "MZ (DOS)", tier: "B" },
                 { text: "PSX BIOS (PS1)", tier: "B" },
                 { text: "XBE (Xbox)", tier: "B" },
@@ -36,6 +38,7 @@ export default {
                 { text: "MIPS", tier: "A" },
                 { text: "ARM / THUMB", tier: "A" },
                 { text: "ARM64", tier: "A" },
+                { text: "SM83", tier: "A" },
                 { text: "Z80", tier: "B" },
                 { text: "MOS6502", tier: "B" },
             ],
@@ -45,9 +48,12 @@ export default {
             title: "other",
 
             items: [
+                { text: "PDB Loader", tier: "S" },
+                { text: "COFF Parser", tier: "S" },
                 { text: "Visual Basic Analyzer", tier: "A" },
                 { text: "MSVC RTTI Analyzer", tier: "D" },
                 { text: "MSVC EH Analyzer", tier: "D" },
+                { text: "MCP Protocol", tier: "D" },
             ],
         }
     ]
