@@ -30,6 +30,26 @@ function getPlatform(name) {
     return "";
 }
 
+// display order inside a release: platform first, then architecture (macOS: universal, arm64, x86_64)
+const PLATFORM_ORDER = ["windows", "linux", "macos"];
+const ARCH_ORDER = ["universal", "arm64", "x86_64"];
+
+function rankOf(order, value) {
+    const idx = order.indexOf(value);
+    return idx === -1 ? order.length : idx;
+}
+
+function getArch(name) {
+    const n = name.toLowerCase();
+    return ARCH_ORDER.find(a => n.includes(a)) ?? "";
+}
+
+function compareAssets(a, b) {
+    return rankOf(PLATFORM_ORDER, a.platform) - rankOf(PLATFORM_ORDER, b.platform) ||
+        rankOf(ARCH_ORDER, getArch(a.name)) - rankOf(ARCH_ORDER, getArch(b.name)) ||
+        a.name.localeCompare(b.name);
+}
+
 function isSidecar(name) {
     return name.endsWith(".sha256") || name.endsWith(".asc") || name.endsWith(".zsync");
 }
@@ -49,6 +69,8 @@ async function fetchReleases() {
                     const major = parseVersion(r.tag_name).version[0];
                     return major !== "2" && major !== "3";
                 })
+                // newest first, don't rely on the order of releases.json
+                .sort((a, b) => new Date(b.published_at ?? b.created_at) - new Date(a.published_at ?? a.created_at))
                 .slice(0, 3);
 
             // flatten to binaries only, attaching each one's sidecars
@@ -73,7 +95,8 @@ async function fetchReleases() {
                             size: getFileSize(a.size),
                             sha256: sha_hash,
                         };
-                    });
+                    })
+                    .sort(compareAssets);
             });
         }
         else
