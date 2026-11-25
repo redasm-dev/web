@@ -2,17 +2,18 @@
 """
 REDasm Download Append Script
 Reads releases.json, extracts download counts for the last 3 tracked versions,
-appends a new row to downloads.csv if today's date is not already present.
-When tracked versions change, rewrites the CSV to match the new column set.
+adds a row to downloads.csv for today (if not already present) and keeps only
+the last RETENTION_DAYS days.
+When tracked versions change, the CSV is remapped to the new column set.
 
 Run from the root of the data branch:
     python3 scripts/append_downloads.py
 """
 
 import csv
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
-from common import load_tracked_releases, PLATFORM_ORDER
+from common import load_tracked_releases, PLATFORM_ORDER, RETENTION_DAYS
 
 DOWNLOADS_CSV = Path("downloads.csv")
 
@@ -30,30 +31,28 @@ def load_csv(csv_path: Path) -> tuple[list, list | None]:
         return [], None
     with csv_path.open(newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f)
-        return list(reader), list(reader.fieldnames)
+        return list(reader), list(reader.fieldnames or [])
 
 
-def rewrite_csv(csv_path: Path, fieldnames: list, rows: list) -> None:
-    """Rewrite entire CSV remapping existing rows to new fieldnames."""
-    remapped = []
-    for row in rows:
-        new_row = {"date": row["date"]}
-        for col in fieldnames:
-            if col == "date":
-                continue
-            new_row[col] = int(row.get(col, 0))
-        remapped.append(new_row)
+def remap_row(row: dict, fieldnames: list) -> dict:
+    """Map an existing row to the current column set (new columns start at 0)."""
+    new_row = {"date": row["date"]}
+    for col in fieldnames[1:]:
+        new_row[col] = int(row.get(col) or 0)
+    return new_row
 
+
+def write_csv(csv_path: Path, fieldnames: list, rows: list) -> None:
     with csv_path.open("w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
-        writer.writerows(remapped)
-
-    print(f"Rewrote CSV with columns: {fieldnames}")
+        writer.writerows(rows)
 
 
 def main():
-    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    now = datetime.now(timezone.utc)
+    today = now.strftime("%Y-%m-%d")
+    cutoff = (now - timedelta(days=RETENTION_DAYS)).strftime("%Y-%m-%d")
 
     releases = load_tracked_releases()
     if not releases:
@@ -64,30 +63,27 @@ def main():
     counts = {r["tag"]: r["platforms"] for r in releases}
 
     existing_rows, existing_fields = load_csv(DOWNLOADS_CSV)
-
-    # Rewrite if columns changed or file is new
     if existing_fields != fieldnames:
-        rewrite_csv(DOWNLOADS_CSV, fieldnames, existing_rows)
-        existing_rows, _ = load_csv(DOWNLOADS_CSV)
+        print(f"Columns changed: {fieldnames}")
 
-    # Check if today already exists
-    if any(row["date"] == today for row in existing_rows):
-        print(f"Already have data for {today}, skipping.")
-        return
+    rows = [remap_row(r, fieldnames) for r in existing_rows]
 
-    # Build and append new row
-    row = {"date": today}
-    for col in fieldnames:
-        if col == "date":
-            continue
-        version, platform = col.rsplit("_", 1)
-        row[col] = counts.get(version, {}).get(platform, 0)
+    if any(r["date"] == today for r in rows):
+        print(f"Already have data for {today}, not appending.")
+    else:
+        row = {"date": today}
+        for col in fieldnames[1:]:
+            version, platform = col.rsplit("_", 1)
+            row[col] = counts.get(version, {}).get(platform, 0)
+        rows.append(row)
+        print(f"Appended {today}: { {r['tag']: r['platforms'] for r in releases} }")
 
-    with DOWNLOADS_CSV.open("a", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=fieldnames)
-        writer.writerow(row)
+    # ISO dates compare correctly as strings
+    kept = [r for r in rows if r["date"] >= cutoff]
+    if len(kept) != len(rows):
+        print(f"Dropped {len(rows) - len(kept)} rows older than {cutoff}")
 
-    print(f"Appended {today}: {{r['tag']: r['platforms'] for r in releases}}")
+    write_csv(DOWNLOADS_CSV, fieldnames, kept)
 
 
 if __name__ == "__main__":

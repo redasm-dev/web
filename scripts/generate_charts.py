@@ -13,7 +13,11 @@ from common import (
     version_colors,
     PLATFORM_LABELS,
     PLATFORM_ORDER,
+    CHART_DAYS,
 )
+import matplotlib
+matplotlib.use("Agg")  # must be selected before pyplot is imported
+
 import matplotlib.ticker as mticker
 import matplotlib.dates as mdates
 import matplotlib.pyplot as plt
@@ -21,9 +25,6 @@ import argparse
 import csv
 from datetime import datetime, timedelta
 from pathlib import Path
-
-import matplotlib
-matplotlib.use("Agg")
 
 
 def load_csv(path: str):
@@ -60,7 +61,7 @@ def compute_deltas(counts: list) -> list:
 
 def chart_platform(dates, versions, ordered_versions, colors,
                    release_dates, platform, out_path: Path):
-    cutoff = dates[-1] - timedelta(days=30)
+    cutoff = dates[-1] - timedelta(days=CHART_DAYS)
     idx = next((i for i, d in enumerate(dates) if d >= cutoff), 0)
     d30 = dates[idx:]
 
@@ -124,7 +125,7 @@ def chart_platform(dates, versions, ordered_versions, colors,
                     ha="center", va="top")
 
     label = PLATFORM_LABELS.get(platform, platform.capitalize())
-    ax.set_title(f"{label} Downloads (Last 30 Days)",
+    ax.set_title(f"{label} Downloads (Last {CHART_DAYS} Days)",
                  fontsize=13, fontweight="bold", pad=10)
     ax.set_ylabel("Downloads")
     ax.yaxis.set_major_locator(mticker.MaxNLocator(integer=True))

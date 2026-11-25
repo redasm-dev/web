@@ -12,11 +12,21 @@ RELEASES_JSON = Path("releases.json")
 EXCLUDE_TAGS = {"nightly"}
 TRACKED_PREFIX = "v4.0.0" # TODO: when stable series begins (v4.0.1, v4.1.0 etc), broaden to "v4."
 MAX_VERSIONS = 3
-SKIP_EXTENSIONS = {".sha256", ".asc", ".sig"}
+SKIP_EXTENSIONS = {".sha256", ".asc", ".sig", ".zsync"}
+
+# downloads.csv keeps CHART_DAYS + 1 days: the extra (oldest) day is the baseline
+# needed to compute the first daily delta shown in the charts
+CHART_DAYS = 30
+RETENTION_DAYS = CHART_DAYS + 1
 
 WINDOWS_PATTERNS = ["-windows-", "_windows_"]
 LINUX_PATTERNS = ["-linux-", "_linux_", "_amd64"]
 MACOS_PATTERNS = ["-macos-", "-darwin-", "_macos_", "_darwin_"]
+
+# since beta4 Linux and macOS assets carry no platform name (e.g. REDasm-4.0.0-beta4-arm64.dmg),
+# the extension identifies them
+LINUX_EXTENSIONS = (".appimage",)
+MACOS_EXTENSIONS = (".dmg",)
 
 PLATFORM_LABELS = {
     "windows": "Windows",
@@ -41,6 +51,10 @@ def classify_asset(name: str) -> str | None:
     for p in MACOS_PATTERNS:
         if p in lower:
             return "macos"
+    if lower.endswith(LINUX_EXTENSIONS):
+        return "linux"
+    if lower.endswith(MACOS_EXTENSIONS):
+        return "macos"
     return None
 
 
