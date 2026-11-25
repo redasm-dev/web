@@ -23,7 +23,7 @@ import matplotlib.dates as mdates
 import matplotlib.pyplot as plt
 import argparse
 import csv
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 
@@ -100,8 +100,8 @@ def chart_platform(dates, versions, ordered_versions, colors,
         print(f"Skipped: {out_path} (no downloads for {platform} in the last {CHART_DAYS} days)")
         return False
 
-    # 7-day rolling average trend line
-    import numpy as np
+    # 3-day trailing average trend line: each day averages itself and the (up to) two days
+    # before it, so the last point isn't dragged down by days that haven't happened yet
     total_deltas = [0.0] * len(d30)
     for version in ordered_versions:
         if platform not in versions[version]:
@@ -109,25 +109,30 @@ def chart_platform(dates, versions, ordered_versions, colors,
         deltas = compute_deltas(versions[version][platform])[idx:]
         total_deltas = [a + b for a, b in zip(total_deltas, deltas)]
 
-    window = min(3, len(total_deltas))
-    rolling = np.convolve(total_deltas, np.ones(window) / window, mode="same")
-    ax.plot(d30, rolling, color="#111111", linewidth=2.5,
-            linestyle="-", zorder=4, label="3-day avg", alpha=0.85)
+    window = 3
+    rolling = []
+    for i in range(len(total_deltas)):
+        span = total_deltas[max(0, i - window + 1):i + 1]
+        rolling.append(sum(span) / len(span))
 
-    # Release day markers within the 30-day window
+    ax.plot(d30, rolling, color="#111111", linewidth=2.5,
+            linestyle="-", zorder=4, label=f"{window}-day avg", alpha=0.85)
+
+    # Release day markers within the 30-day window; the label sits just above the plot area
+    # (x in data coordinates, y in axes coordinates) so tall bars can't cover it
     for version, rdate in release_dates.items():
         if rdate >= d30[0]:
             ax.axvline(rdate,
                        color=colors.get(version, "#AAAAAA"),
                        linestyle="--", linewidth=1.2, alpha=0.7, zorder=1)
-            ax.text(rdate, ax.get_ylim()[1] * 0.95,
-                    version.replace("v4.0.0-", ""),
+            ax.text(rdate, 1.01, version.replace("v4.0.0-", ""),
+                    transform=ax.get_xaxis_transform(),
                     fontsize=7, color=colors.get(version, "#AAAAAA"),
-                    ha="center", va="top")
+                    ha="center", va="bottom", clip_on=False)
 
     label = PLATFORM_LABELS.get(platform, platform.capitalize())
     ax.set_title(f"{label} Downloads (Last {CHART_DAYS} Days)",
-                 fontsize=13, fontweight="bold", pad=10)
+                 fontsize=13, fontweight="bold", pad=18)
     ax.set_ylabel("Downloads")
     ax.yaxis.set_major_locator(mticker.MaxNLocator(integer=True))
     ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m-%d"))
@@ -149,6 +154,7 @@ def chart_platform(dates, versions, ordered_versions, colors,
 def write_readme(dates, versions, ordered_versions, ordered_platforms,
                  release_dates, out_dir: Path, readme_path: Path):
     today = dates[-1].strftime("%Y-%m-%d")
+    version_stamp = datetime.now(timezone.utc).strftime("%Y%m%d%H%M")
 
     grand = {p: 0 for p in ordered_platforms}
     grand["total"] = 0
@@ -184,7 +190,9 @@ def write_readme(dates, versions, ordered_versions, ordered_platforms,
     chart_sections = []
     for platform in ordered_platforms:
         label = PLATFORM_LABELS.get(platform, platform.capitalize())
-        img_path = f"{out_dir.name}/downloads_{platform}.png"
+        # ?v=<generation time> changes the URL on every run, so GitHub's image cache
+        # can't keep serving a chart from an earlier run (even one from the same day)
+        img_path = f"{out_dir.name}/downloads_{platform}.png?v={version_stamp}"
         chart_sections.append(f"## {label}\n\n![{label} Downloads]({img_path})\n")
 
     readme = f"""\
