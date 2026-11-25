@@ -2,7 +2,7 @@
 """
 REDasm Download Append Script
 Reads releases.json, extracts download counts for the last 3 tracked versions,
-adds a row to downloads.csv for today (if not already present) and keeps only
+writes today's row to downloads.csv (replacing it if already present) and keeps only
 the last RETENTION_DAYS days.
 When tracked versions change, the CSV is remapped to the new column set.
 
@@ -66,17 +66,17 @@ def main():
     if existing_fields != fieldnames:
         print(f"Columns changed: {fieldnames}")
 
-    rows = [remap_row(r, fieldnames) for r in existing_rows]
+    # counts are cumulative: if today's row already exists (e.g. a manual re-run),
+    # replace it with the latest values instead of keeping a stale snapshot
+    rows = [remap_row(r, fieldnames) for r in existing_rows if r["date"] != today]
+    replaced = len(rows) != len(existing_rows)
 
-    if any(r["date"] == today for r in rows):
-        print(f"Already have data for {today}, not appending.")
-    else:
-        row = {"date": today}
-        for col in fieldnames[1:]:
-            version, platform = col.rsplit("_", 1)
-            row[col] = counts.get(version, {}).get(platform, 0)
-        rows.append(row)
-        print(f"Appended {today}: { {r['tag']: r['platforms'] for r in releases} }")
+    row = {"date": today}
+    for col in fieldnames[1:]:
+        version, platform = col.rsplit("_", 1)
+        row[col] = counts.get(version, {}).get(platform, 0)
+    rows.append(row)
+    print(f"{'Updated' if replaced else 'Appended'} {today}: { {r['tag']: r['platforms'] for r in releases} }")
 
     # ISO dates compare correctly as strings
     kept = [r for r in rows if r["date"] >= cutoff]
