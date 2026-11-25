@@ -4,13 +4,13 @@
 
 ## Windows
 
-![Windows Downloads](charts/downloads_windows.png)
+![Windows Downloads](charts/downloads_windows.png?v=202611250959)
 ## Linux
 
-![Linux Downloads](charts/downloads_linux.png)
+![Linux Downloads](charts/downloads_linux.png?v=202611250959)
 ## macOS
 
-![macOS Downloads](charts/downloads_macos.png)
+![macOS Downloads](charts/downloads_macos.png?v=202611250959)
 
 ## Totals
 
