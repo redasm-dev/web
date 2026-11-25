@@ -97,6 +97,7 @@ def chart_platform(dates, versions, ordered_versions, colors,
 
     if not any_data:
         plt.close(fig)
+        print(f"Skipped: {out_path} (no downloads for {platform} in the last {CHART_DAYS} days)")
         return False
 
     # 7-day rolling average trend line
